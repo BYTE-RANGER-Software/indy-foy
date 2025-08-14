@@ -1,0 +1,14 @@
+# OS & Tools
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log
+*.tmp
+
+# Build-Outputs & temporäre Dateien
+Compiled/
+Build/
+bin/
+*.exe~
+*.bak
