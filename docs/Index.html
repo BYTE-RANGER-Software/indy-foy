@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Indiana Jones and the Fountain of Youth – Development</title>
+  <meta name="description" content="Fortführung des Fanprojekts »Indiana Jones and the Fountain of Youth« durch BYTE RANGER Software – aktive Weiterentwicklung mit Historie, Media, Releases, Roadmap und Informationen."/>
+  <style>
+    /* =============== Grundlayout =============== */
+    :root{
+      --bg: #2a241c;            /* Hintergrund (Leder/Canvas-Anmutung) */
+      --panel: #ece6dd;         /* zentrales Panel */
+      --panel-edge: #d6cfc5;    /* Kante/Absetzung */
+      --accent: #9a8f83;        /* seitliche Spalten */
+      --ink: #28231b;           /* Textfarbe */
+      --link: #5b4930;          /* Linkfarbe */
+      --maxw: 980px;            /* max. Breite des Inhalts */
+    }
+
+    html,body{height:100%;}
+    body{
+      margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, sans-serif;
+      color:var(--ink);
+      background: var(--bg) url('assets/header-texture.jpg') center top / cover no-repeat fixed; /* Optionaler Textur-/Header-Hintergrund */
+    }
+
+    /* Header-Banner */
+    .banner{
+      width:100%;
+      min-height:160px; /* Platz für Logo/Grafik */
+      background: transparent url('assets/banner.png') center 20px / auto 120px no-repeat; /* Ersetze durch eigenes Logo */
+      position: relative;
+    }
+
+    /* zentrales Panel mit seitlichen Navigationsleisten */
+    .wrap{
+      display:grid;
+      grid-template-columns: 56px 1fr 240px; /* Links schmale Leiste, Mitte Inhalt, rechts gestaffelte Leisten */
+      gap:0;
+      max-width: var(--maxw);
+      margin: -30px auto 60px; /* leicht in den Banner überlappen */
+      border-radius: 8px;
+      box-shadow: 0 4px 0 rgba(0,0,0,.15), 0 12px 24px rgba(0,0,0,.25);
+      border: 6px solid #fff; /* helle Außenkante analog zum Screenshot */
+      background: #fff;       /* Außenkante sichtbar machen */
+    }
+
+    /* Linke vertikale Registerleiste */
+    .vnav-left{
+      background: linear-gradient(#b7b0a8, #9e958b);
+      border-right: 1px solid rgba(0,0,0,.08);
+      display:flex; align-items:center; justify-content:center;
+    }
+
+    /* Rechte gestaffelte Leisten – simulieren mehrere schmale Spalten */
+    .vnav-right{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: var(--accent);
+      border-left: 1px solid rgba(0,0,0,.08);
+    }
+    .vtab{ /* einzelne Registerspalte */
+      display:flex; align-items:center; justify-content:center;
+      border-left: 1px solid rgba(255,255,255,.45);
+      border-right: 1px solid rgba(0,0,0,.08);
+      background: linear-gradient(#cfc7bd,#b8b0a6);
+    }
+
+    /* Rotierte Beschriftung wie im Screenshot */
+    .vtab a, .vnav-left a{
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      text-decoration:none;
+      color:#3c3123;
+      font-weight:600;
+      letter-spacing:.5px;
+      padding: 16px 0;
+    }
+
+    /* Zentraler Content-Bereich */
+    .content{
+      background: linear-gradient(#f7f3ee, #efe9e0);
+      border-left: 1px solid var(--panel-edge);
+      border-right: 1px solid var(--panel-edge);
+      padding: 28px 28px 40px;
+      min-height: 460px;
+    }
+
+    /* Typografie & Module */
+    h1{
+      margin: 0 0 16px; font-size: 34px; line-height: 1.15; font-weight: 700;
+    }
+    h2{font-size: 22px; margin-top: 28px}
+    p{line-height:1.6}
+    .lead{font-weight:600}
+
+    .card{
+      display:grid; grid-template-columns: 220px 1fr; gap: 18px;
+      background:#fff; border:1px solid #d9d2c8; border-radius: 6px; padding:14px; margin: 16px 0 6px;
+    }
+    .card img{width:100%; height:auto; border:1px solid #cbbfb0; border-radius:4px}
+
+    .note{background:#fff8e1; border:1px solid #e5d2a5; padding:12px 14px; border-radius:6px; margin:12px 0}
+
+    /* Tabellen für Downloads */
+    table{width:100%; border-collapse:collapse; margin: 10px 0 16px}
+    th, td{padding:8px 10px; border:1px solid #d9d2c8; text-align:left}
+    th{background:#f3ede4}
+
+    /* Tab-Zielmarken */
+    section{scroll-margin-top: 120px;}
+
+    /* Aktiver Tab zustandsbasiert (hash) */
+    .vtab a.active, .vnav-left a.active{ color:#000; text-decoration: underline; }
+
+    /* Footer */
+    footer{
+      max-width: var(--maxw);
+      margin: 0 auto 60px; color:#ddd; font-size:14px; text-align:center;
+    }
+    .footnav{margin: 8px 0 0}
+    .footnav a{color:#e7e0d6; margin:0 .4rem; text-decoration:none}
+
+    /* Responsiv: unter 900 px die rechte Registergruppe unter den Content schieben */
+    @media (max-width: 900px){
+      .wrap{ grid-template-columns: 48px 1fr; }
+      .vnav-right{ grid-column: 1 / -1; grid-template-columns: repeat(4, 1fr); }
+      .vtab a, .vnav-left a{ writing-mode: horizontal-tb; transform:none; padding:12px; }
+      .card{grid-template-columns: 1fr}
+    }
+  </style>
+</head>
+<body>
+  <!-- Header-/Hero-Bereich mit großem Logo (ersetzen) -->
+  <header class="banner" aria-label="Banner mit Logo"></header>
+
+  <main class="wrap">
+    <!-- Linke vertikale Navigation → entspricht „Introduction“ aus dem Screenshot -->
+    <aside class="vnav-left" aria-label="Linke Registerleiste">
+      <a href="#intro" id="tab-intro">Introduction</a>
+    </aside>
+
+    <!-- Zentriertes Inhalts-Panel -->
+    <article class="content">
+      <section id="intro">
+        <h1>Indiana Jones and the Fountain of Youth</h1>
+        <p class="lead"><strong>Status:</strong> Aktive Weiterentwicklung durch BYTE RANGER Software. Diese Seite dient als zentrale Anlaufstelle für Planung, Builds und Dokumentation.</p>
+        <div class="note">Hinweis: Dies ist ein <strong>nicht‑kommerzielles Fanprojekt</strong> ohne Verbindung zu Lucasfilm/Disney. Marken gehören ihren jeweiligen Inhabern. Inhalte in diesem Repo sind – sofern nicht anders gekennzeichnet – unter <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a> lizenziert.</div>
+
+        <div class="card">
+          <img src="assets/thumb-placeholder.jpg" alt="Vorschaubild / Cover" />
+          <div>
+            <p><em>Willkommen.</em> Diese Seite spiegelt Stil und Aufbau der historischen Projektseite wider. Ersetze die Platzhalter-Bilder und -Texte mit deinen Inhalten oder Spiegeln (Mirrors).</p>
+            <h2>Features (Projektvision)</h2>
+            <ul>
+              <li>Kapitel in Bimini, Europa & Asien</li>
+              <li>Über 150 gezeichnete Räume (geplant)</li>
+              <li>Adventure-UI & Mechaniken im Stil von „Fate of Atlantis“</li>
+              <li>Rätsel, Action und Story</li>
+              <li>Originalmusik & SFX</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 id="releases">Releases & Builds</h2>
+        <p>Stabile Releases und Nightly-Builds. Prüfsummen dienen der Verifikation.</p>
+        <table aria-label="Releases mit Prüfsummen">
+          <thead>
+            <tr><th>Datei</th><th>Version</th><th>Datum</th><th>SHA-256</th><th>Download</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>FOY_Windows.zip</td>
+              <td>0.1.0 (Pre-Release)</td>
+              <td>YYYY-MM-DD</td>
+              <td><code>[SHA256]</code></td>
+              <td><a href="#">Release</a></td>
+            </tr>
+            <tr>
+              <td>FOY_Nightly.zip</td>
+              <td>nightly</td>
+              <td>YYYY-MM-DD</td>
+              <td><code>[SHA256]</code></td>
+              <td><a href="#">Latest</a></td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="note">Tipp: Lege Dateien in <code>assets/downloads/</code> ab und verlinke sie hier. Prüfsummen lokal mit <code>sha256sum</code> erzeugen.</p>
+      </section>
+
+      <section id="history">
+        <h1>History</h1>
+        <p>Kurzer Überblick über Entstehung, Meilensteine und ggf. frühere Einstellungsmitteilungen. Ergänze die Punkte mit konkreten Daten/Links (Foren, Snapshots, News-Posts).</p>
+        <ul>
+          <li><strong>2003–2006:</strong> Frühe Konzeptphase, Teamfindung.</li>
+          <li><strong>2007–2010:</strong> Art & Engine-Prototypen, öffentliche Demo.</li>
+          <li><strong>2011–2014:</strong> Weitere Previews, Community-Updates.</li>
+          <li><strong>Ab 2015:</strong> Aktivität nimmt ab, Arbeiten sporadisch.</li>
+          <li><strong>Fortführung:<\/strong> Projekt wird durch BYTE RANGER Software weitergeführt.<\/li>
+        </ul>
+        <h2 id="archive">Archive</h2>
+        <p>Spiegel & Snapshots der alten Website/Beiträge:</p>
+        <ul>
+          <li><a href="#">Alter Site-Snapshot (Wayback)</a></li>
+          <li><a href="#">News-Archiv (Mirror)</a></li>
+          <li><a href="#">Foren-Thread / Dev-Diary</a></li>
+        </ul>
+      </section>
+
+      <section id="development">
+        <h1>Development</h1>
+        <p>Technische Notizen, Tools, Tutorials. Diese Sektion bündelt alle Entwicklungsinfos.</p>
+        <ul>
+          <li>Engine/Framework: <strong>AGS</strong> (Adventure Game Studio)</li>
+          <li>Grafik-Pipeline & Auflösung: <em>[eintragen]</em></li>
+          <li>Build/Tooling: <em>[eintragen]</em></li>
+          <li>Tutorials & How-Tos: <a href="#">[Link]</a></li>
+        </ul>
+      </section>
+
+      <section id="roadmap">
+        <h1>Roadmap</h1>
+        <ul>
+          <li><strong>M0 – Project Setup:</strong> Repo-Struktur, CI, erste lauffähige Demo.</li>
+          <li><strong>M1 – Core Gameplay:</strong> Räume laden, UI/Verb-Klick, Inventar.</li>
+          <li><strong>M2 – Content Pack 1:</strong> Bimini-Prolog komplett, 5–8 Puzzles.</li>
+          <li><strong>M3 – Polishing & Release 0.2:</strong> Bugfixes, Performance, QA.</li>
+        </ul>
+      </section>
+
+      <section id="contribute">
+        <h1>Contribute<\/h1>
+        <p>Beiträge sind möglich, jedoch <strong>nach vorheriger Abstimmung</strong>. Bitte erst ein Issue eröffnen und das Vorhaben beschreiben.</p>
+        <ol>
+          <li>Issue erstellen: Ziel und Umfang kurz skizzieren</li>
+          <li>Nach Rückmeldung Branch anlegen: <code>feature/kurzbeschreibung</code></li>
+          <li>PR stellen; verlinke Issue; Screenshots/GIFs beilegen</li>
+        </ol>
+        <p><strong>Assets & große Dateien:</strong> Git LFS verwenden (<code>.gitattributes</code> für <code>*.png *.jpg *.wav *.psd</code> etc.).</p>
+      </section>
+
+      <section id="media">
+        <h1>Media</h1>
+        <p>Screenshots, Artworks, Trailer. Lege Dateien in <code>assets/</code> ab und binde sie hier ein.</p>
+        <div class="card">
+          <img src="assets/screenshot-1.jpg" alt="Screenshot 1 (Platzhalter)">
+          <div>
+            <p>Kurzkommentar zum Bild – Szene, Kapitel, Jahr.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/artwork-1.jpg" alt="Artwork 1 (Platzhalter)">
+          <div>
+            <p>Konzeptgrafik oder Promo-Art mit Quellenhinweis.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="faqs">
+        <h1>FAQs</h1>
+        <details>
+          <summary>Ist das offiziell?</summary>
+          <p>Nein. Dies ist ein Fan‑Projekt ohne Verbindung zu den Rechteinhabern. Siehe <a href="#legal">Legal & License</a>.</p>
+        </details>
+        <details>
+          <summary>Darf ich Assets/Dateien nutzen?</summary>
+          <p>Sofern im Repo enthalten und nicht anders gekennzeichnet: unter <strong>CC BY-SA 4.0</strong>. Nenne die Urheber und verwende dieselbe Lizenz für Abwandlungen. Siehe <a href="ATTRIBUTION.md">Attribution</a>.</p>
+        </details>
+        <details>
+          <summary>Wie kann ich beitragen?</summary>
+          <p>Siehe <a href="#contribute">Contribute</a> – Issues/PRs willkommen.</p>
+        </details>
+      </section>
+
+      <section id="credits">
+        <h1>Credits</h1>
+        <p>Würdigung des ursprünglichen Teams und der Community. Wenn möglich, mit Rollen & Jahren.</p>
+        <ul>
+          <li><strong>Original Team:</strong> [Namen / Rollen]</li>
+          <li><strong>Beiträge/Thanks:</strong> [Namen / Links]</li>
+          <li><strong>Maintainer:<\/strong> BYTE RANGER Software (CalDymos)<\/li>
+        </ul>
+      </section>
+
+      <section id="legal">
+        <h1>Legal & License</h1>
+        <p><strong>Fan-Disclaimer:</strong> „Indiana Jones“ und verwandte Marken sind Eigentum ihrer jeweiligen Rechteinhaber. Dieses Projekt ist ein nicht-kommerzielles Fanprojekt ohne offizielle Verbindung.</p>
+        <p><strong>Repo-Lizenz:</strong> Sofern nicht anders gekennzeichnet, stehen Inhalte unter <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)</a>. Bitte beachte die <a href="ATTRIBUTION.md">Attribution</a>.</p>
+        <p><strong>Drittlizenzen:</strong> Externe Assets (z. B. Fonts, Icons, Sounds) sind gesondert gekennzeichnet.</p>
+      </section>
+
+      <section id="contact">
+        <h1>Contact / Community</h1>
+        <p>Fragen, Korrekturen, neue Mirrors? Bitte ein
+          <a href="https://github.com/CalDymos/indy-foy/issues">Issue</a>
+          im Repo eröffnen oder per E‑Mail:
+          <a href="mailto:ByteRanger@gmx.de">ByteRanger@gmx.de</a>.
+        </p>
+        <p>Projektseite (GitHub Pages): <a href="https://caldymos.github.io/indy-foy/">https://caldymos.github.io/indy-foy/</a></p>
+      </section>
+    </article>
+
+    <!-- Rechte vertikale, gestaffelte Register wie im Screenshot -->
+    <aside class="vnav-right" aria-label="Rechte Registerleiste">
+      <div class="vtab"><a href="#history" id="tab-history">History</a></div>
+      <div class="vtab"><a href="#development" id="tab-dev">Development</a></div>
+      <div class="vtab"><a href="#media" id="tab-media">Media</a></div>
+      <div class="vtab"><a href="#faqs" id="tab-faqs">FAQs</a></div>
+    </aside>
+  </main>
+
+  <footer>
+    <p>© BYTE RANGER Software – Indiana Jones and the Fountain of Youth · <a href="ATTRIBUTION.md" style="color:#e7e0d6;">Attribution</a> · <a href="#legal" style="color:#e7e0d6;">Legal & License</a></p>
+    <p class="footnav">
+      <a href="#releases">Releases</a> ·
+      <a href="#roadmap">Roadmap</a> ·
+      <a href="#contribute">Contribute</a> ·
+      <a href="#archive">History/Archive</a> ·
+      <a href="#credits">Credits</a> ·
+      <a href="#contact">Contact</a>
+    </p>
+  </footer>
+
+  <script>
+    // Markiere aktiven Tab basierend auf Hash
+    function setActiveByHash(){
+      const id = location.hash || '#intro';
+      document.querySelectorAll('.vtab a, .vnav-left a').forEach(a=>a.classList.toggle('active', a.getAttribute('href')===id));
+    }
+    window.addEventListener('hashchange', setActiveByHash);
+    window.addEventListener('DOMContentLoaded', setActiveByHash);
+  </script>
+</body>
+</html>
