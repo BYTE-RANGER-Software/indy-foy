@@ -128,6 +128,10 @@
       .vtab a, .vnav-left a{ writing-mode: horizontal-tb; transform:none; padding:12px; }
       .card{grid-template-columns: 1fr}
     }
+    /* Tabsichtbarkeit */
+.content section{display:none;}
+.content #intro{display:block;}        /* Standard: Introduction sichtbar */
+.content section:target{display:block;}
   </style>
 </head>
 <body>
@@ -320,15 +324,36 @@
       <a href="#contact">Contact</a>
     </p>
   </footer>
+<script>
+  function setActiveByHash(){
+    const id = location.hash || '#intro';
 
-  <script>
-    // Markiere aktiven Tab basierend auf Hash
-    function setActiveByHash(){
-      const id = location.hash || '#intro';
-      document.querySelectorAll('.vtab a, .vnav-left a').forEach(a=>a.classList.toggle('active', a.getAttribute('href')===id));
+    // Tabs markieren
+    document.querySelectorAll('.vtab a, .vnav-left a').forEach(a=>{
+      a.classList.toggle('active', a.getAttribute('href')===id);
+    });
+
+    // Sichtbarkeit der Bereiche steuern
+    const sections = document.querySelectorAll('.content section');
+    let shown = false;
+    sections.forEach(sec => {
+      const show = ('#'+sec.id) === id;
+      sec.style.display = show ? 'block' : 'none';
+      sec.setAttribute('aria-hidden', show ? 'false' : 'true');
+      if (show) shown = true;
+    });
+
+    // Fallback: falls unbekannter Hash -> Intro zeigen
+    if (!shown){
+      const intro = document.getElementById('intro');
+      if (intro){
+        intro.style.display='block';
+        intro.setAttribute('aria-hidden','false');
+      }
     }
-    window.addEventListener('hashchange', setActiveByHash);
-    window.addEventListener('DOMContentLoaded', setActiveByHash);
-  </script>
+  }
+  window.addEventListener('hashchange', setActiveByHash);
+  window.addEventListener('DOMContentLoaded', setActiveByHash);
+</script>
 </body>
 </html>
