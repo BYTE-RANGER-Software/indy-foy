@@ -3,357 +3,266 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Indiana Jones and the Fountain of Youth – Development</title>
-  <meta name="description" content="Fortführung des Fanprojekts »Indiana Jones and the Fountain of Youth« durch BYTE RANGER Software – aktive Weiterentwicklung mit Historie, Media, Releases, Roadmap und Informationen."/>
+  <title>Indiana Jones and the Fountain of Youth – BYTE RANGER Software</title>
+  <meta name="description" content="Moderne, jQuery-freie Neuauflage der klassischen FOY-Seite – mit Akkordeon-Tabs und leichter Lightbox (ohne zusätzliche Bild-Assets)."/>
   <style>
-    /* =============== Grundlayout =============== */
     :root{
-      --bg: #2a241c;            /* Hintergrund (Leder/Canvas-Anmutung) */
-      --panel: #ece6dd;         /* zentrales Panel */
-      --panel-edge: #d6cfc5;    /* Kante/Absetzung */
-      --accent: #9a8f83;        /* seitliche Spalten */
-      --ink: #28231b;           /* Textfarbe */
-      --link: #5b4930;          /* Linkfarbe */
-      --maxw: 980px;            /* max. Breite des Inhalts */
+      --maxw: 980px;
+      --card-bg: #dfdbd2;
+      --card-edge: #eee9de;
+      --ink: #2a241c;
+      --muted: #6b6257;
+      --collapsed: 56px;    /* Breite der eingefahrenen Tabs */
+      --expanded: 700px;     /* Breite des aktiven Tabs */
+      --gap: 0px;            /* Spaltmaß zwischen Tabs */
     }
 
-    html,body{height:100%;}
+    html,body{height:100%}
     body{
-      margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, sans-serif;
-      color:var(--ink);
-      background: var(--bg) url('assets/header-texture.jpg') center top / cover no-repeat fixed; /* Optionaler Textur-/Header-Hintergrund */
+      margin:0; color:var(--ink); font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, sans-serif;
+      background: #2a241c url('assets/templatemo_body.jpg') center top / cover fixed no-repeat;
     }
 
-    /* Header-Banner */
+    /* ======= Header ======= */
     .banner{
-      width:100%;
-      min-height:160px; /* Platz für Logo/Grafik */
-      background: transparent url('assets/banner.png') center 20px / auto 120px no-repeat; /* Ersetze durch eigenes Logo */
-      position: relative;
+      position:relative; min-height:145px; width:100%;
+      background:
+        url('assets/templatemo_main.jpg') center top / cover no-repeat;
+    }
+    .banner::after{
+      content:""; position:absolute; left:0; right:0; top:10px; height:120px;
+      background:url('assets/templatemo_logo.png') left 16px/ auto 110px no-repeat;
     }
 
-    /* zentrales Panel mit seitlichen Navigationsleisten */
-    .wrap{
-      display:grid;
-      grid-template-columns: 56px 1fr 240px; /* Links schmale Leiste, Mitte Inhalt, rechts gestaffelte Leisten */
-      gap:0;
-      max-width: var(--maxw);
-      margin: -30px auto 60px; /* leicht in den Banner überlappen */
-      border-radius: 8px;
-      box-shadow: 0 4px 0 rgba(0,0,0,.15), 0 12px 24px rgba(0,0,0,.25);
-      border: 6px solid #fff; /* helle Außenkante analog zum Screenshot */
-      background: #fff;       /* Außenkante sichtbar machen */
+    /* ======= Panel-Frame (helle Karte) ======= */
+    .frame{ max-width: var(--maxw); margin: -24px auto 60px; padding: 10px; border-radius:6px; background:#fff; box-shadow: 0 10px 24px rgba(0,0,0,.35); }
+    .frame-inner{ background: var(--card-bg); border: 6px solid var(--card-edge); border-radius:4px; position:relative; overflow:hidden; }
+
+    /* ======= Akkordeon (Kwicks-ähnlich) ======= */
+    .kwicks{ list-style:none; margin:0; padding:0; display:flex; gap:var(--gap); align-items:stretch; }
+    .panel{ position:relative; flex: 0 0 var(--collapsed); height: 560px; background: #bfb7ad url('assets/slider_bg.png') repeat-y center; transition: flex-basis .35s ease, flex .35s ease, filter .25s ease; overflow:hidden; }
+    .panel.active{ flex: 0 0 var(--expanded); background-color: transparent; filter:none; }
+    .panel:not(.active){ filter: saturate(.8) brightness(.95); }
+
+    /* Vertikale Beschriftung (Fallback als Text); ersetzbar via --label-img */
+    .panel::before{
+      content: attr(data-label);
+      position:absolute; inset:0 auto 0 0; width: var(--collapsed); display:flex; align-items:center; justify-content:center;
+      writing-mode: vertical-rl; transform: rotate(180deg);
+      color:#fff; letter-spacing:.6px; font-weight:700; text-transform:capitalize; opacity:.9;
+      background: rgba(0,0,0,.05);
+      backdrop-filter: blur(0.5px);
     }
+    .panel.has-img::before{ content:""; background: transparent var(--label-img) center/ contain no-repeat; }
 
-    /* Linke vertikale Registerleiste */
-    .vnav-left{
-      background: linear-gradient(#b7b0a8, #9e958b);
-      border-right: 1px solid rgba(0,0,0,.08);
-      display:flex; align-items:center; justify-content:center;
-    }
+    /* Inhalt innerhalb des aktiven Panels */
+    .content{ position:absolute; left: var(--collapsed); right: 0; top:0; bottom:0; padding: 26px 26px 30px; overflow:auto; display:none; }
+    .panel.active .content{ display:block; }
 
-    /* Rechte gestaffelte Leisten – simulieren mehrere schmale Spalten */
-    .vnav-right{
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      background: var(--accent);
-      border-left: 1px solid rgba(0,0,0,.08);
-    }
-    .vtab{ /* einzelne Registerspalte */
-      display:flex; align-items:center; justify-content:center;
-      border-left: 1px solid rgba(255,255,255,.45);
-      border-right: 1px solid rgba(0,0,0,.08);
-      background: linear-gradient(#cfc7bd,#b8b0a6);
-    }
+    h1{ font-size:32px; margin:0 0 14px; }
+    h2{ font-size:22px; margin:20px 0 8px; }
+    p{ line-height:1.6; color: var(--ink); }
+    .lead{ font-weight:600; }
 
-    /* Rotierte Beschriftung wie im Screenshot */
-    .vtab a, .vnav-left a{
-      writing-mode: vertical-rl;
-      transform: rotate(180deg);
-      text-decoration:none;
-      color:#3c3123;
-      font-weight:600;
-      letter-spacing:.5px;
-      padding: 16px 0;
-    }
+    .grid{ display:grid; grid-template-columns: 240px 1fr; gap:16px; align-items:start; margin-top:6px; }
+    .grid img{ width:100%; border:1px solid rgba(0,0,0,.12); border-radius:4px; background:#fff; }
 
-    /* Zentraler Content-Bereich */
-    .content{
-      background: linear-gradient(#f7f3ee, #efe9e0);
-      border-left: 1px solid var(--panel-edge);
-      border-right: 1px solid var(--panel-edge);
-      padding: 28px 28px 40px;
-      min-height: 460px;
-    }
+    ul.feature{ margin:8px 0 0 0; padding:0 0 0 18px; }
+    ul.feature li{ margin:.35rem 0; }
 
-    /* Typografie & Module */
-    h1{
-      margin: 0 0 16px; font-size: 34px; line-height: 1.15; font-weight: 700;
-    }
-    h2{font-size: 22px; margin-top: 28px}
-    p{line-height:1.6}
-    .lead{font-weight:600}
-
-    .card{
-      display:grid; grid-template-columns: 220px 1fr; gap: 18px;
-      background:#fff; border:1px solid #d9d2c8; border-radius: 6px; padding:14px; margin: 16px 0 6px;
-    }
-    .card img{width:100%; height:auto; border:1px solid #cbbfb0; border-radius:4px}
-
-    .note{background:#fff8e1; border:1px solid #e5d2a5; padding:12px 14px; border-radius:6px; margin:12px 0}
-
-    /* Tabellen für Downloads */
-    table{width:100%; border-collapse:collapse; margin: 10px 0 16px}
-    th, td{padding:8px 10px; border:1px solid #d9d2c8; text-align:left}
-    th{background:#f3ede4}
-
-    /* Tab-Zielmarken */
-    section{scroll-margin-top: 120px;}
-
-    /* Aktiver Tab zustandsbasiert (hash) */
-    .vtab a.active, .vnav-left a.active{ color:#000; text-decoration: underline; }
+    table{ width:100%; border-collapse:collapse; margin: 8px 0 16px; }
+    th,td{ border:1px solid #d8d2c8; padding:8px 10px; text-align:left; }
+    th{ background:#eee7dc; }
 
     /* Footer */
-    footer{
-      max-width: var(--maxw);
-      margin: 0 auto 60px; color:#ddd; font-size:14px; text-align:center;
-    }
-    .footnav{margin: 8px 0 0}
-    .footnav a{color:#e7e0d6; margin:0 .4rem; text-decoration:none}
+    footer{ max-width:var(--maxw); margin: 0 auto 50px; color:#e9e2d8; text-align:center; font-size:14px; }
+    footer a{ color:#efe7dd; text-decoration:none; }
 
-    /* Responsiv: unter 900 px die rechte Registergruppe unter den Content schieben */
-    @media (max-width: 900px){
-      .wrap{ grid-template-columns: 48px 1fr; }
-      .vnav-right{ grid-column: 1 / -1; grid-template-columns: repeat(4, 1fr); }
-      .vtab a, .vnav-left a{ writing-mode: horizontal-tb; transform:none; padding:12px; }
-      .card{grid-template-columns: 1fr}
+    /* Responsive */
+    @media (max-width: 1000px){
+      :root{ --expanded: 100%; }
+      .kwicks{ flex-direction:column; }
+      .panel, .panel.active{ flex: 0 0 auto; height:auto; min-height: 420px; }
+      .panel::before{ position:absolute; top:0; left:0; right:auto; width:100%; height:44px; writing-mode: horizontal-tb; transform:none; display:flex; justify-content:flex-start; padding-left:16px; color:#3c3123; background: rgba(255,255,255,.65); }
+      .content{ position:relative; left:0; padding-top:56px; }
     }
-    /* Tabsichtbarkeit */
-.content section{display:none;}
-.content #intro{display:block;}        /* Standard: Introduction sichtbar */
-.content section:target{display:block;}
+
+    /* ======= Lightbox (ohne Zusatzbilder) ======= */
+    .lb{ position: fixed; inset:0; background: rgba(0,0,0,.8); display:none; align-items:center; justify-content:center; z-index: 50; }
+    .lb.open{ display:flex; }
+    .lb figure{ margin:0; max-width: 92vw; max-height: 90vh; }
+    .lb img{ max-width: 100%; max-height: 90vh; display:block; }
+    .lb .close{ position:absolute; top:14px; right:18px; font-size:28px; color:#fff; cursor:pointer; line-height:1; }
+    .lb .caption{ color:#fff; margin-top:8px; font-size:14px; text-align:center; opacity:.85; }
+    .thumbs{ display:grid; grid-template-columns: repeat(auto-fill, minmax(160px,1fr)); gap:12px; }
+    .thumbs a{ display:block; border:1px solid #d8d2c8; background:#fff; }
+    .thumbs img{ width:100%; height:auto; display:block; }
+
   </style>
 </head>
 <body>
-  <!-- Header-/Hero-Bereich mit großem Logo (ersetzen) -->
-  <header class="banner" aria-label="Banner mit Logo"></header>
+  <header class="banner" aria-label="FOY Banner"></header>
 
-  <main class="wrap">
-    <!-- Linke vertikale Navigation → entspricht „Introduction“ aus dem Screenshot -->
-    <aside class="vnav-left" aria-label="Linke Registerleiste">
-      <a href="#intro" id="tab-intro">Introduction</a>
-    </aside>
+  <div class="frame">
+    <div class="frame-inner">
+      <ul class="kwicks" id="kw">
+        <!-- INTRO / HOME -->
+        <li class="panel has-img" id="intro" data-label="Introduction" style="--label-img:url('assets/home.png')">
+          <div class="content">
+            <h1>The Fountain of Youth</h1>
+            <div class="grid">
+              <img alt="Cover" src="assets/templatemo_main.png">
+              <div>
+                <p class="lead">Fortführung des Fanprojekts durch <strong>BYTE RANGER Software</strong>. Klassisches Point‑and‑Click‑Adventure im Stil der 90er.</p>
+                <p>Diese Seite ist die moderne, jQuery‑freie Umsetzung der historischen Website. Tabs fahren wie einst auf, Inhalte erscheinen selektiv.</p>
+                <h2>Features</h2>
+                <ul class="feature">
+                  <li>Kapitel: Bimini, Europa & Asien</li>
+                  <li>Handgezeichnete Hintergründe (Low‑Res‑Look)</li>
+                  <li>Adventure‑UI im „Atlantis“-Stil</li>
+                  <li>Rätsel, Action und Story</li>
+                </ul>
+              </div>
+            </div>
 
-    <!-- Zentriertes Inhalts-Panel -->
-    <article class="content">
-      <section id="intro">
-        <h1>Indiana Jones and the Fountain of Youth</h1>
-        <p class="lead"><strong>Status:</strong> Aktive Weiterentwicklung durch BYTE RANGER Software. Diese Seite dient als zentrale Anlaufstelle für Planung, Builds und Dokumentation.</p>
-        <div class="note">Hinweis: Dies ist ein <strong>nicht‑kommerzielles Fanprojekt</strong> ohne Verbindung zu Lucasfilm/Disney. Marken gehören ihren jeweiligen Inhabern. Inhalte in diesem Repo sind – sofern nicht anders gekennzeichnet – unter <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a> lizenziert.</div>
+            <h2>Releases</h2>
+            <table>
+              <thead><tr><th>Datei</th><th>Version</th><th>Datum</th><th>SHA‑256</th><th>Download</th></tr></thead>
+              <tbody>
+                <tr><td>FOY_Windows.zip</td><td>0.1.0</td><td>YYYY‑MM‑DD</td><td><code>[SHA256]</code></td><td><a href="#">Release</a></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </li>
 
-        <div class="card">
-          <img src="assets/thumb-placeholder.jpg" alt="Vorschaubild / Cover" />
-          <div>
-            <p><em>Willkommen.</em> Diese Seite spiegelt Stil und Aufbau der historischen Projektseite wider. Ersetze die Platzhalter-Bilder und -Texte mit deinen Inhalten oder Spiegeln (Mirrors).</p>
-            <h2>Features (Projektvision)</h2>
-            <ul>
-              <li>Kapitel in Bimini, Europa & Asien</li>
-              <li>Über 150 gezeichnete Räume (geplant)</li>
-              <li>Adventure-UI & Mechaniken im Stil von „Fate of Atlantis“</li>
-              <li>Rätsel, Action und Story</li>
-              <li>Originalmusik & SFX</li>
+        <!-- HISTORY -->
+        <li class="panel" id="history" data-label="History">
+          <div class="content">
+            <h1>History</h1>
+            <div class="grid">
+              <img src="assets/screenshot-1.jpg" alt="Historisches Bild"/>
+              <div>
+                <p>Vom frühen Konzept (ca. 1999) über Demos bis zur heutigen Fortführung. Ergänze hier eine Timeline mit Meilensteinen, Screenshots und Links.</p>
+                <ul class="feature">
+                  <li>2006 – Erste öffentliche Demo</li>
+                  <li>2010 – Weitere Previews</li>
+                  <li>Heute – Fortführung durch BYTE RANGER Software</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <!-- DEVELOPMENT -->
+        <li class="panel" id="development" data-label="Development">
+          <div class="content">
+            <h1>Development</h1>
+            <p>Engine/Framework: <strong>AGS (Adventure Game Studio)</strong></p>
+            <ul class="feature">
+              <li>Grafik‑Pipeline & Auflösung: <em>[eintragen]</em></li>
+              <li>Build/Tooling: <em>[eintragen]</em></li>
+              <li>Tutorials & How‑Tos: <em>[Links]</em></li>
+            </ul>
+
+            <h2>Roadmap</h2>
+            <ul class="feature">
+              <li>M0 – Project Setup, CI, Demo</li>
+              <li>M1 – Core Gameplay (Verb‑UI, Inventar)</li>
+              <li>M2 – Bimini‑Prolog</li>
             </ul>
           </div>
-        </div>
+        </li>
 
-        <h2 id="releases">Releases & Builds</h2>
-        <p>Stabile Releases und Nightly-Builds. Prüfsummen dienen der Verifikation.</p>
-        <table aria-label="Releases mit Prüfsummen">
-          <thead>
-            <tr><th>Datei</th><th>Version</th><th>Datum</th><th>SHA-256</th><th>Download</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>FOY_Windows.zip</td>
-              <td>0.1.0 (Pre-Release)</td>
-              <td>YYYY-MM-DD</td>
-              <td><code>[SHA256]</code></td>
-              <td><a href="#">Release</a></td>
-            </tr>
-            <tr>
-              <td>FOY_Nightly.zip</td>
-              <td>nightly</td>
-              <td>YYYY-MM-DD</td>
-              <td><code>[SHA256]</code></td>
-              <td><a href="#">Latest</a></td>
-            </tr>
-          </tbody>
-        </table>
-        <p class="note">Tipp: Lege Dateien in <code>assets/downloads/</code> ab und verlinke sie hier. Prüfsummen lokal mit <code>sha256sum</code> erzeugen.</p>
-      </section>
-
-      <section id="history">
-        <h1>History</h1>
-        <p>Kurzer Überblick über Entstehung, Meilensteine und ggf. frühere Einstellungsmitteilungen. Ergänze die Punkte mit konkreten Daten/Links (Foren, Snapshots, News-Posts).</p>
-        <ul>
-          <li><strong>2003–2006:</strong> Frühe Konzeptphase, Teamfindung.</li>
-          <li><strong>2007–2010:</strong> Art & Engine-Prototypen, öffentliche Demo.</li>
-          <li><strong>2011–2014:</strong> Weitere Previews, Community-Updates.</li>
-          <li><strong>Ab 2015:</strong> Aktivität nimmt ab, Arbeiten sporadisch.</li>
-          <li><strong>Fortführung:<\/strong> Projekt wird durch BYTE RANGER Software weitergeführt.<\/li>
-        </ul>
-        <h2 id="archive">Archive</h2>
-        <p>Spiegel & Snapshots der alten Website/Beiträge:</p>
-        <ul>
-          <li><a href="#">Alter Site-Snapshot (Wayback)</a></li>
-          <li><a href="#">News-Archiv (Mirror)</a></li>
-          <li><a href="#">Foren-Thread / Dev-Diary</a></li>
-        </ul>
-      </section>
-
-      <section id="development">
-        <h1>Development</h1>
-        <p>Technische Notizen, Tools, Tutorials. Diese Sektion bündelt alle Entwicklungsinfos.</p>
-        <ul>
-          <li>Engine/Framework: <strong>AGS</strong> (Adventure Game Studio)</li>
-          <li>Grafik-Pipeline & Auflösung: <em>[eintragen]</em></li>
-          <li>Build/Tooling: <em>[eintragen]</em></li>
-          <li>Tutorials & How-Tos: <a href="#">[Link]</a></li>
-        </ul>
-      </section>
-
-      <section id="roadmap">
-        <h1>Roadmap</h1>
-        <ul>
-          <li><strong>M0 – Project Setup:</strong> Repo-Struktur, CI, erste lauffähige Demo.</li>
-          <li><strong>M1 – Core Gameplay:</strong> Räume laden, UI/Verb-Klick, Inventar.</li>
-          <li><strong>M2 – Content Pack 1:</strong> Bimini-Prolog komplett, 5–8 Puzzles.</li>
-          <li><strong>M3 – Polishing & Release 0.2:</strong> Bugfixes, Performance, QA.</li>
-        </ul>
-      </section>
-
-      <section id="contribute">
-        <h1>Contribute<\/h1>
-        <p>Beiträge sind möglich, jedoch <strong>nach vorheriger Abstimmung</strong>. Bitte erst ein Issue eröffnen und das Vorhaben beschreiben.</p>
-        <ol>
-          <li>Issue erstellen: Ziel und Umfang kurz skizzieren</li>
-          <li>Nach Rückmeldung Branch anlegen: <code>feature/kurzbeschreibung</code></li>
-          <li>PR stellen; verlinke Issue; Screenshots/GIFs beilegen</li>
-        </ol>
-        <p><strong>Assets & große Dateien:</strong> Git LFS verwenden (<code>.gitattributes</code> für <code>*.png *.jpg *.wav *.psd</code> etc.).</p>
-      </section>
-
-      <section id="media">
-        <h1>Media</h1>
-        <p>Screenshots, Artworks, Trailer. Lege Dateien in <code>assets/</code> ab und binde sie hier ein.</p>
-        <div class="card">
-          <img src="assets/screenshot-1.jpg" alt="Screenshot 1 (Platzhalter)">
-          <div>
-            <p>Kurzkommentar zum Bild – Szene, Kapitel, Jahr.</p>
+        <!-- MEDIA -->
+        <li class="panel" id="media" data-label="Media">
+          <div class="content">
+            <h1>Media</h1>
+            <p>Galerie mit leichter Lightbox (ohne Zusatzbilder). Klick auf ein Bild zum Vergrößern.</p>
+            <div class="thumbs">
+              <a href="assets/screenshot-1.jpg" data-lightbox data-caption="Screenshot 1"><img src="assets/screenshot-1.jpg" alt="Screenshot 1"></a>
+              <a href="assets/artwork-1.jpg" data-lightbox data-caption="Artwork 1"><img src="assets/artwork-1.jpg" alt="Artwork 1"></a>
+            </div>
           </div>
-        </div>
-        <div class="card">
-          <img src="assets/artwork-1.jpg" alt="Artwork 1 (Platzhalter)">
-          <div>
-            <p>Konzeptgrafik oder Promo-Art mit Quellenhinweis.</p>
+        </li>
+
+        <!-- FAQ -->
+        <li class="panel" id="faqs" data-label="FAQs">
+          <div class="content">
+            <h1>FAQs</h1>
+            <h2>Ist das offiziell?</h2>
+            <p>Nein. Fan‑Projekt; keine Verbindung zu den Rechteinhabern. Lizenz: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY‑SA 4.0</a>.</p>
+            <h2>Darf ich Dateien nutzen?</h2>
+            <p>Sofern im Repo enthalten und nicht anders gekennzeichnet: unter CC BY‑SA 4.0 mit korrekter Namensnennung & Weitergabe unter gleichen Bedingungen.</p>
           </div>
-        </div>
-      </section>
-
-      <section id="faqs">
-        <h1>FAQs</h1>
-        <details>
-          <summary>Ist das offiziell?</summary>
-          <p>Nein. Dies ist ein Fan‑Projekt ohne Verbindung zu den Rechteinhabern. Siehe <a href="#legal">Legal & License</a>.</p>
-        </details>
-        <details>
-          <summary>Darf ich Assets/Dateien nutzen?</summary>
-          <p>Sofern im Repo enthalten und nicht anders gekennzeichnet: unter <strong>CC BY-SA 4.0</strong>. Nenne die Urheber und verwende dieselbe Lizenz für Abwandlungen. Siehe <a href="ATTRIBUTION.md">Attribution</a>.</p>
-        </details>
-        <details>
-          <summary>Wie kann ich beitragen?</summary>
-          <p>Siehe <a href="#contribute">Contribute</a> – Issues/PRs willkommen.</p>
-        </details>
-      </section>
-
-      <section id="credits">
-        <h1>Credits</h1>
-        <p>Würdigung des ursprünglichen Teams und der Community. Wenn möglich, mit Rollen & Jahren.</p>
-        <ul>
-          <li><strong>Original Team:</strong> [Namen / Rollen]</li>
-          <li><strong>Beiträge/Thanks:</strong> [Namen / Links]</li>
-          <li><strong>Maintainer:<\/strong> BYTE RANGER Software (CalDymos)<\/li>
-        </ul>
-      </section>
-
-      <section id="legal">
-        <h1>Legal & License</h1>
-        <p><strong>Fan-Disclaimer:</strong> „Indiana Jones“ und verwandte Marken sind Eigentum ihrer jeweiligen Rechteinhaber. Dieses Projekt ist ein nicht-kommerzielles Fanprojekt ohne offizielle Verbindung.</p>
-        <p><strong>Repo-Lizenz:</strong> Sofern nicht anders gekennzeichnet, stehen Inhalte unter <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)</a>. Bitte beachte die <a href="ATTRIBUTION.md">Attribution</a>.</p>
-        <p><strong>Drittlizenzen:</strong> Externe Assets (z. B. Fonts, Icons, Sounds) sind gesondert gekennzeichnet.</p>
-      </section>
-
-      <section id="contact">
-        <h1>Contact / Community</h1>
-        <p>Fragen, Korrekturen, neue Mirrors? Bitte ein
-          <a href="https://github.com/CalDymos/indy-foy/issues">Issue</a>
-          im Repo eröffnen oder per E‑Mail:
-          <a href="mailto:ByteRanger@gmx.de">ByteRanger@gmx.de</a>.
-        </p>
-        <p>Projektseite (GitHub Pages): <a href="https://caldymos.github.io/indy-foy/">https://caldymos.github.io/indy-foy/</a></p>
-      </section>
-    </article>
-
-    <!-- Rechte vertikale, gestaffelte Register wie im Screenshot -->
-    <aside class="vnav-right" aria-label="Rechte Registerleiste">
-      <div class="vtab"><a href="#history" id="tab-history">History</a></div>
-      <div class="vtab"><a href="#development" id="tab-dev">Development</a></div>
-      <div class="vtab"><a href="#media" id="tab-media">Media</a></div>
-      <div class="vtab"><a href="#faqs" id="tab-faqs">FAQs</a></div>
-    </aside>
-  </main>
+        </li>
+      </ul>
+    </div>
+  </div>
 
   <footer>
-    <p>© BYTE RANGER Software – Indiana Jones and the Fountain of Youth · <a href="ATTRIBUTION.md" style="color:#e7e0d6;">Attribution</a> · <a href="#legal" style="color:#e7e0d6;">Legal & License</a></p>
-    <p class="footnav">
-      <a href="#releases">Releases</a> ·
-      <a href="#roadmap">Roadmap</a> ·
-      <a href="#contribute">Contribute</a> ·
-      <a href="#archive">History/Archive</a> ·
-      <a href="#credits">Credits</a> ·
-      <a href="#contact">Contact</a>
-    </p>
+    © BYTE RANGER Software – Indiana Jones and the Fountain of Youth · <a href="https://github.com/CalDymos/indy-foy/issues">Issues</a>
   </footer>
-<script>
-  function setActiveByHash(){
-    const id = location.hash || '#intro';
 
-    // Tabs markieren
-    document.querySelectorAll('.vtab a, .vnav-left a').forEach(a=>{
-      a.classList.toggle('active', a.getAttribute('href')===id);
-    });
+  <!-- Lightbox (ohne Zusatzbilder) -->
+  <div class="lb" id="lb" aria-hidden="true" role="dialog">
+    <button class="close" id="lbClose" aria-label="Close">×</button>
+    <figure>
+      <img id="lbImg" alt="">
+      <figcaption class="caption" id="lbCap"></figcaption>
+    </figure>
+  </div>
 
-    // Sichtbarkeit der Bereiche steuern
-    const sections = document.querySelectorAll('.content section');
-    let shown = false;
-    sections.forEach(sec => {
-      const show = ('#'+sec.id) === id;
-      sec.style.display = show ? 'block' : 'none';
-      sec.setAttribute('aria-hidden', show ? 'false' : 'true');
-      if (show) shown = true;
-    });
-
-    // Fallback: falls unbekannter Hash -> Intro zeigen
-    if (!shown){
-      const intro = document.getElementById('intro');
-      if (intro){
-        intro.style.display='block';
-        intro.setAttribute('aria-hidden','false');
-      }
+  <script>
+    // Akkordeon ohne jQuery – klickbares, kwicks-ähnliches Verhalten
+    const panels = Array.from(document.querySelectorAll('.panel'));
+    function activateById(id){
+      panels.forEach(p=>p.classList.toggle('active', '#'+p.id===id));
+      // Hash synchronisieren (ohne Scroll-Jump)
+      if (history.replaceState) history.replaceState(null, '', id);
     }
-  }
-  window.addEventListener('hashchange', setActiveByHash);
-  window.addEventListener('DOMContentLoaded', setActiveByHash);
-</script>
+    function initAccordion(){
+      const hash = location.hash || '#intro';
+      if (panels.some(p=>'#'+p.id===hash)) activateById(hash); else activateById('#intro');
+      panels.forEach(p=>{
+        p.addEventListener('click', e=>{
+          // Nur aktivieren, wenn in die schmale Leiste geklickt wird
+          const insideContent = e.target.closest('.content');
+          if (!insideContent) activateById('#'+p.id);
+        });
+      });
+      window.addEventListener('hashchange', ()=>{
+        const h = location.hash || '#intro';
+        if (panels.some(p=>'#'+p.id===h)) activateById(h);
+      });
+    }
+
+    // Leichte Lightbox
+    function initLightbox(){
+      const lb = document.getElementById('lb');
+      const img = document.getElementById('lbImg');
+      const cap = document.getElementById('lbCap');
+      const btn = document.getElementById('lbClose');
+
+      function open(src, caption){
+        img.src = src; img.alt = caption||''; cap.textContent = caption||'';
+        lb.classList.add('open'); lb.setAttribute('aria-hidden','false');
+      }
+      function close(){
+        lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); img.src=''; cap.textContent='';
+      }
+      document.addEventListener('click', (e)=>{
+        const a = e.target.closest('a[data-lightbox]');
+        if (a){ e.preventDefault(); open(a.getAttribute('href'), a.dataset.caption); }
+      });
+      lb.addEventListener('click', (e)=>{ if (e.target===lb) close(); });
+      btn.addEventListener('click', close);
+      document.addEventListener('keydown', (e)=>{ if (e.key==='Escape') close(); });
+    }
+
+    document.addEventListener('DOMContentLoaded', ()=>{
+      initAccordion();
+      initLightbox();
+    });
+  </script>
 </body>
 </html>
