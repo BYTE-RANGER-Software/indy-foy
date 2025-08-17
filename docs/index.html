@@ -4,14 +4,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Indiana Jones and the Fountain of Youth – BYTE RANGER Software</title>
-  <meta name="description" content="Moderne, jQuery-freie Neuauflage der klassischen FOY-Seite – mit Akkordeon-Tabs und leichter Lightbox (ohne zusätzliche Bild-Assets)."/>
+  <meta name="description" content="Moderne, jQuery-freie Neuauflage der klassischen FOY-Seite – mit Akkordeon-Tabs und leichter Lightbox. Optik angelehnt an das Original."/>
   <style>
     :root{
       --maxw: 980px;
       --card-bg: #dfdbd2;
       --card-edge: #eee9de;
       --ink: #2a241c;
-      --muted: #6b6257;
       --collapsed: 56px;    /* Breite der eingefahrenen Tabs */
       --expanded: 700px;     /* Breite des aktiven Tabs */
       --gap: 0px;            /* Spaltmaß zwischen Tabs */
@@ -20,48 +19,34 @@
     html,body{height:100%}
     body{
       margin:0; color:var(--ink); font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, sans-serif;
-      background: #2a241c url('assets/templatemo_body.jpg') center top / cover fixed no-repeat;
+      background: #2a241c url('/indy-foy/assets/templatemo_body.jpg') center top / cover fixed no-repeat;
     }
 
     /* ======= Header ======= */
-    .banner{
-      position:relative; min-height:145px; width:100%;
-      background:
-        url('assets/templatemo_main.jpg') center top / cover no-repeat;
-    }
-    .banner::after{
-      content:""; position:absolute; left:0; right:0; top:10px; height:120px;
-      background:url('assets/templatemo_logo.png') left 16px/ auto 110px no-repeat;
-    }
+    .banner{ position:relative; min-height:145px; width:100%; background: url('/indy-foy/assets/templatemo_main.jpg') center top / cover no-repeat; }
+    .banner::after{ content:""; position:absolute; left:0; right:0; top:10px; height:120px; background:url('/indy-foy/assets/templatemo_logo.png') left 16px/ auto 110px no-repeat; }
 
-    /* ======= Panel-Frame (helle Karte) ======= */
+    /* ======= Panel-Frame ======= */
     .frame{ max-width: var(--maxw); margin: -24px auto 60px; padding: 10px; border-radius:6px; background:#fff; box-shadow: 0 10px 24px rgba(0,0,0,.35); }
     .frame-inner{ background: var(--card-bg); border: 6px solid var(--card-edge); border-radius:4px; position:relative; overflow:hidden; }
 
     /* ======= Akkordeon (Kwicks-ähnlich) ======= */
     .kwicks{ list-style:none; margin:0; padding:0; display:flex; gap:var(--gap); align-items:stretch; }
-    .panel{ position:relative; flex: 0 0 var(--collapsed); height: 560px; background: #bfb7ad url('assets/slider_bg.png') repeat-y center; transition: flex-basis .35s ease, flex .35s ease, filter .25s ease; overflow:hidden; }
+    .panel{ position:relative; flex: 0 0 var(--collapsed); height:560px; background:#bfb7ad url('/indy-foy/assets/slider_bg.png') repeat-y center; transition:flex-basis .35s ease, flex .35s ease, filter .25s ease; overflow:hidden; cursor:pointer; }
     .panel.active{ flex: 0 0 var(--expanded); background-color: transparent; filter:none; }
-    .panel:not(.active){ filter: saturate(.8) brightness(.95); }
+    .panel:not(.active){ filter: saturate(.85) brightness(.95); }
 
-    /* Vertikale Beschriftung (Fallback als Text); ersetzbar via --label-img */
-    .panel::before{
-      content: attr(data-label);
-      position:absolute; inset:0 auto 0 0; width: var(--collapsed); display:flex; align-items:center; justify-content:center;
-      writing-mode: vertical-rl; transform: rotate(180deg);
-      color:#fff; letter-spacing:.6px; font-weight:700; text-transform:capitalize; opacity:.9;
-      background: rgba(0,0,0,.05);
-      backdrop-filter: blur(0.5px);
-    }
+    /* Vertikale Beschriftung (Fallback Text oder Bild per CSS-Var) */
+    .panel::before{ content: attr(data-label); position:absolute; inset:0 auto 0 0; width:var(--collapsed); display:flex; align-items:center; justify-content:center; writing-mode: vertical-rl; transform: rotate(180deg); color:#fff; letter-spacing:.6px; font-weight:700; text-transform:capitalize; opacity:.9; background: rgba(0,0,0,.05); }
     .panel.has-img::before{ content:""; background: transparent var(--label-img) center/ contain no-repeat; }
 
-    /* Inhalt innerhalb des aktiven Panels */
-    .content{ position:absolute; left: var(--collapsed); right: 0; top:0; bottom:0; padding: 26px 26px 30px; overflow:auto; display:none; }
+    /* Panel-Inhalt */
+    .content{ position:absolute; left:var(--collapsed); right:0; top:0; bottom:0; padding:26px 26px 30px; overflow:auto; display:none; cursor:auto; }
     .panel.active .content{ display:block; }
 
     h1{ font-size:32px; margin:0 0 14px; }
     h2{ font-size:22px; margin:20px 0 8px; }
-    p{ line-height:1.6; color: var(--ink); }
+    p{ line-height:1.6; }
     .lead{ font-weight:600; }
 
     .grid{ display:grid; grid-template-columns: 240px 1fr; gap:16px; align-items:start; margin-top:6px; }
@@ -74,16 +59,15 @@
     th,td{ border:1px solid #d8d2c8; padding:8px 10px; text-align:left; }
     th{ background:#eee7dc; }
 
-    /* Footer */
     footer{ max-width:var(--maxw); margin: 0 auto 50px; color:#e9e2d8; text-align:center; font-size:14px; }
     footer a{ color:#efe7dd; text-decoration:none; }
 
     /* Responsive */
-    @media (max-width: 1000px){
+    @media (max-width:1000px){
       :root{ --expanded: 100%; }
       .kwicks{ flex-direction:column; }
-      .panel, .panel.active{ flex: 0 0 auto; height:auto; min-height: 420px; }
-      .panel::before{ position:absolute; top:0; left:0; right:auto; width:100%; height:44px; writing-mode: horizontal-tb; transform:none; display:flex; justify-content:flex-start; padding-left:16px; color:#3c3123; background: rgba(255,255,255,.65); }
+      .panel, .panel.active{ flex:0 0 auto; height:auto; min-height:420px; }
+      .panel::before{ position:absolute; top:0; left:0; width:100%; height:44px; writing-mode: horizontal-tb; transform:none; display:flex; justify-content:flex-start; padding-left:16px; color:#3c3123; background: rgba(255,255,255,.65); }
       .content{ position:relative; left:0; padding-top:56px; }
     }
 
@@ -91,13 +75,12 @@
     .lb{ position: fixed; inset:0; background: rgba(0,0,0,.8); display:none; align-items:center; justify-content:center; z-index: 50; }
     .lb.open{ display:flex; }
     .lb figure{ margin:0; max-width: 92vw; max-height: 90vh; }
-    .lb img{ max-width: 100%; max-height: 90vh; display:block; }
+    .lb img{ max-width:100%; max-height:90vh; display:block; }
     .lb .close{ position:absolute; top:14px; right:18px; font-size:28px; color:#fff; cursor:pointer; line-height:1; }
     .lb .caption{ color:#fff; margin-top:8px; font-size:14px; text-align:center; opacity:.85; }
     .thumbs{ display:grid; grid-template-columns: repeat(auto-fill, minmax(160px,1fr)); gap:12px; }
     .thumbs a{ display:block; border:1px solid #d8d2c8; background:#fff; }
     .thumbs img{ width:100%; height:auto; display:block; }
-
   </style>
 </head>
 <body>
@@ -107,17 +90,17 @@
     <div class="frame-inner">
       <ul class="kwicks" id="kw">
         <!-- INTRO / HOME -->
-        <li class="panel has-img" id="intro" data-label="Introduction" style="--label-img:url('assets/home.png')">
+        <li class="panel active has-img" id="intro" data-label="Introduction" style="--label-img:url('/indy-foy/assets/home.png')">
           <div class="content">
             <h1>The Fountain of Youth</h1>
             <div class="grid">
-              <img alt="Cover" src="assets/templatemo_main.png">
+              <img alt="Cover" src="/indy-foy/assets/templatemo_main.png">
               <div>
                 <p class="lead">Fortführung des Fanprojekts durch <strong>BYTE RANGER Software</strong>. Klassisches Point‑and‑Click‑Adventure im Stil der 90er.</p>
                 <p>Diese Seite ist die moderne, jQuery‑freie Umsetzung der historischen Website. Tabs fahren wie einst auf, Inhalte erscheinen selektiv.</p>
                 <h2>Features</h2>
                 <ul class="feature">
-                  <li>Kapitel: Bimini, Europa & Asien</li>
+                  <li>Kapitel: Bimini, Europa &amp; Asien</li>
                   <li>Handgezeichnete Hintergründe (Low‑Res‑Look)</li>
                   <li>Adventure‑UI im „Atlantis“-Stil</li>
                   <li>Rätsel, Action und Story</li>
@@ -140,7 +123,7 @@
           <div class="content">
             <h1>History</h1>
             <div class="grid">
-              <img src="assets/screenshot-1.jpg" alt="Historisches Bild"/>
+              <img src="/indy-foy/assets/screenshot-1.jpg" alt="Historisches Bild"/>
               <div>
                 <p>Vom frühen Konzept (ca. 1999) über Demos bis zur heutigen Fortführung. Ergänze hier eine Timeline mit Meilensteinen, Screenshots und Links.</p>
                 <ul class="feature">
@@ -159,9 +142,9 @@
             <h1>Development</h1>
             <p>Engine/Framework: <strong>AGS (Adventure Game Studio)</strong></p>
             <ul class="feature">
-              <li>Grafik‑Pipeline & Auflösung: <em>[eintragen]</em></li>
+              <li>Grafik‑Pipeline &amp; Auflösung: <em>[eintragen]</em></li>
               <li>Build/Tooling: <em>[eintragen]</em></li>
-              <li>Tutorials & How‑Tos: <em>[Links]</em></li>
+              <li>Tutorials &amp; How‑Tos: <em>[Links]</em></li>
             </ul>
 
             <h2>Roadmap</h2>
@@ -179,8 +162,8 @@
             <h1>Media</h1>
             <p>Galerie mit leichter Lightbox (ohne Zusatzbilder). Klick auf ein Bild zum Vergrößern.</p>
             <div class="thumbs">
-              <a href="assets/screenshot-1.jpg" data-lightbox data-caption="Screenshot 1"><img src="assets/screenshot-1.jpg" alt="Screenshot 1"></a>
-              <a href="assets/artwork-1.jpg" data-lightbox data-caption="Artwork 1"><img src="assets/artwork-1.jpg" alt="Artwork 1"></a>
+              <a href="/indy-foy/assets/screenshot-1.jpg" data-lightbox data-caption="Screenshot 1"><img src="/indy-foy/assets/screenshot-1.jpg" alt="Screenshot 1"></a>
+              <a href="/indy-foy/assets/artwork-1.jpg" data-lightbox data-caption="Artwork 1"><img src="/indy-foy/assets/artwork-1.jpg" alt="Artwork 1"></a>
             </div>
           </div>
         </li>
@@ -192,7 +175,7 @@
             <h2>Ist das offiziell?</h2>
             <p>Nein. Fan‑Projekt; keine Verbindung zu den Rechteinhabern. Lizenz: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY‑SA 4.0</a>.</p>
             <h2>Darf ich Dateien nutzen?</h2>
-            <p>Sofern im Repo enthalten und nicht anders gekennzeichnet: unter CC BY‑SA 4.0 mit korrekter Namensnennung & Weitergabe unter gleichen Bedingungen.</p>
+            <p>Sofern im Repo enthalten und nicht anders gekennzeichnet: unter CC BY‑SA 4.0 mit korrekter Namensnennung &amp; Weitergabe unter gleichen Bedingungen.</p>
           </div>
         </li>
       </ul>
@@ -217,22 +200,23 @@
     const panels = Array.from(document.querySelectorAll('.panel'));
     function activateById(id){
       panels.forEach(p=>p.classList.toggle('active', '#'+p.id===id));
-      // Hash synchronisieren (ohne Scroll-Jump)
-      if (history.replaceState) history.replaceState(null, '', id);
+      if (window.history && typeof window.history.replaceState === 'function') {
+        window.history.replaceState(null, '', id);
+      }
     }
     function initAccordion(){
-      const hash = location.hash || '#intro';
-      if (panels.some(p=>'#'+p.id===hash)) activateById(hash); else activateById('#intro');
+      const valid = h => panels.some(p => ('#'+p.id) === h);
+      const hash = valid(location.hash) ? location.hash : '#intro';
+      activateById(hash);
       panels.forEach(p=>{
         p.addEventListener('click', e=>{
-          // Nur aktivieren, wenn in die schmale Leiste geklickt wird
-          const insideContent = e.target.closest('.content');
+          const insideContent = e.target.closest && e.target.closest('.content');
           if (!insideContent) activateById('#'+p.id);
         });
       });
       window.addEventListener('hashchange', ()=>{
-        const h = location.hash || '#intro';
-        if (panels.some(p=>'#'+p.id===h)) activateById(h);
+        const h = valid(location.hash) ? location.hash : '#intro';
+        activateById(h);
       });
     }
 
@@ -251,7 +235,7 @@
         lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); img.src=''; cap.textContent='';
       }
       document.addEventListener('click', (e)=>{
-        const a = e.target.closest('a[data-lightbox]');
+        const a = e.target.closest && e.target.closest('a[data-lightbox]');
         if (a){ e.preventDefault(); open(a.getAttribute('href'), a.dataset.caption); }
       });
       lb.addEventListener('click', (e)=>{ if (e.target===lb) close(); });
@@ -259,10 +243,7 @@
       document.addEventListener('keydown', (e)=>{ if (e.key==='Escape') close(); });
     }
 
-    document.addEventListener('DOMContentLoaded', ()=>{
-      initAccordion();
-      initLightbox();
-    });
+    document.addEventListener('DOMContentLoaded', ()=>{ initAccordion(); initLightbox(); });
   </script>
 </body>
 </html>
