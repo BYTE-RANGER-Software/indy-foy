@@ -1,5 +1,5 @@
 # --- Website-Assets NICHT mit LFS tracken
-docs/assets/** -filter -diff -merge text
+docs/assets/** -filter -diff -merge -text
 
 # --- LFS nur für große Dateien außerhalb der Website
 originals/** filter=lfs diff=lfs merge=lfs -text
