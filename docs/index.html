@@ -79,7 +79,16 @@
 
     /* Vertikale Beschriftung (Fallback Text oder Bild per CSS-Var) */
     .panel::before{ content: attr(data-label); position:absolute; inset:0 auto 0 0; width:var(--collapsed); display:flex; align-items:center; justify-content:center; writing-mode: vertical-rl; transform: rotate(180deg); color:#fff; letter-spacing:.6px; font-weight:700; text-transform:capitalize; opacity:.9; background: rgba(0,0,0,.05); }
-    .panel.has-img::before{ content:""; background: transparent var(--label-img) center/ contain no-repeat; }
+    .panel.has-img::before{
+      content: "";                               /* kein Text */
+      background-image: var(--label-img);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: auto 92%;                 /* Höhe dominierend, passt in 56px Breite */
+      writing-mode: horizontal-tb;               /* Text-Flow ausschalten */
+      transform: none;                           /* keine 180°-Drehung fürs Bild */
+    }
+
 
     /* Panel-Inhalt */
     .content{ position:absolute; left:var(--collapsed); right:0; top:0; bottom:0; padding:26px 26px 30px; overflow:auto; display:none; cursor:auto; }
