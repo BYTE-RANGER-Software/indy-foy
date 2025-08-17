@@ -40,6 +40,7 @@
       top:  24px;
       width: 620px;               /* ~ reale Breite des Logos */
       height: 140px;              /* ~ reale Höhe des Logos */
+      z-index: 1;
       background: url('/indy-foy/assets/templatemo_logo.png')
                   left top / contain no-repeat;
       pointer-events: none;       /* Klicks gehen durch */
@@ -58,7 +59,15 @@
 
     /* ======= Akkordeon (Kwicks-ähnlich) ======= */
     .kwicks{ list-style:none; margin:0; padding:0; display:flex; gap:var(--gap); align-items:stretch; }
-    .panel{  background: #bfb7ad url('/indy-foy/assets/slider_bg.png') repeat-y center;}
+    .panel{
+      position: relative;
+      flex: 0 0 var(--collapsed);
+      height: 560px;
+      background: #bfb7ad url('/indy-foy/assets/slider_bg.png') repeat-y center;
+      transition: flex-basis .35s ease, flex .35s ease, filter .25s ease;
+      overflow: hidden;
+      cursor: pointer;
+    }
     .panel.active{ flex: 0 0 var(--expanded); background-color: transparent; filter:none; }
     .panel:not(.active){ filter: saturate(.85) brightness(.95); }
 
