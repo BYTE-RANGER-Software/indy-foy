@@ -11,7 +11,7 @@
       --card-bg: #dfdbd2;
       --card-edge: #eee9de;
       --ink: #2a241c;
-      --collapsed: 56px;    /* Breite der eingefahrenen Tabs */
+      --collapsed: 48px;    /* Breite der eingefahrenen Tabs */
       --expanded: 700px;     /* Breite des aktiven Tabs */
       --gap: 0px;            /* Spaltmaß zwischen Tabs */
     }
@@ -36,20 +36,22 @@
     .banner::after{
       content:"";
       position:absolute;
-      left: 28px;                 /* feintunen nach Geschmack */
-      top:  24px;
-      width: 620px;               /* ~ reale Breite des Logos */
-      height: 140px;              /* ~ reale Höhe des Logos */
+      top: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(90vw, 640px);       /* max ~Originalbreite */
+      height: 140px;                 /* Höhe beibehalten/feintunen */
       z-index: 1;
       background: url('/indy-foy/assets/templatemo_logo.png')
-                  left top / contain no-repeat;
-      pointer-events: none;       /* Klicks gehen durch */
+                  center / contain no-repeat;
+      pointer-events: none;
     }
+
 
     /* ======= Panel-Frame ======= */
     .frame{
       max-width: var(--maxw);
-      margin: 12px auto 60px;     /* vorher: -24px auto 60px */
+      margin: 24px auto 60px;     /* vorher: -24px auto 60px */
       padding: 10px;
       border-radius:6px;
       background:#fff;
@@ -68,7 +70,11 @@
       overflow: hidden;
       cursor: pointer;
     }
-    .panel.active{ flex: 0 0 var(--expanded); background-color: transparent; filter:none; }
+    .panel.active{
+      flex: 0 0 var(--expanded);
+      background: var(--card-bg);   /* statt background-color:transparent */
+      filter:none;
+    }
     .panel:not(.active){ filter: saturate(.85) brightness(.95); }
 
     /* Vertikale Beschriftung (Fallback Text oder Bild per CSS-Var) */
