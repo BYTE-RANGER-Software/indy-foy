@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Indiana Jones and the Fountain of Youth – BYTE RANGER Software</title>
-  <meta name="description" content="Moderne, jQuery-freie Neuauflage der klassischen FOY-Seite – mit Akkordeon-Tabs und leichter Lightbox. Optik wie das Original."/>
+  <meta name="description" content="Project page of the repository Indiana Jones and the Fountain of Youth (indy-foy)"/>
   <style>
     :root{
       --maxw: 980px;
@@ -62,8 +62,22 @@
     .panel.active .content{ display:block; }
 
     h1{ font-size:32px; margin:0 0 14px; } h2{ font-size:22px; margin:20px 0 8px; } p{ line-height:1.6; } .lead{ font-weight:600; }
-    .grid{ display:grid; grid-template-columns: 240px 1fr; gap:16px; align-items:start; margin-top:6px; }
-    .grid img{ width:100%; border:1px solid rgba(0,0,0,.12); border-radius:4px; background:#fff; }
+    .grid{
+      display: grid;
+      grid-template-columns: 1fr;    /* Standard: 1 Spalte → nichts gequetscht */
+      gap: 16px;
+      align-items: start;
+      margin-top: 6px;
+    }
+    .grid img{
+      width: 100%;
+      border: 1px solid rgba(0,0,0,.12);
+      border-radius: 4px;
+      background: #fff;
+    }
+    /* Panels MIT Bild links */
+    .grid.two{ grid-template-columns: 240px 1fr; }
+
     ul.feature{ margin:8px 0 0 0; padding:0 0 0 18px; } ul.feature li{ margin:.35rem 0; }
     table{ width:100%; border-collapse:collapse; margin:8px 0 16px; } th,td{ border:1px solid #d8d2c8; padding:8px 10px; text-align:left; } th{ background:#eee7dc; }
 
@@ -101,23 +115,24 @@
             <h1>The Fountain of Youth</h1>
             <div class="grid">
               <div>
-                <p class="lead">Fortführung des Fanprojekts durch <strong>BYTE RANGER Software</strong>. Klassisches Point‑and‑Click‑Adventure im Stil der 90er.</p>
-                <p>Diese Seite ist die moderne, jQuery‑freie Umsetzung der historischen Website. Tabs fahren wie einst auf, Inhalte erscheinen selektiv.</p>
+                <p class="lead">Continuation of the fan project by <strong>BYTE RANGER Software</strong>.</p>
+                <p>Indiana Jones and the Fountain of Youth is a freeware fan game project in a similar style to the 1992 classic Indiana Jones and the Fate of Atlantis. The game is in development and features brand new original art and animations in classic low-res style, a gripping story, advanced coding methods and original music.</p>
                 <h2>Features</h2>
                 <ul class="feature">
-                  <li>Kapitel: Bimini, Europa &amp; Asien</li>
-                  <li>Handgezeichnete Hintergründe (Low‑Res‑Look)</li>
-                  <li>Adventure‑UI im „Atlantis“-Stil</li>
-                  <li>Rätsel, Action und Story</li>
+                  <li>Chapters include Bimini, Europe &amp; Asia</li>
+                  <li>Over 150 hand-drawn backgrounds (low-res look)</li>
+                  <li>Classic "Atlantis" GUI & mechanics</li>
+                  <li>Puzzles, action, and story</li>
+                  <li>Antiqiuties, sidekicks & leather jackets!</li>
                 </ul>
               </div>
             </div>
 
             <h2>Releases</h2>
             <table>
-              <thead><tr><th>Datei</th><th>Version</th><th>Datum</th><th>SHA‑256</th><th>Download</th></tr></thead>
+              <thead><tr><th>Datei</th><th>Version</th><th>Datum</th><th>SHA-256</th><th>Download</th></tr></thead>
               <tbody>
-                <tr><td>FOY_Windows.zip</td><td>0.1.0</td><td>YYYY‑MM‑DD</td><td><code>[SHA256]</code></td><td><a href="#">Release</a></td></tr>
+                <!-- <tr><td>FOY_Windows.zip</td><td>0.1.0</td><td>YYYY-MM-DD</td><td><code>[SHA256]</code></td><td><a href="#">Release</a></td></tr> -->
               </tbody>
             </table>
           </div>
@@ -126,16 +141,16 @@
         <!-- HISTORY -->
         <li class="panel" id="history" data-label="History">
           <div class="content">
-            <h1>History</h1>
-            <div class="grid">
-              <img src="/indy-foy/assets/screenshot-1.jpg" alt="Historisches Bild"/>
+          <h1>History</h1>
+            <div class="grid two">
               <div>
-                <p>Vom frühen Konzept (ca. 1999) über Demos bis zur heutigen Fortführung. Ergänze hier eine Timeline mit Meilensteinen, Screenshots und Links.</p>
-                <ul class="feature">
-                  <li>2006 – Erste öffentliche Demo</li>
-                  <li>2010 – Weitere Previews</li>
-                  <li>Heute – Fortführung durch BYTE RANGER Software</li>
-                </ul>
+                <p><strong>Origins (1999).</strong> <em>Fountain of Youth</em> began as a fan project conceived and scripted by <strong>Jocke Andersson</strong> around 1999. Over time the scope and ambition grew as more artists and developers joined the effort.</p>
+                <p><strong>First public demo (2006).</strong> After years of prototyping and asset work, a <strong>playable demo</strong> was released in 2006 and picked up by the games press and community.</p>
+                <p><strong>Side releases.</strong> The team produced seasonal mini-games and flash animations, including <em>Temple of Spheres</em> (2009) and <em>Passage of Saints</em> (2012).</p>
+                <p><strong>Chapter plan (2013).</strong> In 2013 the team decided to split the game into chapters for release, while continuing to recruit contributors to share the workload.</p>
+                <p><strong>Team.</strong> Over the years contributors included <strong>Mark Lovegrove</strong> (Screen 7), <strong>Misja van Laatum</strong>, <strong>Jan “DKH” Simon</strong>, <strong>Paul Wilkinson</strong> (Subspark), <strong>Mutbrecht Asengard</strong> and many community helpers.</p>
+                <p><strong>Project status (2021).</strong> By 2021 public posts indicated the project was discontinued under Screen 7.</p>
+                <p><strong>Continuation (2025).</strong> The project is now being continued by <strong>BYTE RANGER Software</strong> with the aim of releasing it in stages.</p>
               </div>
             </div>
           </div>
@@ -145,18 +160,33 @@
         <li class="panel" id="development" data-label="Development">
           <div class="content">
             <h1>Development</h1>
-            <p>Engine/Framework: <strong>AGS (Adventure Game Studio)</strong></p>
+
+            <p>Engine/Framework: <strong>Adventure Game Studio (AGS)</strong></p>
+
+            <h2>Resolution & Rendering</h2>
             <ul class="feature">
-              <li>Grafik‑Pipeline &amp; Auflösung: <em>[eintragen]</em></li>
-              <li>Build/Tooling: <em>[eintragen]</em></li>
-              <li>Tutorials &amp; How‑Tos: <em>[Links]</em></li>
+              <li><strong>Native resolution:</strong> <code>640×400</code> (16:10). Classic framing with 2× the pixel density of 320×200.</li>
+              <li><strong>Scaling:</strong> Aspect-preserving, nearest-neighbour; pillarbox/letterbox where needed.</li>
+              <li><strong>Asset pipeline:</strong> Backgrounds either drawn natively at 640×400 or as 1280×800 masters then downscaled; UI/fonts tuned for readability.</li>
+            </ul>
+
+            <h2>Build & Tooling</h2>
+            <ul class="feature">
+              <li><strong>AGS 3.6.x</strong> project, Windows builds via Editor; CI (GitHub Actions) for nightly zips.</li>
+              <li>Art: Aseprite/PS; Audio: Reaper/Audacity; Versioning: Git (LFS only for large original sources).</li>
             </ul>
 
             <h2>Roadmap</h2>
             <ul class="feature">
-              <li>M0 – Project Setup, CI, Demo</li>
-              <li>M1 – Core Gameplay (Verb‑UI, Inventar)</li>
-              <li>M2 – Bimini‑Prolog</li>
+              <li><strong>M0 – Project Setup (vertical-slice tech)</strong>: 1 test room (walkable areas & walk-behinds), verb-UI/inventory stub, one hotspot interaction, basic dialog, packaged build.</li>
+              <li><strong>M1 – Core Gameplay</strong>: Rooms & transitions, hotspots/objects, inventory flow, dialog system, save/load, pathfinding, blocking volumes, options.</li>
+              <li><strong>M2 – Bimini Prologue</strong>: 3–6 rooms, 5–8 puzzles, 1 mini-cutscene, first audio pass, QA; public demo.</li>
+            </ul>
+
+            <h2>Notes</h2>
+            <ul class="feature">
+              <li>Deliver crisp pixels on modern displays; default to <em>Nearest-Neighbour</em> and aspect-preserving scale in setup.</li>
+              <li>Keep art guidelines (palette, line weight, anim FPS, font sizes) in <code>ATTRIBUTION.md</code>/<code>docs/</code>.</li>
             </ul>
           </div>
         </li>
@@ -165,7 +195,7 @@
         <li class="panel" id="media" data-label="Media">
           <div class="content">
             <h1>Media</h1>
-            <p>Galerie mit leichter Lightbox (ohne Zusatzbilder). Klick auf ein Bild zum Vergrößern.</p>
+            <p>Click on an image to enlarge it.</p>
             <div class="thumbs">
               <a href="/indy-foy/assets/screenshot-1.jpg" data-lightbox data-caption="Screenshot 1"><img src="/indy-foy/assets/screenshot-1.jpg" alt="Screenshot 1"></a>
               <a href="/indy-foy/assets/artwork-1.jpg" data-lightbox data-caption="Artwork 1"><img src="/indy-foy/assets/artwork-1.jpg" alt="Artwork 1"></a>
@@ -177,10 +207,10 @@
         <li class="panel" id="faqs" data-label="FAQs">
           <div class="content">
             <h1>FAQs</h1>
-            <h2>Ist das offiziell?</h2>
-            <p>Nein. Fan‑Projekt; keine Verbindung zu den Rechteinhabern. Lizenz: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY‑SA 4.0</a>.</p>
-            <h2>Darf ich Dateien nutzen?</h2>
-            <p>Sofern im Repo enthalten und nicht anders gekennzeichnet: unter CC BY‑SA 4.0 mit korrekter Namensnennung &amp; Weitergabe unter gleichen Bedingungen.</p>
+            <h2>Is that official?</h2>
+            <p>No. Fan project; no connection to the rights holders. License: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY‑SA 4.0</a>.</p>
+            <h2>Can I use files?</h2>
+            <p>Unless otherwise indicated in the repository: licensed under CC BY-SA 4.0 with proper attribution and distribution under the same conditions.</p>
           </div>
         </li>
       </ul>
