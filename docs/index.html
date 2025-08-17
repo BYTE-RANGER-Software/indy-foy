@@ -4,112 +4,70 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Indiana Jones and the Fountain of Youth – BYTE RANGER Software</title>
-  <meta name="description" content="Moderne, jQuery-freie Neuauflage der klassischen FOY-Seite – mit Akkordeon-Tabs und leichter Lightbox. Optik angelehnt an das Original."/>
+  <meta name="description" content="Moderne, jQuery-freie Neuauflage der klassischen FOY-Seite – mit Akkordeon-Tabs und leichter Lightbox. Optik wie das Original."/>
   <style>
     :root{
       --maxw: 980px;
       --card-bg: #dfdbd2;
       --card-edge: #eee9de;
       --ink: #2a241c;
-      --collapsed: 48px;    /* Breite der eingefahrenen Tabs */
-      --expanded: 700px;     /* Breite des aktiven Tabs */
-      --gap: 0px;            /* Spaltmaß zwischen Tabs */
+      --collapsed: 48px;   /* schmalere Tabs wie im Original */
+      --expanded: 700px;
+      --gap: 0px;
     }
 
     html,body{height:100%}
-    /* 1) Globaler Hintergrund = das große Wallpaper */
+    /* Globaler Hintergrund = großes Wallpaper */
     body{
-      margin:0;
-      color:var(--ink);
+      margin:0; color:var(--ink);
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, sans-serif;
-      background: #20180f url('/indy-foy/assets/templatemo_main.jpg')
-                  center top / cover fixed no-repeat;
+      background: #20180f url('/indy-foy/assets/templatemo_main.jpg') center top / cover fixed no-repeat;
     }
 
-    /* ======= Header ======= */
-    .banner{
-      position:relative;
-      min-height: 240px;          /* Platz für das Logo wie im Original */
-      width:100%;
-      background: transparent;    /* <- wichtig: kein Bild mehr hier */
-    }
+    /* Banner nur fürs Logo */
+    .banner{ position:relative; min-height:240px; width:100%; background:transparent; }
     .banner::after{
-      content:"";
-      position:absolute;
-      top: 22px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: min(90vw, 640px);       /* max ~Originalbreite */
-      height: 140px;                 /* Höhe beibehalten/feintunen */
-      z-index: 1;
-      background: url('/indy-foy/assets/templatemo_logo.png')
-                  center / contain no-repeat;
-      pointer-events: none;
+      content:""; position:absolute; top:22px; left:50%; transform:translateX(-50%);
+      width:min(90vw, 620px); height:138px; z-index:1;
+      background:url('/indy-foy/assets/templatemo_logo.png') center / contain no-repeat; pointer-events:none;
     }
 
+    /* Kartenrahmen */
+    .frame{ max-width:var(--maxw); margin:24px auto 60px; padding:10px; border-radius:6px; background:#fff; box-shadow:0 10px 24px rgba(0,0,0,.35); }
+    .frame-inner{ background:var(--card-bg); border:6px solid var(--card-edge); border-radius:4px; position:relative; overflow:hidden; }
 
-    /* ======= Panel-Frame ======= */
-    .frame{
-      max-width: var(--maxw);
-      margin: 24px auto 60px;     /* vorher: -24px auto 60px */
-      padding: 10px;
-      border-radius:6px;
-      background:#fff;
-      box-shadow: 0 10px 24px rgba(0,0,0,.35);
-    }
-    .frame-inner{ background: var(--card-bg); border: 6px solid var(--card-edge); border-radius:4px; position:relative; overflow:hidden; }
-
-    /* ======= Akkordeon (Kwicks-ähnlich) ======= */
+    /* Akkordeon */
     .kwicks{ list-style:none; margin:0; padding:0; display:flex; gap:var(--gap); align-items:stretch; }
     .panel{
-      position: relative;
-      flex: 0 0 var(--collapsed);
-      height: 560px;
-      background: #bfb7ad url('/indy-foy/assets/slider_bg.png') repeat-y center;
-      transition: flex-basis .35s ease, flex .35s ease, filter .25s ease;
-      overflow: hidden;
-      cursor: pointer;
+      position:relative; flex:0 0 var(--collapsed); height:560px;
+      background:#bfb7ad url('/indy-foy/assets/slider_bg.png') repeat-y center;
+      transition:flex-basis .35s ease, flex .35s ease, filter .25s ease; overflow:hidden; cursor:pointer;
     }
-    .panel.active{
-      flex: 0 0 var(--expanded);
-      background: var(--card-bg);   /* statt background-color:transparent */
-      filter:none;
-    }
-    .panel:not(.active){ filter: saturate(.85) brightness(.95); }
+    .panel.active{ flex:0 0 var(--expanded); background:var(--card-bg); filter:none; }
+    .panel:not(.active){ filter:saturate(.85) brightness(.95); }
 
-    /* Vertikale Beschriftung (Fallback Text oder Bild per CSS-Var) */
-    .panel::before{ content: attr(data-label); position:absolute; inset:0 auto 0 0; width:var(--collapsed); display:flex; align-items:center; justify-content:center; writing-mode: vertical-rl; transform: rotate(180deg); color:#fff; letter-spacing:.6px; font-weight:700; text-transform:capitalize; opacity:.9; background: rgba(0,0,0,.05); }
+    /* Vertikale Labels */
+    .panel::before{
+      content: attr(data-label); position:absolute; inset:0 auto 0 0; width:var(--collapsed);
+      display:flex; align-items:center; justify-content:center; writing-mode: vertical-rl; transform: rotate(180deg);
+      color:#fff; letter-spacing:.6px; font-weight:700; text-transform:capitalize; opacity:.9; background: rgba(0,0,0,.05);
+    }
     .panel.has-img::before{
-      content: "";                               /* kein Text */
-      background-image: var(--label-img);
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: auto 92%;                 /* Höhe dominierend, passt in 56px Breite */
-      writing-mode: horizontal-tb;               /* Text-Flow ausschalten */
-      transform: none;                           /* keine 180°-Drehung fürs Bild */
+      content:""; background-image:var(--label-img); background-repeat:no-repeat; background-position:center; background-size:auto 92%;
+      writing-mode: horizontal-tb; transform:none;    /* Bild nicht drehen */
     }
-
 
     /* Panel-Inhalt */
     .content{ position:absolute; left:var(--collapsed); right:0; top:0; bottom:0; padding:26px 26px 30px; overflow:auto; display:none; cursor:auto; }
     .panel.active .content{ display:block; }
 
-    h1{ font-size:32px; margin:0 0 14px; }
-    h2{ font-size:22px; margin:20px 0 8px; }
-    p{ line-height:1.6; }
-    .lead{ font-weight:600; }
-
+    h1{ font-size:32px; margin:0 0 14px; } h2{ font-size:22px; margin:20px 0 8px; } p{ line-height:1.6; } .lead{ font-weight:600; }
     .grid{ display:grid; grid-template-columns: 240px 1fr; gap:16px; align-items:start; margin-top:6px; }
     .grid img{ width:100%; border:1px solid rgba(0,0,0,.12); border-radius:4px; background:#fff; }
+    ul.feature{ margin:8px 0 0 0; padding:0 0 0 18px; } ul.feature li{ margin:.35rem 0; }
+    table{ width:100%; border-collapse:collapse; margin:8px 0 16px; } th,td{ border:1px solid #d8d2c8; padding:8px 10px; text-align:left; } th{ background:#eee7dc; }
 
-    ul.feature{ margin:8px 0 0 0; padding:0 0 0 18px; }
-    ul.feature li{ margin:.35rem 0; }
-
-    table{ width:100%; border-collapse:collapse; margin: 8px 0 16px; }
-    th,td{ border:1px solid #d8d2c8; padding:8px 10px; text-align:left; }
-    th{ background:#eee7dc; }
-
-    footer{ max-width:var(--maxw); margin: 0 auto 50px; color:#e9e2d8; text-align:center; font-size:14px; }
+    footer{ max-width:var(--maxw); margin:0 auto 50px; color:#e9e2d8; text-align:center; font-size:14px; }
     footer a{ color:#efe7dd; text-decoration:none; }
 
     /* Responsive */
@@ -118,19 +76,17 @@
       .kwicks{ flex-direction:column; }
       .panel, .panel.active{ flex:0 0 auto; height:auto; min-height:420px; }
       .panel::before{ position:absolute; top:0; left:0; width:100%; height:44px; writing-mode: horizontal-tb; transform:none; display:flex; justify-content:flex-start; padding-left:16px; color:#3c3123; background: rgba(255,255,255,.65); }
+      .panel.has-img::before{ background-position:left center; background-size:auto 70%; }
       .content{ position:relative; left:0; padding-top:56px; }
     }
 
-    /* ======= Lightbox (ohne Zusatzbilder) ======= */
+    /* Lightbox */
     .lb{ position: fixed; inset:0; background: rgba(0,0,0,.8); display:none; align-items:center; justify-content:center; z-index: 50; }
-    .lb.open{ display:flex; }
-    .lb figure{ margin:0; max-width: 92vw; max-height: 90vh; }
-    .lb img{ max-width:100%; max-height:90vh; display:block; }
+    .lb.open{ display:flex; } .lb figure{ margin:0; max-width: 92vw; max-height: 90vh; } .lb img{ max-width:100%; max-height:90vh; display:block; }
     .lb .close{ position:absolute; top:14px; right:18px; font-size:28px; color:#fff; cursor:pointer; line-height:1; }
     .lb .caption{ color:#fff; margin-top:8px; font-size:14px; text-align:center; opacity:.85; }
     .thumbs{ display:grid; grid-template-columns: repeat(auto-fill, minmax(160px,1fr)); gap:12px; }
-    .thumbs a{ display:block; border:1px solid #d8d2c8; background:#fff; }
-    .thumbs img{ width:100%; height:auto; display:block; }
+    .thumbs a{ display:block; border:1px solid #d8d2c8; background:#fff; } .thumbs img{ width:100%; height:auto; display:block; }
   </style>
 </head>
 <body>
@@ -235,64 +191,31 @@
     © BYTE RANGER Software – Indiana Jones and the Fountain of Youth · <a href="https://github.com/CalDymos/indy-foy/issues">Issues</a>
   </footer>
 
-  <!-- Lightbox (ohne Zusatzbilder) -->
+  <!-- Lightbox -->
   <div class="lb" id="lb" aria-hidden="true" role="dialog">
     <button class="close" id="lbClose" aria-label="Close">×</button>
     <figure>
-      <img id="lbImg" alt="">
-      <figcaption class="caption" id="lbCap"></figcaption>
+      <img id="lbImg" alt=""><figcaption class="caption" id="lbCap"></figcaption>
     </figure>
   </div>
 
   <script>
-    // Akkordeon ohne jQuery – klickbares, kwicks-ähnliches Verhalten
     const panels = Array.from(document.querySelectorAll('.panel'));
-    function activateById(id){
-      panels.forEach(p=>p.classList.toggle('active', '#'+p.id===id));
-      if (window.history && typeof window.history.replaceState === 'function') {
-        window.history.replaceState(null, '', id);
-      }
-    }
+    function activateById(id){ panels.forEach(p=>p.classList.toggle('active', '#'+p.id===id)); if(history&&history.replaceState) history.replaceState(null,'',id); }
     function initAccordion(){
-      const valid = h => panels.some(p => ('#'+p.id) === h);
-      const hash = valid(location.hash) ? location.hash : '#intro';
-      activateById(hash);
-      panels.forEach(p=>{
-        p.addEventListener('click', e=>{
-          const insideContent = e.target.closest && e.target.closest('.content');
-          if (!insideContent) activateById('#'+p.id);
-        });
-      });
-      window.addEventListener('hashchange', ()=>{
-        const h = valid(location.hash) ? location.hash : '#intro';
-        activateById(h);
-      });
+      const valid = h => panels.some(p => '#'+p.id===h);
+      activateById(valid(location.hash)?location.hash:'#intro');
+      panels.forEach(p=>p.addEventListener('click',e=>{ if(!(e.target.closest&&e.target.closest('.content'))) activateById('#'+p.id); }));
+      addEventListener('hashchange',()=>activateById(valid(location.hash)?location.hash:'#intro'));
     }
-
-    // Leichte Lightbox
     function initLightbox(){
-      const lb = document.getElementById('lb');
-      const img = document.getElementById('lbImg');
-      const cap = document.getElementById('lbCap');
-      const btn = document.getElementById('lbClose');
-
-      function open(src, caption){
-        img.src = src; img.alt = caption||''; cap.textContent = caption||'';
-        lb.classList.add('open'); lb.setAttribute('aria-hidden','false');
-      }
-      function close(){
-        lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); img.src=''; cap.textContent='';
-      }
-      document.addEventListener('click', (e)=>{
-        const a = e.target.closest && e.target.closest('a[data-lightbox]');
-        if (a){ e.preventDefault(); open(a.getAttribute('href'), a.dataset.caption); }
-      });
-      lb.addEventListener('click', (e)=>{ if (e.target===lb) close(); });
-      btn.addEventListener('click', close);
-      document.addEventListener('keydown', (e)=>{ if (e.key==='Escape') close(); });
+      const lb=document.getElementById('lb'), img=document.getElementById('lbImg'), cap=document.getElementById('lbCap'), btn=document.getElementById('lbClose');
+      const open=(src,c)=>{ img.src=src; img.alt=c||''; cap.textContent=c||''; lb.classList.add('open'); lb.setAttribute('aria-hidden','false'); };
+      const close=()=>{ lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); img.src=''; cap.textContent=''; };
+      document.addEventListener('click',e=>{ const a=e.target.closest&&e.target.closest('a[data-lightbox]'); if(a){ e.preventDefault(); open(a.getAttribute('href'), a.dataset.caption);} });
+      lb.addEventListener('click',e=>{ if(e.target===lb) close();}); btn.addEventListener('click',close); document.addEventListener('keydown',e=>{ if(e.key==='Escape') close(); });
     }
-
-    document.addEventListener('DOMContentLoaded', ()=>{ initAccordion(); initLightbox(); });
+    document.addEventListener('DOMContentLoaded',()=>{ initAccordion(); initLightbox(); });
   </script>
 </body>
 </html>
