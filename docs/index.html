@@ -116,9 +116,9 @@
     .progress .bar{ height:100%; width:0; background:#7b5b2c; transition:width .35s ease; }
     .tasks{ margin:8px 0 0 18px; padding:0; }
     .tasks li{ margin:.35rem 0; }
-    .tasks li[data-status="done"]::marker{ content:"✔ "; }
-    .tasks li[data-status="doing"]::marker{ content:"⏳ "; }
-    .tasks li[data-status="todo"]::marker{ content:"• "; }
+    .tasks li[data-status="done"]::marker{ content:"✅ "; }
+    .tasks li[data-status="doing"]::marker{ content:"🚧 "; }
+    .tasks li[data-status="todo"]::marker{ content:"☐ "; }
 
     /* Mobile Tweaks */
     @media (max-width:1000px){
@@ -364,14 +364,7 @@
                   <li data-status="todo">Documentation &amp; optional open-source release</li>
                 </ul>
               </section>
-
             </div>
-
-            <h2>Notes</h2>
-            <ul class="feature">
-              <li>Deliver crisp pixels on modern displays; default to <em>Nearest-Neighbour</em> and aspect-preserving scale in setup.</li>
-              <li>Keep art guidelines (palette, line weight, anim FPS, font sizes) in <code>ATTRIBUTION.md</code>/<code>docs/</code>.</li>
-            </ul>
           </div>
         </li>
 
