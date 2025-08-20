@@ -11,20 +11,37 @@
       --card-bg: #dfdbd2;
       --card-edge: #eee9de;
       --ink: #2a241c;
-      --collapsed: 48px;   /* schmalere Tabs wie im Original */
+      --collapsed: 48px;   /* narrower tabs as in the original */
       --expanded: 700px;
       --gap: 0px;
     }
 
     html,body{height:100%}
-    /* Globaler Hintergrund = großes Wallpaper */
+
+    /* Global background: robust via pseudo-element (no iOS fixed bug) */
     body{
       margin:0; color:var(--ink);
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, sans-serif;
-      background: #20180f url('/indy-foy/assets/main.png') center top / cover fixed no-repeat;
+      background-color:#20180f; /* fallback color */
+    }
+    body::before{
+      content:"";
+      position:fixed; inset:0; z-index:-1;
+      background:url('/indy-foy/assets/main.png') center top / cover no-repeat;
+    }
+    /* Mobile/small screens: display complete graphics, no cropping */
+    @media (max-width:1000px){
+      body::before{
+        background-size:contain;
+        background-position:center top;
+      }
+    }
+    /* iOS/Safari fix: fixed → absolute, so that parallax problems disappear */
+    @supports (-webkit-touch-callout: none) {
+      body::before{ position:absolute; }
     }
 
-    /* Banner nur fürs Logo */
+    /* Banner for logo only */
     .banner{ position:relative; min-height:240px; width:100%; background:transparent; }
     .banner::after{
       content:""; position:absolute; top:22px; left:50%; transform:translateX(-50%);
@@ -32,21 +49,26 @@
       background:url('/indy-foy/assets/logo.png') center / contain no-repeat; pointer-events:none;
     }
 
-    /* Kartenrahmen */
+    /* card frame */
     .frame{ max-width:var(--maxw); margin:24px auto 60px; padding:10px; border-radius:6px; background:#fff; box-shadow:0 10px 24px rgba(0,0,0,.35); }
     .frame-inner{ background:var(--card-bg); border:6px solid var(--card-edge); border-radius:4px; position:relative; overflow:hidden; }
 
-    /* Akkordeon */
+    /* accordion */
     .kwicks{ list-style:none; margin:0; padding:0; display:flex; gap:var(--gap); align-items:stretch; }
     .panel{
-      position:relative; flex:0 0 var(--collapsed); height:560px;
+      position:relative; flex:0 0 var(--collapsed);
+      height:560px;                      /* Fallback */
+      height:clamp(420px, 62svh, 560px); /* responsiv */
       background:#bfb7ad url('/indy-foy/assets/slider_bg.png') repeat-y center;
       transition:flex-basis .35s ease, flex .35s ease, filter .25s ease; overflow:hidden; cursor:pointer;
+
+      /* IMPORTANT: Prevent flex overflow */
+      min-width:0;
     }
     .panel.active{ flex:0 0 var(--expanded); background:var(--card-bg); filter:none; }
     .panel:not(.active){ filter:saturate(.85) brightness(.95); }
 
-    /* Vertikale Labels */
+    /* Vertical labels */
     .panel::before{
       content: attr(data-label); position:absolute; inset:0 auto 0 0; width:var(--collapsed);
       display:flex; align-items:center; justify-content:center; writing-mode: vertical-rl; transform: rotate(180deg);
@@ -54,17 +76,23 @@
     }
     .panel.has-img::before{
       content:""; background-image:var(--label-img); background-repeat:no-repeat; background-position:center; background-size:auto 92%;
-      writing-mode: horizontal-tb; transform:none;    /* Bild nicht drehen */
+      writing-mode: horizontal-tb; transform:none;    /* Do not rotate image */
     }
 
-    /* Panel-Inhalt */
-    .content{ position:absolute; left:var(--collapsed); right:0; top:0; bottom:0; padding:26px 26px 30px; overflow:auto; display:none; cursor:auto; }
+    /* Panel content */
+    .content{
+      position:absolute; left:var(--collapsed); right:0; top:0; bottom:0; padding:26px 26px 30px;
+      overflow:auto; display:none; cursor:auto;
+
+      /* IMPORTANT: Prevent flex overflow */
+      min-width:0;
+    }
     .panel.active .content{ display:block; }
 
     h1{ font-size:32px; margin:0 0 14px; } h2{ font-size:22px; margin:20px 0 8px; } p{ line-height:1.6; } .lead{ font-weight:600; }
     .grid{
       display: grid;
-      grid-template-columns: 1fr;    /* Standard: 1 Spalte → nichts gequetscht */
+      grid-template-columns: 1fr;    /* Standard: 1 column → nothing squashed */
       gap: 16px;
       align-items: start;
       margin-top: 6px;
@@ -75,7 +103,7 @@
       border-radius: 4px;
       background: #fff;
     }
-    /* Panels MIT Bild links */
+    /* Panels WITH image on the left */
     .grid.two{ grid-template-columns: 240px 1fr; }
 
     ul.feature{ margin:8px 0 0 0; padding:0 0 0 18px; } ul.feature li{ margin:.35rem 0; }
@@ -88,10 +116,16 @@
     @media (max-width:1000px){
       :root{ --expanded: 100%; }
       .kwicks{ flex-direction:column; }
-      .panel, .panel.active{ flex:0 0 auto; height:auto; min-height:420px; }
-      .panel::before{ position:absolute; top:0; left:0; width:100%; height:44px; writing-mode: horizontal-tb; transform:none; display:flex; justify-content:flex-start; padding-left:16px; color:#3c3123; background: rgba(255,255,255,.65); }
+      .panel, .panel.active{
+        flex:0 0 auto; height:auto;
+        min-height:clamp(360px, 60svh, 520px);
+      }
+      .panel::before{
+        position:absolute; top:0; left:0; width:100%; height:44px; writing-mode: horizontal-tb; transform:none;
+        display:flex; justify-content:flex-start; padding-left:16px; color:#3c3123; background: rgba(255,255,255,.65); z-index:1;
+      }
       .panel.has-img::before{ background-position:left center; background-size:auto 70%; }
-      .content{ position:relative; left:0; padding-top:56px; }
+      .content{ position:relative; left:0; padding-top:56px; z-index:0; }
     }
 
     /* CTA-Buttons */
@@ -103,7 +137,6 @@
     }
     .actions .btn.secondary{ background:#3d3a34; font-weight:600; }
     .actions .btn:focus{ outline:2px solid #2a241c; outline-offset:2px; }
-
 
     /* Lightbox */
     .lb{ position: fixed; inset:0; background: rgba(0,0,0,.8); display:none; align-items:center; justify-content:center; z-index: 50; }
@@ -131,10 +164,16 @@
     .tasks li[data-status="doing"]::marker{ content:"🚧 "; }
     .tasks li[data-status="todo"]::marker{ content:"☐ "; }
 
-    /* Mobile Tweaks */
+    /* Mobile tweaks for milestones */
     @media (max-width:1000px){
       .ms header{ flex-wrap:wrap; gap:6px; }
       .pct{ order:3; width:100%; margin:6px 0 0 0; }
+    }
+
+    /* Optional motion reduction */
+    @media (prefers-reduced-motion: reduce){
+      .panel{ transition:none; }
+      .progress .bar{ transition:none; }
     }
   </style>
 </head>
