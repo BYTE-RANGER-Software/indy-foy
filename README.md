@@ -2,7 +2,7 @@
 ![License](https://img.shields.io/badge/license-CC%20BY--SA%204.0-blue)
 [![Project Maintenance](https://img.shields.io/maintenance/yes/2025.svg)](https://github.com/CalDymos/indy-foy 'GitHub Repository')
 
-# Indiana Jones and the Fountain of Youth (BYTE RANGER Software)
+# Indiana Jones and the Fountain of Youth
 
 > **Non-profit fan point-and-click adventure inspired by *Indiana Jones* — continued by BYTE RANGER Software.**
 
