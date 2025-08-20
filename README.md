@@ -137,23 +137,23 @@ Verified releases appear on the **GitHub Releases** page.
 
 ## Roadmap Progress
 
-- 🚧[M00 — Pre-Pre-Production / Discovery & Preservation](https://github.com/<USER>/<REPO>/milestone/1)  
-- ☐ [M01 — Pre-Production / Vertical Slice Tech](https://github.com/<USER>/<REPO>/milestone/2)  
-- ☐ [M02 — Core Gameplay Systems](https://github.com/<USER>/<REPO>/milestone/3)  
-- ☐ [M03 — Content Production I: Bimini Prologue](https://github.com/<USER>/<REPO>/milestone/4)  
-- ☐ [M04 — Content Production II: Main Chapters](https://github.com/<USER>/<REPO>/milestone/5)  
-- ☐ [M05 — Alpha (Feature Complete)](https://github.com/<USER>/<REPO>/milestone/6)  
-- ☐ [M06 — Beta (Closed Testing)](https://github.com/<USER>/<REPO>/milestone/7)  
-- ☐ [M07 — Release Candidate](https://github.com/<USER>/<REPO>/milestone/8)  
-- ☐ [M08 — Release 1.0](https://github.com/<USER>/<REPO>/milestone/9)  
-- ☐ [M09 — Post-Release Support](https://github.com/<USER>/<REPO>/milestone/10)  
+- 🚧[M00 — Pre-Pre-Production / Discovery & Preservation](https://github.com/CalDymos/indy-foy/milestone/1)  
+- ☐ [M01 — Pre-Production / Vertical Slice Tech](https://github.com/CalDymos/indy-foy/milestone/2)  
+- ☐ [M02 — Core Gameplay Systems](https://github.com/CalDymos/indy-foy/milestone/3)  
+- ☐ [M03 — Content Production I: Bimini Prologue](https://github.com/CalDymos/indy-foy/milestone/4)  
+- ☐ [M04 — Content Production II: Main Chapters](https://github.com/CalDymos/indy-foy/milestone/5)  
+- ☐ [M05 — Alpha (Feature Complete)](https://github.com/CalDymos/indy-foy/milestone/6)  
+- ☐ [M06 — Beta (Closed Testing)](https://github.com/CalDymos/indy-foy/milestone/7)  
+- ☐ [M07 — Release Candidate](https://github.com/CalDymos/indy-foy/milestone/8)  
+- ☐ [M08 — Release 1.0](https://github.com/CalDymos/indy-foy/milestone/9)  
+- ☐ [M09 — Post-Release Support](https://github.com/CalDymos/indy-foy/milestone/10)  
 
 > Legend:
 >- ✅ Done  
 >- 🚧 In Progress  
 >- ☐ To Do 
 
-👉 See [Issues → Milestones](https://github.com/<USER>/<REPO>/milestones) for live progress tracking.
+👉 See [Issues → Milestones](https://github.com/CalDymos/indy-foy/milestones) for live progress tracking.
 
 ## Contributing
 Contributions are possible **after prior coordination**.  
