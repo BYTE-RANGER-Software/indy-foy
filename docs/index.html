@@ -101,6 +101,30 @@
     .lb .caption{ color:#fff; margin-top:8px; font-size:14px; text-align:center; opacity:.85; }
     .thumbs{ display:grid; grid-template-columns: repeat(auto-fill, minmax(160px,1fr)); gap:12px; }
     .thumbs a{ display:block; border:1px solid #d8d2c8; background:#fff; } .thumbs img{ width:100%; height:auto; display:block; }
+
+    /* Roadmap UI */
+    .roadmap{ display:grid; gap:14px; margin-top:8px; }
+    .ms{ background:#f5f1ea; border:1px solid #d8d2c8; border-radius:6px; padding:12px; }
+    .ms header{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px; }
+    .ms h3{ font-size:18px; margin:0; }
+    .badge{ font-size:12px; padding:3px 8px; border-radius:999px; color:#fff; text-transform:uppercase; letter-spacing:.4px; white-space:nowrap; }
+    .badge.todo{ background:#6b6b6b; }
+    .badge.doing{ background:#b07d00; }
+    .badge.done{ background:#2e7d32; }
+    .pct{ font-size:12px; opacity:.8; margin-left:auto; margin-right:6px; }
+    .progress{ height:8px; background:#e6ded3; border-radius:4px; overflow:hidden; }
+    .progress .bar{ height:100%; width:0; background:#7b5b2c; transition:width .35s ease; }
+    .tasks{ margin:8px 0 0 18px; padding:0; }
+    .tasks li{ margin:.35rem 0; }
+    .tasks li[data-status="done"]::marker{ content:"✔ "; }
+    .tasks li[data-status="doing"]::marker{ content:"⏳ "; }
+    .tasks li[data-status="todo"]::marker{ content:"• "; }
+
+    /* Mobile Tweaks */
+    @media (max-width:1000px){
+      .ms header{ flex-wrap:wrap; gap:6px; }
+      .pct{ order:3; width:100%; margin:6px 0 0 0; }
+    }
   </style>
 </head>
 <body>
@@ -177,12 +201,171 @@
               <li>Art: Aseprite/PS; Audio: Reaper/Audacity; Versioning: Git (LFS only for large original sources).</li>
             </ul>
 
-            <h2>Roadmap</h2>
-            <ul class="feature">
-              <li><strong>M0 – Project Setup (vertical-slice tech)</strong>: 1 test room (walkable areas & walk-behinds), verb-UI/inventory stub, one hotspot interaction, basic dialog, packaged build.</li>
-              <li><strong>M1 – Core Gameplay</strong>: Rooms & transitions, hotspots/objects, inventory flow, dialog system, save/load, pathfinding, blocking volumes, options.</li>
-              <li><strong>M2 – Bimini Prologue</strong>: 3–6 rooms, 5–8 puzzles, 1 mini-cutscene, first audio pass, QA; public demo.</li>
-            </ul>
+            <h2 id="roadmap">Roadmap</h2>
+            <div class="roadmap">
+
+              <!-- M00 -->
+              <section class="ms" id="ms-m00">
+                <header>
+                  <h3>M00 — Pre-Pre-Production / Discovery &amp; Preservation</h3>
+                  <span class="pct">0%</span>
+                  <span class="badge todo">Planned</span>
+                </header>
+                <div class="progress" aria-label="M00 progress"><div class="bar"></div></div>
+                <ul class="tasks">
+                  <li data-status="doing">Collect prior materials into <code>originals/</code> (with SHA-256 + source)</li>
+                  <li data-status="doing">Draft <code>ATTRIBUTION.md</code></li>
+                  <li data-status="todo">Create/complete <code>docs/GDD.xlsx</code> (concept, storyline, mechanics, room design, art &amp; sound, UI, technical aspects, project details)</li>
+                  <li data-status="todo">Optional: dedicated Room Design Document</li>
+                </ul>
+              </section>
+
+              <!-- M01 -->
+              <section class="ms" id="ms-m01">
+                <header>
+                  <h3>M01 — Pre-Production / Vertical Slice Tech</h3>
+                  <span class="pct">0%</span>
+                  <span class="badge todo">Planned</span>
+                </header>
+                <div class="progress" aria-label="M01 progress"><div class="bar"></div></div>
+                <ul class="tasks">
+                  <li data-status="todo">AGS project @ 640×400, NN-scaling, aspect lock</li>
+                  <li data-status="todo">One test room (walkable / walk-behind)</li>
+                  <li data-status="todo">Verb-UI &amp; inventory stub</li>
+                  <li data-status="todo">One hotspot interaction + short dialog</li>
+                  <li data-status="todo">Packaged build exported to <code>src/build/</code></li>
+                  <li data-status="todo">Nightly ZIP via GitHub Actions</li>
+                  <li data-status="todo">Website: Releases link visible</li>
+                </ul>
+              </section>
+
+              <!-- M02 -->
+              <section class="ms" id="ms-m02">
+                <header>
+                  <h3>M02 — Core Gameplay Systems</h3>
+                  <span class="pct">0%</span>
+                  <span class="badge todo">Planned</span>
+                </header>
+                <div class="progress" aria-label="M02 progress"><div class="bar"></div></div>
+                <ul class="tasks">
+                  <li data-status="todo">Room transitions &amp; pathfinding</li>
+                  <li data-status="todo">Hotspots, objects &amp; inventory flow</li>
+                  <li data-status="todo">Dialog system (basic)</li>
+                  <li data-status="todo">Save/load</li>
+                  <li data-status="todo">Blocking volumes</li>
+                  <li data-status="todo">Options menu</li>
+                </ul>
+              </section>
+
+              <!-- M03 -->
+              <section class="ms" id="ms-m03">
+                <header>
+                  <h3>M03 — Content Production I: Public Demo</h3>
+                  <span class="pct">0%</span>
+                  <span class="badge todo">Planned</span>
+                </header>
+                <div class="progress" aria-label="M03 progress"><div class="bar"></div></div>
+                <ul class="tasks">
+                  <li data-status="todo">3–6 rooms</li>
+                  <li data-status="todo">5–8 puzzles</li>
+                  <li data-status="todo">1 mini-cutscene</li>
+                  <li data-status="todo">First audio pass (music &amp; SFX)</li>
+                  <li data-status="todo">QA &amp; packaging for public demo</li>
+                </ul>
+              </section>
+
+              <!-- M04 -->
+              <section class="ms" id="ms-m04">
+                <header>
+                  <h3>M04 — Content Production II: Main Chapters</h3>
+                  <span class="pct">0%</span>
+                  <span class="badge todo">Planned</span>
+                </header>
+                <div class="progress" aria-label="M04 progress"><div class="bar"></div></div>
+                <ul class="tasks">
+                  <li data-status="todo">Expand rooms, puzzles &amp; story progression</li>
+                  <li data-status="todo">Additional characters &amp; animations</li>
+                  <li data-status="todo">Intermediate builds for internal testing</li>
+                </ul>
+              </section>
+
+              <!-- M05 -->
+              <section class="ms" id="ms-m05">
+                <header>
+                  <h3>M05 — Alpha (Feature Complete)</h3>
+                  <span class="pct">0%</span>
+                  <span class="badge todo">Planned</span>
+                </header>
+                <div class="progress" aria-label="M05 progress"><div class="bar"></div></div>
+                <ul class="tasks">
+                  <li data-status="todo">All core mechanics &amp; chapters implemented</li>
+                  <li data-status="todo">Placeholder graphics/audio replaced by finals</li>
+                  <li data-status="todo">Full playthrough possible (bugs expected)</li>
+                </ul>
+              </section>
+
+              <!-- M06 -->
+              <section class="ms" id="ms-m06">
+                <header>
+                  <h3>M06 — Beta (Closed Testing)</h3>
+                  <span class="pct">0%</span>
+                  <span class="badge todo">Planned</span>
+                </header>
+                <div class="progress" aria-label="M06 progress"><div class="bar"></div></div>
+                <ul class="tasks">
+                  <li data-status="todo">Bugfixing &amp; puzzle/difficulty balancing</li>
+                  <li data-status="todo">Performance optimization</li>
+                  <li data-status="todo">Closed-group external testing &amp; feedback loop</li>
+                </ul>
+              </section>
+
+              <!-- M07 -->
+              <section class="ms" id="ms-m07">
+                <header>
+                  <h3>M07 — Release Candidate (RC)</h3>
+                  <span class="pct">0%</span>
+                  <span class="badge todo">Planned</span>
+                </header>
+                <div class="progress" aria-label="M07 progress"><div class="bar"></div></div>
+                <ul class="tasks">
+                  <li data-status="todo">All assets, features, and texts finalized</li>
+                  <li data-status="todo">Translations/localization where applicable</li>
+                  <li data-status="todo">Packaging &amp; installer</li>
+                  <li data-status="todo">Trailer, screenshots &amp; marketing material</li>
+                </ul>
+              </section>
+
+              <!-- M08 -->
+              <section class="ms" id="ms-m08">
+                <header>
+                  <h3>M08 — Release 1.0</h3>
+                  <span class="pct">0%</span>
+                  <span class="badge todo">Planned</span>
+                </header>
+                <div class="progress" aria-label="M08 progress"><div class="bar"></div></div>
+                <ul class="tasks">
+                  <li data-status="todo">Public launch of the full game</li>
+                  <li data-status="todo">Distribution via GitHub, itch.io, etc.</li>
+                  <li data-status="todo">Announcements &amp; community posts</li>
+                </ul>
+              </section>
+
+              <!-- M09 -->
+              <section class="ms" id="ms-m09">
+                <header>
+                  <h3>M09 — Post-Release Support</h3>
+                  <span class="pct">0%</span>
+                  <span class="badge todo">Planned</span>
+                </header>
+                <div class="progress" aria-label="M09 progress"><div class="bar"></div></div>
+                <ul class="tasks">
+                  <li data-status="todo">Patches &amp; hotfixes</li>
+                  <li data-status="todo">Possible bonus content</li>
+                  <li data-status="todo">Documentation &amp; optional open-source release</li>
+                </ul>
+              </section>
+
+            </div>
 
             <h2>Notes</h2>
             <ul class="feature">
@@ -199,7 +382,7 @@
             <p>Click on an image to enlarge it.</p>
             <div class="thumbs">
               <a href="/indy-foy/assets/screenshot-1.jpg" data-lightbox data-caption="Screenshot 1"><img src="/indy-foy/assets/screenshot-1.jpg" alt="Screenshot 1"></a>
-              <a href="/indy-foy/assets/artwork-1.jpg" data-lightbox data-caption="Artwork 1"><img src="/indy-foy/assets/artwork-1.jpg" alt="Artwork 1"></a>
+              <a href="/indy-foy/assets/screenshot-2.jpg" data-lightbox data-caption="Screenshot 2"><img src="/indy-foy/assets/screenshot-2.jpg" alt="Screenshot 2"></a>
             </div>
           </div>
         </li>
@@ -252,7 +435,42 @@
       document.addEventListener('click',e=>{ const a=e.target.closest&&e.target.closest('a[data-lightbox]'); if(a){ e.preventDefault(); open(a.getAttribute('href'), a.dataset.caption);} });
       lb.addEventListener('click',e=>{ if(e.target===lb) close();}); btn.addEventListener('click',close); document.addEventListener('keydown',e=>{ if(e.key==='Escape') close(); });
     }
-    document.addEventListener('DOMContentLoaded',()=>{ initAccordion(); initLightbox(); });
+
+    function initRoadmap(){
+      const milestones = document.querySelectorAll('.ms');
+      milestones.forEach(ms=>{
+        const tasks = ms.querySelectorAll('.tasks li');
+        const counts = {done:0, doing:0, todo:0};
+        tasks.forEach(li=>{
+          const s = (li.dataset.status || 'todo').toLowerCase();
+          if (s==='done') counts.done++;
+          else if (s==='doing') counts.doing++;
+          else counts.todo++;
+        });
+        const total = tasks.length || 1;
+        const pct = Math.round((counts.done / total) * 100);
+        const bar = ms.querySelector('.bar');
+        const pctEl = ms.querySelector('.pct');
+        const badge = ms.querySelector('.badge');
+
+        if (bar) bar.style.width = pct + '%';
+        if (pctEl) pctEl.textContent = pct + '%';
+
+        // Status des Meilensteins bestimmen:
+        if (counts.todo === 0 && counts.doing === 0) {
+          badge.textContent = 'Done';
+          badge.className = 'badge done';
+        } else if (counts.done > 0 || counts.doing > 0) {
+          badge.textContent = 'In Progress';
+          badge.className = 'badge doing';
+        } else {
+          badge.textContent = 'Planned';
+          badge.className = 'badge todo';
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded',()=>{ initAccordion(); initLightbox(); initRoadmap(); });
   </script>
 </body>
 </html>
