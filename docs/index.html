@@ -94,6 +94,17 @@
       .content{ position:relative; left:0; padding-top:56px; }
     }
 
+    /* CTA-Buttons */
+    .actions{display:flex; gap:10px; flex-wrap:wrap; margin:14px 0 6px;}
+    .actions .btn{
+      display:inline-block; padding:8px 12px; border-radius:6px;
+      background:#7b5b2c; color:#fff; text-decoration:none; font-weight:700;
+      box-shadow:0 2px 6px rgba(0,0,0,.25);
+    }
+    .actions .btn.secondary{ background:#3d3a34; font-weight:600; }
+    .actions .btn:focus{ outline:2px solid #2a241c; outline-offset:2px; }
+
+
     /* Lightbox */
     .lb{ position: fixed; inset:0; background: rgba(0,0,0,.8); display:none; align-items:center; justify-content:center; z-index: 50; }
     .lb.open{ display:flex; } .lb figure{ margin:0; max-width: 92vw; max-height: 90vh; } .lb img{ max-width:100%; max-height:90vh; display:block; }
@@ -150,6 +161,13 @@
                   <li>Puzzles, action, and story</li>
                   <li>Antiquities, sidekicks & leather jackets!</li>
                 </ul>
+
+                <div class="actions" role="navigation" aria-label="Project links">
+                  <a class="btn" href="https://github.com/CalDymos/indy-foy">Repository</a>
+                  <a class="btn secondary" href="https://github.com/CalDymos/indy-foy/releases">Releases</a>
+                  <a class="btn secondary" href="https://github.com/CalDymos/indy-foy/issues">Issues</a>
+                  <a class="btn secondary" href="https://github.com/CalDymos/indy-foy/milestones">Milestones</a>
+                </div>
               </div>
             </div>
 
@@ -398,7 +416,10 @@
     © 2025 BYTE RANGER Software —
     Fan project; not affiliated with or endorsed by Lucasfilm, Disney, or Screen 7. —
     “Indiana Jones”™ and related properties are trademarks of Lucasfilm Ltd. —
+    <a href="https://github.com/CalDymos/indy-foy">Repository</a> ·
+    <a href="https://github.com/CalDymos/indy-foy/releases">Releases</a> ·
     <a href="https://github.com/CalDymos/indy-foy/issues">Issues</a> ·
+    <a href="https://github.com/CalDymos/indy-foy/milestones">Milestones</a> ·
     <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a> ·
     <a href="/indy-foy/ATTRIBUTION.md">Attribution</a>
   </footer>
