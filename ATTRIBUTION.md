@@ -39,7 +39,7 @@ If an original file uses a different license, it will be indicated at the top of
 
 ---
 
-## Third-party materials included
+## Game Assets (used in game / website)
 
 ### FOY Project Logo (original)
 - **File:** `docs/assets/logo.png`
@@ -50,6 +50,8 @@ If an original file uses a different license, it will be indicated at the top of
 - **Required attribution (as provided):** “Misja van Laatum — 01-12-2021 / Utrecht NL”
 - **Changes:** `renamed` (original filename: foy_logo.png)
 - **SHA-256:** `5c51fc7878b0dcb7f9f1e14205ef4dae255f9889bc963ce6509378e31aafef02`
+
+## Repository Archives (originals / research)
 
 ### Original FOY Website (archive)
 - **Title:** Barnett College (www.barnettcollege.com) — site archive
@@ -65,4 +67,14 @@ If an original file uses a different license, it will be indicated at the top of
   - **SHA-1:** 74f46dbd59720ce90c5840b63079f0ef54c23aac
   - **MD5:** c85000a0dbdeac5cf7d3ca95213cf338
   - **CRC32:** cf74bbb7
+
+### Indiana Jones FoY Design Docs from Misja
+- **Title:** Indiana Jones and the Fontain of Youth Design Docs (Screen 7)
+- **Author/Owner:** Misja van Laatum
+- **Source:** https://www.mediafire.com/file/d8p82fcv50lvi4u/IJatFoY_Graphics_MvL.zip/file
+- **Location in repo:** `originals/IJatFoY Graphics MvL.zip`
+- **License/Terms:** CC BY-SA 4.0 — https://creativecommons.org/licenses/by-sa/4.0/
+- **Use in this project:** Reference for design research
+- **File size:** 200.62MB
+- **SHA-256:** ``
 
