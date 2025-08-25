@@ -2,7 +2,7 @@
 ![License](https://img.shields.io/badge/license-CC%20BY--SA%204.0-blue)
 [![Project Maintenance](https://img.shields.io/maintenance/yes/2025.svg)](https://github.com/BYTE-RANGER-Software/indy-foy 'GitHub Repository')
 
-# Indiana Jones and the Fountain of Youth
+# Fountain of Youth (FoY)
 
 > **Non-profit fan point-and-click adventure inspired by *Indiana Jones* — continued by BYTE RANGER Software.**
 
@@ -28,7 +28,7 @@
 ---
 
 ## About the Project
-**Indiana Jones and the Fountain of Youth** is a non-commercial fan adventure in classic LucasArts style.  
+**Fountain of Youth** is a non-commercial fan adventure in classic LucasArts style.  
 This repository hosts the **active continuation by BYTE RANGER Software**: planning, source/assets, builds, and documentation.
 
 📖 For a detailed **project history** see the [Project Website → History](https://BYTE-RANGER-Software.github.io/indy-foy/#history).
@@ -177,16 +177,19 @@ Please open an Issue first and describe your proposal. Uncoordinated PRs may be 
 
 ## Repository Layout
 ```
+design/                     # 
 docs/                       # GitHub Pages (Website)
     index.html
+    main.js
     assets/
-        banner.png
-        header-texture.jpg
-        screenshot-1.jpg
-        artwork-1.jpg
+        logo.png
+        main.png
+        slider_bg.png
         downloads/
 originals/
 src/                        # new game source code
+  ags/
+  assets/
 ```
 
 ## License
