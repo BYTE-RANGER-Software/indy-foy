@@ -50,12 +50,20 @@ If an original file uses a different license, it will be indicated at the top of
 
 ## Assets Used in Game / Website
 
-### FOY Project Logo
+### FoY Project Logo
 - **Author:** Misja van Laatum  
-- **Source:** FOY asset bundle (`originals/IJatFoY Graphics MvL.zip`)  
+- **Source:** FoY asset bundle (`originals/IJatFoY Graphics MvL.zip`)  
 - **License:** CC BY-SA 4.0  
 - **Required attribution:** “Misja van Laatum — 01-12-2021 / Utrecht NL”  
 - **Changes:** renamed (foy_logo.png → logo.png)
+
+### FoY Wallpaper1
+- **Author:** Screen 7  
+- **Source:** `originals/wallpaper1_1024x768.zip`  
+- **License:** No explicit license provided.  
+- **Required attribution:** Not specified. 
+- **Changes:** This image was fully redrawn and renamed based on the original image from Screen 7 (Copyright © Screen 7).  
+  (Original filename: wallpaper1_1024x768.bmp → New filename: main.png)
 
 ---
 
