@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html lang="de">
+  <!-- 
+  Project: Indiana Jones and the Fountain of Youth
+  Page-Version: 0.1.0
+  Author: Erek Starwind (BYTE RANGER Software)
+  Edited: 2025-08-27
+-->
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="Content-Security-Policy" content="script-src 'self';">
@@ -12,14 +18,14 @@
       --card-bg: #dfdbd2;
       --card-edge: #eee9de;
       --ink: #2a241c;
-      --collapsed: 48px;   /* narrower tabs as in the original */
+      --collapsed: 48px;   /* narrow tabs (desktop) */
       --expanded: 700px;
       --gap: 0px;
     }
 
     html,body{height:100%}
 
-    /* Global background: robust via pseudo-element (no iOS fixed bug) */
+    /* Global background */
     body{
       margin:0; color:var(--ink);
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, sans-serif;
@@ -30,19 +36,14 @@
       position:fixed; inset:0; z-index:-1;
       background:url('/indy-foy/assets/main.png') center top / cover no-repeat;
     }
-    /* Mobile/small screens: display complete graphics, no cropping */
     @media (max-width:1000px){
-      body::before{
-        background-size:contain;
-        background-position:center top;
-      }
+      body::before{ background-size:contain; background-position:center top; }
     }
-    /* iOS/Safari fix: fixed → absolute, so that parallax problems disappear */
     @supports (-webkit-touch-callout: none) {
       body::before{ position:absolute; }
     }
 
-    /* Banner for logo only */
+    /* Banner */
     .banner{ position:relative; min-height:240px; width:100%; background:transparent; }
     .banner::after{
       content:""; position:absolute; top:22px; left:50%; transform:translateX(-50%);
@@ -50,83 +51,123 @@
       background:url('/indy-foy/assets/logo.png') center / contain no-repeat; pointer-events:none;
     }
 
-    /* card frame */
+    /* Card frame */
     .frame{ max-width:var(--maxw); margin:24px auto 60px; padding:10px; border-radius:6px; background:#fff; box-shadow:0 10px 24px rgba(0,0,0,.35); }
     .frame-inner{ background:var(--card-bg); border:6px solid var(--card-edge); border-radius:4px; position:relative; overflow:hidden; }
 
-    /* accordion */
+    /* Accordion (Base) */
     .kwicks{ list-style:none; margin:0; padding:0; display:flex; gap:var(--gap); align-items:stretch; }
     .panel{
-      position:relative; flex:0 0 var(--collapsed);
-      height:560px;                      /* Fallback */
-      height:clamp(420px, 62svh, 560px); /* responsiv */
-      background:#bfb7ad url('/indy-foy/assets/slider_bg.png') repeat-y center;
-      transition:flex-basis .35s ease, flex .35s ease, filter .25s ease; overflow:hidden; cursor:pointer;
-
-      /* IMPORTANT: Prevent flex overflow */
+      position:relative;
+      flex:0 0 var(--collapsed);
+      height:560px;
+      height:clamp(420px, 62svh, 560px);
+      background:#bfb7ad;                       /* base color */
+      transition:flex-basis .35s ease, flex .35s ease, filter .25s ease;
+      overflow:hidden;
+      cursor:pointer;
       min-width:0;
     }
-    .panel.active{ flex:0 0 var(--expanded); background:var(--card-bg); filter:none; }
+    /* Desktop: active panel fills the remaining space */
+    .panel.active{
+      flex: 1 1 auto;         /* no fixed width */
+      background: var(--card-bg);
+      filter: none;
+    }
     .panel:not(.active){ filter:saturate(.85) brightness(.95); }
 
-    /* Vertical labels */
+    /* Vertical labels (desktop)*/
     .panel::before{
-      content: attr(data-label); position:absolute; inset:0 auto 0 0; width:var(--collapsed);
-      display:flex; align-items:center; justify-content:center; writing-mode: vertical-rl; transform: rotate(180deg);
-      color:#fff; letter-spacing:.6px; font-weight:700; text-transform:capitalize; opacity:.9; background: rgba(0,0,0,.05);
+      content: attr(data-label);
+      position:absolute; inset:0 auto 0 0; width:var(--collapsed);
+      display:flex; align-items:center; justify-content:center;
+      writing-mode: vertical-rl; transform: rotate(180deg);
+      color:#fff; letter-spacing:.6px; font-weight:700; text-transform:capitalize;
+      opacity:.9; background: rgba(0,0,0,.05);
     }
     .panel.has-img::before{
       content:""; background-image:var(--label-img); background-repeat:no-repeat; background-position:center; background-size:auto 92%;
-      writing-mode: horizontal-tb; transform:none;    /* Do not rotate image */
+      writing-mode: horizontal-tb; transform:none;    /* Bild nicht drehen */
     }
 
-    /* Panel content */
+    /* Panel content (base: desktop) */
     .content{
       position:absolute; left:var(--collapsed); right:0; top:0; bottom:0; padding:26px 26px 30px;
       overflow:auto; display:none; cursor:auto;
-
-      /* IMPORTANT: Prevent flex overflow */
       min-width:0;
     }
     .panel.active .content{ display:block; }
 
-    h1{ font-size:32px; margin:0 0 14px; } h2{ font-size:22px; margin:20px 0 8px; } p{ line-height:1.6; } .lead{ font-weight:600; }
+    /* Typo & Grid */
+    h1{ font-size:32px; margin:0 0 14px; }
+    h2{ font-size:22px; margin:20px 0 8px; }
+    p{ line-height:1.6; }
+    .lead{ font-weight:600; }
     .grid{
-      display: grid;
-      grid-template-columns: 1fr;    /* Standard: 1 column → nothing squashed */
-      gap: 16px;
-      align-items: start;
-      margin-top: 6px;
+      display:grid;
+      grid-template-columns:1fr;
+      gap:16px; align-items:start; margin-top:6px;
     }
     .grid img{
-      width: 100%;
-      border: 1px solid rgba(0,0,0,.12);
-      border-radius: 4px;
-      background: #fff;
+      width:100%;
+      border:1px solid rgba(0,0,0,.12);
+      border-radius:4px; background:#fff;
     }
-    /* Panels WITH image on the left */
-    .grid.two{ grid-template-columns: 240px 1fr; }
+    .grid.two{ grid-template-columns:240px 1fr; }
 
-    ul.feature{ margin:8px 0 0 0; padding:0 0 0 18px; } ul.feature li{ margin:.35rem 0; }
-    table{ width:100%; border-collapse:collapse; margin:8px 0 16px; } th,td{ border:1px solid #d8d2c8; padding:8px 10px; text-align:left; } th{ background:#eee7dc; }
+    ul.feature{ margin:8px 0 0 0; padding:0 0 0 18px; }
+    ul.feature li{ margin:.35rem 0; }
+
+    table{ width:100%; border-collapse:collapse; margin:8px 0 16px; }
+    th,td{ border:1px solid #d8d2c8; padding:8px 10px; text-align:left; }
+    th{ background:#eee7dc; }
 
     footer{ max-width:var(--maxw); margin:0 auto 50px; color:#e9e2d8; text-align:center; font-size:14px; }
     footer a{ color:#efe7dd; text-decoration:none; }
 
-    /* Responsive */
+    /* ---------- Desktop-specific ---------- */
+    @media (min-width:1001px){
+      /* Tabs side by side → vertical dividing line */
+      .panel:not(:last-child){ border-right:1px solid #d8d2c8; }
+    }
+
+    /* ---------- Mobile-specific ---------- */
     @media (max-width:1000px){
       :root{ --expanded: 100%; }
+
       .kwicks{ flex-direction:column; }
-      .panel, .panel.active{
-        flex:0 0 auto; height:auto;
-        min-height:clamp(360px, 60svh, 520px);
+
+      /* Do not enforce minimum height; closed tabs at label height */
+      .panel,
+      .panel.active{
+        flex:0 0 auto;
+        height:auto;
+        min-height:auto;
+        background:#bfb7ad;
       }
+      .panel:not(.active){
+        min-height:44px;                 /* only header visible */
+        overflow:hidden;
+      }
+
+      /* Label at the top (horizontal bar) */
       .panel::before{
-        position:absolute; top:0; left:0; width:100%; height:44px; writing-mode: horizontal-tb; transform:none;
-        display:flex; justify-content:flex-start; padding-left:16px; color:#3c3123; background: rgba(255,255,255,.65); z-index:1;
+        position:absolute; top:0; left:0; width:100%; height:44px;
+        writing-mode: horizontal-tb; transform:none;
+        display:flex; justify-content:flex-start; padding-left:16px;
+        color:#3c3123; background: rgba(255,255,255,.65); z-index:1;
       }
       .panel.has-img::before{ background-position:left center; background-size:auto 70%; }
-      .content{ position:relative; left:0; padding-top:56px; z-index:0; }
+
+      /* Content: only visible when the tab is active; space under the label */
+      .content{
+        position:relative; left:0; padding-top:56px; z-index:0;
+        display:none;
+      }
+      .panel.active .content{ display:block; }
+
+      /* Tabs below each other → horizontal dividing line */
+      .panel:not(:last-child){ border-bottom:1px solid #d8d2c8; }
     }
 
     /* CTA-Buttons */
@@ -140,12 +181,15 @@
     .actions .btn:focus{ outline:2px solid #2a241c; outline-offset:2px; }
 
     /* Lightbox */
-    .lb{ position: fixed; inset:0; background: rgba(0,0,0,.8); display:none; align-items:center; justify-content:center; z-index: 50; }
-    .lb.open{ display:flex; } .lb figure{ margin:0; max-width: 92vw; max-height: 90vh; } .lb img{ max-width:100%; max-height:90vh; display:block; }
+    .lb{ position: fixed; inset:0; background: rgba(0,0,0,.8); display:none; align-items:center; justify-content:center; z-index:50; }
+    .lb.open{ display:flex; }
+    .lb figure{ margin:0; max-width:92vw; max-height:90vh; }
+    .lb img{ max-width:100%; max-height:90vh; display:block; }
     .lb .close{ position:absolute; top:14px; right:18px; font-size:28px; color:#fff; cursor:pointer; line-height:1; }
     .lb .caption{ color:#fff; margin-top:8px; font-size:14px; text-align:center; opacity:.85; }
     .thumbs{ display:grid; grid-template-columns: repeat(auto-fill, minmax(160px,1fr)); gap:12px; }
-    .thumbs a{ display:block; border:1px solid #d8d2c8; background:#fff; } .thumbs img{ width:100%; height:auto; display:block; }
+    .thumbs a{ display:block; border:1px solid #d8d2c8; background:#fff; }
+    .thumbs img{ width:100%; height:auto; display:block; }
 
     /* Roadmap UI */
     .roadmap{ display:grid; gap:14px; margin-top:8px; }
@@ -171,7 +215,7 @@
       .pct{ order:3; width:100%; margin:6px 0 0 0; }
     }
 
-    /* Optional motion reduction */
+    /* Motion reduction */
     @media (prefers-reduced-motion: reduce){
       .panel{ transition:none; }
       .progress .bar{ transition:none; }
