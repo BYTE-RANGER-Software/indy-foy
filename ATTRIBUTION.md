@@ -48,23 +48,64 @@ If an original file uses a different license, it will be indicated at the top of
 
 ---
 
-## Assets Used in Game / Website
+## Assets used in or for the game or website
 
 ### FoY Project Logo
 - **Author:** Misja van Laatum  
-- **Source:** FoY asset bundle (`originals/IJatFoY Graphics MvL.zip`)  
+- **Source:** FoY asset bundle (`originals/archives/IJatFoY Graphics MvL.zip`)  
+- **File:** `foy_logo.png`  
 - **License:** CC BY-SA 4.0  
 - **Required attribution:** “Misja van Laatum — 01-12-2021 / Utrecht NL”  
 - **Changes:** renamed (foy_logo.png → logo.png)
 
 ### FoY Wallpaper1
 - **Author:** Screen 7  
-- **Source:** `originals/wallpaper1_1024x768.zip`  
+- **Source:** `originals/archives/wallpaper1_1024x768.zip`  
+- **File:** `wallpaper1_1024x768.bmp`  
 - **License:** No explicit license provided.  
 - **Required attribution:** Not specified. 
 - **Changes:** This image was fully redrawn and renamed based on the original image from Screen 7 (Copyright © Screen 7).  
   (Original filename: wallpaper1_1024x768.bmp → New filename: main.png)
 
+### FoY doc - Characteristics of the fountain of youth
+- **Author:** Misja van Laatum  
+- **Source:** FoY asset bundle (`originals/archives/IJatFoY Graphics MvL.zip`)  
+- **File:** `Fountain-of-Youth_characteristics_30012017.pdf`  
+- **License:** CC BY-SA 4.0  
+- **Required attribution:** “Misja van Laatum — 01-12-2021 / Utrecht NL”  
+- **Changes:** used for GDD doc
+
+### FoY doc - Ancient History
+- **Author:** Misja van Laatum  
+- **Source:** FoY asset bundle (`originals/archives/IJatFoY Graphics MvL.zip`)  
+- **File:** `FoY_History_v2.pdf`  
+- **License:** CC BY-SA 4.0  
+- **Required attribution:** “Misja van Laatum — 01-12-2021 / Utrecht NL”  
+- **Changes:** used for GDD doc
+
+### FoY doc - Origins of the Fountain
+- **Author:** Misja van Laatum  
+- **Source:** FoY asset bundle (`originals/archives/IJatFoY Graphics MvL.zip`)  
+- **File:** `FoY_Origins_25012017.pdf`  
+- **License:** CC BY-SA 4.0  
+- **Required attribution:** “Misja van Laatum — 01-12-2021 / Utrecht NL”  
+- **Changes:** used for GDD and RDD doc
+
+### FoY doc - Design Document
+- **Author:** Misja van Laatum and Jan Simon 
+- **Source:** `originals/docs/MyFountainofYouthPlan_13072017.pdf`  
+- **File:** `MyFountainofYouthPlan_13072017.pdf`  
+- **License:** No explicit license provided.  
+- **Required attribution:** Not specified.  
+- **Changes:** used for GDD and RDD doc
+
+### Original FoY Website - archiv backup from 2016
+- **Author:** Misja van Laatum (Screen 7)
+- **Source:** `originals/archives/Barnett College.zip.url`  
+- **File:** `none used`  
+- **License:** No explicit license provided.  
+- **Required attribution:** Not specified.  
+- **Changes:** used as inspiration and for the design of the new FoY website.
 ---
 
 Maintainer: **BYTE RANGER Software (CalDymos)**
