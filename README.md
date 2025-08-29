@@ -1,6 +1,6 @@
 ![Status](https://img.shields.io/badge/status-Pre--Pre--Production-yellow)
 ![License](https://img.shields.io/badge/license-CC%20BY--SA%204.0-blue)
-[![Project Maintenance](https://img.shields.io/maintenance/yes/2025.svg)](https://github.com/BYTE-RANGER-Software/indy-foy 'GitHub Repository')
+[![Project Maintenance](https://img.shields.io/maintenance/yes/2025.svg)](https://github.com/byte-ranger-software/indy-foy 'GitHub Repository')
 
 # Fountain of Youth (FoY)
 
@@ -29,18 +29,21 @@
 
 ## About the Project
 **Fountain of Youth** is a non-commercial fan adventure in classic LucasArts style.  
-This repository hosts the **active continuation by BYTE RANGER Software**: planning, source/assets, builds, and documentation.
+Originally initiated and developed by AGS community contributors, including members of the Screen 7 team (1999–2021).
 
-📖 For a detailed **project history** see the [Project Website → History](https://BYTE-RANGER-Software.github.io/indy-foy/#history).
+This continuation is an independent effort by **BYTE RANGER Software** and is not affiliated with Screen 7, Lucasfilm, or Disney.  
+This repository hosts the active continuation: planning, source/assets, builds, and documentation.
+
+📖 For a detailed **project history** see the [Project Website → History](https://byte-ranger-software.github.io/indy-foy/#history).
 
 ## Status
 🚧 Early pre-pre-production.  
-We are currently focusing on collecting and archiving original materials related to FOY.  
+We are currently focusing on collecting and archiving original materials related to FoY.  
 Next step: Creation and completion of the GDD (Game Design Document).
 
 ## Website
 Project website is published via **GitHub Pages**.
-- **URL:** https://BYTE-RANGER-Software.github.io/indy-foy/
+- **URL:** https://byte-ranger-software.github.io/indy-foy/
 - Source for the site lives in `docs/` (see [Repository Layout](#repository-layout)).
 
 ## Features
@@ -137,23 +140,23 @@ Verified releases appear on the **GitHub Releases** page.
 
 ## Roadmap Progress
 
-- 🚧[M00 — Pre-Pre-Production / Discovery & Preservation](https://github.com/BYTE-RANGER-Software/indy-foy/milestone/1)  
-- ☐ [M01 — Pre-Production / Vertical Slice Tech](https://github.com/BYTE-RANGER-Software/indy-foy/milestone/2)  
-- ☐ [M02 — Core Gameplay Systems](https://github.com/BYTE-RANGER-Software/indy-foy/milestone/3)  
-- ☐ [M03 — Content Production I: Bimini Prologue](https://github.com/BYTE-RANGER-Software/indy-foy/milestone/4)  
-- ☐ [M04 — Content Production II: Main Chapters](https://github.com/BYTE-RANGER-Software/indy-foy/milestone/5)  
-- ☐ [M05 — Alpha (Feature Complete)](https://github.com/BYTE-RANGER-Software/indy-foy/milestone/6)  
-- ☐ [M06 — Beta (Closed Testing)](https://github.com/BYTE-RANGER-Software/indy-foy/milestone/7)  
-- ☐ [M07 — Release Candidate](https://github.com/BYTE-RANGER-Software/indy-foy/milestone/8)  
-- ☐ [M08 — Release 1.0](https://github.com/BYTE-RANGER-Software/indy-foy/milestone/9)  
-- ☐ [M09 — Post-Release Support](https://github.com/BYTE-RANGER-Software/indy-foy/milestone/10)  
+- 🚧[M00 — Pre-Pre-Production / Discovery & Preservation](https://github.com/byte-ranger-software/indy-foy/milestone/1)  
+- ☐ [M01 — Pre-Production / Vertical Slice Tech](https://github.com/byte-ranger-software/indy-foy/milestone/2)  
+- ☐ [M02 — Core Gameplay Systems](https://github.com/byte-ranger-software/indy-foy/milestone/3)  
+- ☐ [M03 — Content Production I: Public Demo](https://github.com/byte-ranger-software/indy-foy/milestone/4)  
+- ☐ [M04 — Content Production II: Main Chapters](https://github.com/byte-ranger-software/indy-foy/milestone/5)  
+- ☐ [M05 — Alpha (Feature Complete)](https://github.com/byte-ranger-software/indy-foy/milestone/6)  
+- ☐ [M06 — Beta (Closed Testing)](https://github.com/byte-ranger-software/indy-foy/milestone/7)  
+- ☐ [M07 — Release Candidate](https://github.com/byte-ranger-software/indy-foy/milestone/8)  
+- ☐ [M08 — Release 1.0](https://github.com/byte-ranger-software/indy-foy/milestone/9)  
+- ☐ [M09 — Post-Release Support](https://github.com/byte-ranger-software/indy-foy/milestone/10)  
 
 > Legend:
 >- ✅ Done  
 >- 🚧 In Progress  
 >- ☐ To Do 
 
-👉 See [Issues → Milestones](https://github.com/BYTE-RANGER-Software/indy-foy/milestones) for live progress tracking.
+👉 See [Issues → Milestones](https://github.com/byte-ranger-software/indy-foy/milestones) for live progress tracking.
 
 ## Contributing
 Contributions are possible **after prior coordination**.  
@@ -177,19 +180,23 @@ Please open an Issue first and describe your proposal. Uncoordinated PRs may be 
 
 ## Repository Layout
 ```
-design/                     # 
-docs/                       # GitHub Pages (Website)
-    index.html
-    main.js
-    assets/
-        logo.png
-        main.png
-        slider_bg.png
-        downloads/
-originals/
+design/                     # design docs & mockups (not shipped)
+docs/                       # website for GitHub Pages (not shipped in game releases)
+     index.html
+     main.js
+     assets/
+            logo.png
+            main.png
+            ...
+            downloads/
+originals/                  # archival/reference only (not shipped)
+dist/                       # release packages (ZIPs/installers) for new game releases
 src/                        # new game source code
-  ags/
-  assets/
+    ags/                    # AGS project(s)
+    assets/                 # game assets (sources)
+    build/                  # compiled game output (not versioned; packaged into ../dist)
+tools/                      # build/release scripts and developer utilities (not shipped) 
+.github/                    # workflows, issue templates, etc.                        
 ```
 
 ## License
@@ -204,16 +211,18 @@ This is a **non-commercial fan project**.
 This project is **not affiliated with or endorsed by Lucasfilm, Disney, or Screen 7**.  
 All other trademarks are the property of their respective owners.
 
+“Fountain of Youth” was previously coordinated by contributors associated with Screen 7 (1999–2021).  
+Current continuation is independent and unaffiliated.
+
 Unless otherwise noted, repository contents are provided under **CC BY‑SA 4.0**.
 If you are a rights holder and have concerns, please contact us: ByteRanger@gmx.de.
-
 
 ## Attribution & Credits
 See **[ATTRIBUTION.md](ATTRIBUTION.md)** for sources, acknowledgments, and detailed credits.  
 Maintainer: **BYTE RANGER Software (CalDymos)**
 
 ## Contact
-- **Issues:** https://github.com/BYTE-RANGER-Software/indy-foy/issues  
+- **Issues:** https://github.com/byte-ranger-software/indy-foy/issues  
 - **E-mail:** ByteRanger@gmx.de  
-- **Project website:** https://BYTE-RANGER-Software.github.io/indy-foy/
+- **Project website:** https://byte-ranger-software.github.io/indy-foy/
 
