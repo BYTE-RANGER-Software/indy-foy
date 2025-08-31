@@ -12,6 +12,5 @@ Build/
 bin/
 *.exe~
 *.bak
-tools/
-originals/not public/
+**/not public
 ToDo.txt
