@@ -14,3 +14,4 @@ bin/
 *.bak
 **/not public
 ToDo.txt
+CHECKSUMS.txt
