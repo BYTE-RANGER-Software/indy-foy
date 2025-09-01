@@ -192,10 +192,14 @@ docs/                       # website for GitHub Pages (not shipped in game rele
 originals/                  # archival/reference only (not shipped)
 dist/                       # release packages (ZIPs/installers) for new game releases
 src/                        # new game source code
-    ags/                    # AGS project(s)
-    assets/                 # game assets (sources)
-    build/                  # compiled game output (not versioned; packaged into ../dist)
-tools/                      # build/release scripts and developer utilities (not shipped) 
+    assets/                 # game assets (sources for AGS)
+    AudioCache/             # Cache for imported audio files, for secure project reference
+    Compiled/               # compiled game output (packaged into ../dist)
+    Speech/                 # Voice files for .vox creation 
+tools/                      # build/release scripts and developer utilities (not shipped)
+      packaging/            # e.g., zip/installer scripts
+      ci/                   # CI helpers used by GitHub Actions
+      dev/                  # local dev tools (linters, formatters, one-off scripts)
 .github/                    # workflows, issue templates, etc.                        
 ```
 
