@@ -84,15 +84,13 @@ Verified releases appear on the **GitHub Releases** page.
 
 - **M00 — Pre-Pre-Production / Discovery & Preservation**  
   Collect prior materials into `originals/` (with SHA-256 + source).  
-  Draft `ATTRIBUTION.md` document.  
-  Create or complete `docs/GDD.xlsx` (Game Design Document – includes game concept, storyline, mechanics, room design, art & sound, UI, technical aspects, project details).  
-  Optionally prepare a dedicated Room Design Document if needed.
-
-- **M01 — Pre-Production / Vertical Slice Tech**  
-  AGS project @ 640×400 (nearest-neighbour, aspect lock).  
-  One test room (walkable / walk-behind).  
-  Verb-UI & inventory stub, one hotspot interaction, short dialog.  
-  Packaged build + nightly ZIP.  
+  Draft initial `ATTRIBUTION.md` document.  
+  
+- **M01 — Pre-Production / Vertical Slice Tech** 
+  Create or complete `GDD.docx` (Game Design Document – includes game concept, storyline, mechanics, art & sound, UI, technical aspects, project details) and `RDD.xlsx` (Room Design Document).  
+  Create `TDD.docx` (Technical Design Document based on GDD/RDD)  
+  Create Vertical Slice  
+  Publish Vertical Slice build (ZIP + website link)  
 
 - **M02 — Core Gameplay Systems**  
   Implement room transitions & pathfinding.  
