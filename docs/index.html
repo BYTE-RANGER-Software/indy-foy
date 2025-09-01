@@ -287,7 +287,7 @@
             <ul class="feature">
               <li><strong>Native resolution:</strong> 640×400 (16:10). Classic framing with 2× the pixel density of 320×200.</li>
               <li><strong>Scaling:</strong> Aspect-preserving, nearest-neighbour; pillarbox/letterbox where needed.</li>
-              <li><strong>Asset pipeline:</strong> Backgrounds (re-)drawn natively at 640×400; UI/fonts tuned for readability.</li>
+              <li><strong>Asset pipeline:</strong> Backgrounds (re-)drawn natively at 320×200; UI/fonts tuned for readability.</li>
             </ul>
 
             <h2>Build & Tooling</h2>
@@ -309,27 +309,24 @@
                 <div class="progress" aria-label="M00 progress"><div class="bar"></div></div>
                 <ul class="tasks">
                   <li data-status="doing">Collect prior materials into <code>originals/</code> (with SHA-256 + source)</li>
-                  <li data-status="doing">Draft <code>ATTRIBUTION.md</code></li>
-                  <li data-status="doing">Create/complete <code>GDD.docx</code> &amp; RDD.xlsx (Game Design Document and Room Design Document)</li>
+                  <li data-status="done">Draft initial <code>ATTRIBUTION.md</code></li>
                 </ul>
               </section>
 
               <!-- M01 -->
               <section class="ms" id="ms-m01">
                 <header>
-                  <h3>M01 — Pre-Production / Vertical Slice Tech</h3>
+                  <h3>M01 — Pre-Production / GDD, RDD, TDD &amp; Vertical Slice Tech</h3>
                   <span class="pct">0%</span>
                   <span class="badge todo">Planned</span>
                 </header>
                 <div class="progress" aria-label="M01 progress"><div class="bar"></div></div>
                 <ul class="tasks">
-                  <li data-status="todo">AGS project @ 640×400, NN-scaling, aspect lock</li>
-                  <li data-status="todo">One test room (walkable / walk-behind)</li>
-                  <li data-status="todo">Verb-UI &amp; inventory stub</li>
-                  <li data-status="todo">One hotspot interaction + short dialog</li>
-                  <li data-status="todo">Packaged build exported to <code>src/build/</code></li>
-                  <li data-status="todo">Nightly ZIP via GitHub Actions</li>
-                  <li data-status="todo">Website: Releases link visible</li>
+                  <li data-status="todo">Create/complete <code>GDD.docx</code> &amp; RDD.xlsx (Game Design Document and Room Design Document)</li>
+                  <li data-status="todo">Create <code>TDD.md</code> (Technical Design Document based on GDD/RDD)</li>
+                  <li data-status="todo">Update <code>ATTRIBUTION.md</code> based on used assets in GDD, RDD, TDD</li>
+                  <li data-status="todo">Create Vertical Slice</li>
+                  <li data-status="todo">Publish Vertical Slice build (ZIP + website link)</li>
                 </ul>
               </section>
 
