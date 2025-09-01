@@ -2,7 +2,20 @@
 # Excludes: originals\not public\**
 # Output is saved to originals\CHECKSUMS.txt (relative Unix-style paths)
 
-Set-Location (Join-Path $PSScriptRoot "..")
+# Find repo root by walking up until a marker is found
+$dir = Get-Item -LiteralPath $PSScriptRoot
+$markers = @('.git','originals')
+
+while ($dir -and $dir.PSIsContainer) {
+    if ($markers | ForEach-Object { Test-Path (Join-Path $dir.FullName $_) } | Where-Object { $_ }) {
+        break
+    }
+    $dir = $dir.Parent
+}
+
+if (-not $dir) { throw "Repo root not found." }
+
+Push-Location $dir.FullName
 
 $Output = "originals\CHECKSUMS.txt"
 $Root   = Join-Path (Get-Location) "originals"
@@ -34,3 +47,5 @@ foreach ($f in $files) {
 
 $lines | Out-File $Output -Encoding utf8
 Write-Host "Checksums written to $Output"
+
+Pop-Location

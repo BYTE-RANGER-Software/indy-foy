@@ -20,14 +20,20 @@ from pathlib import Path
 import re
 from datetime import date
 from typing import Dict, Tuple, Optional
+from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parent.parent  # script in tools/
+p = Path(__file__).resolve()
+for ancestor in [p] + list(p.parents):
+    if (ancestor / ".git").exists() or (ancestor / "originals").is_dir():
+        REPO_ROOT = ancestor
+        break
+
 ORIGINALS_DIR = REPO_ROOT / "originals"
 CHECKSUMS_TXT = ORIGINALS_DIR / "CHECKSUMS.txt"
 SOURCES_MD = ORIGINALS_DIR / "SOURCES.md"
 META_JSON = ORIGINALS_DIR / "sources_meta.json"
 
-HEADER_MD = """# FOY Originals – Sources & Checksums
+HEADER_MD = """# FoY Originals – Sources & Checksums
 
 This document lists the origin of all files in the `originals/` folder.  
 Each entry includes the source and a SHA-256 checksum for verification.  
@@ -84,12 +90,23 @@ def write_checksums_txt(checksums: Dict[str, str]) -> None:
 # --- SOURCES.md parsing/updating --------------------------------------------
 
 def ensure_base_document(md_text: Optional[str]) -> str:
-    """Ensure SOURCES.md has a header; create minimal doc if missing."""
+    """Ensure SOURCES.md has exactly one canonical header+intro at the top."""
+    # file missing/empty -> just the canonical header
     if not md_text or not md_text.strip():
         return HEADER_MD
-    if not md_text.lstrip().startswith("# FoY Originals"):
-        return HEADER_MD + "\n" + md_text
-    return md_text
+
+    # Normalize (drop BOM/leading newlines)
+    text = md_text.lstrip("\ufeff\r\n")
+
+    # Cut away any preamble (old header/intro duplicates, random text)
+    # Keep from the first section-level heading (## ...) onward.
+    m = re.search(r'(?m)^\s*##\s+', text)
+    rest = text[m.start():].lstrip() if m else ""
+
+    # Rebuild document: canonical header + optional remainder
+    out = HEADER_MD.rstrip() + ("\n\n" + rest if rest else "\n")
+    return out
+
 
 def remove_notes_section(md_text: str) -> str:
     """Remove exactly the '## Notes' section (if present), preserving everything after it."""
