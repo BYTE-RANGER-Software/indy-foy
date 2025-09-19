@@ -2,6 +2,5 @@
 docs/assets/** -filter -diff -merge -text
 
 # --- LFS nur für große Dateien außerhalb der Website
-originals/** filter=lfs diff=lfs merge=lfs -text
 src/**       filter=lfs diff=lfs merge=lfs -text
 design/**    filter=lfs diff=lfs merge=lfs -text
