@@ -2,7 +2,7 @@
 name: "Background Task, v0.1, draft"
 about: Create or revise a background for a room in 320×200 FoA-like style
 title: "[BG] <Room ID> <Short name>"
-labels: ["BG","Art","Vertical Slice"]
+labels: ["BG","Art"]
 assignees: []
 ---
 
