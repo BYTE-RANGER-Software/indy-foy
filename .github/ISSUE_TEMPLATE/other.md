@@ -1,10 +1,9 @@
-<!-- .github/ISSUE_TEMPLATE/other.md -->
 ---
 name: Other issue
 about: Anything that doesn't fit other templates
 title: "[Other] "
 labels: triage
-assignees: ""
+assignees: []
 ---
 
 **Describe your request or report**
