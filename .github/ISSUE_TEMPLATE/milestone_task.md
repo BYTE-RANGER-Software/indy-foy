@@ -23,8 +23,8 @@ Break the task into actionable steps with checkboxes.
 
 > **Notes for maintainers**
 >
-> - Set the **Milestone** in the sidebar.
-> - Replace `<Description>` in the title.
-> - Adjust the `labels` in the front-matter as needed, e.g., `alpha`, `beta`, `release-candidate`, or area labels like `graphics`, `audio`, `scripting`.
-> - Update the milestone prefix in the title to `[M00]`, `[M01]`, etc.
-> - assign an owner in the sidebar (optional)
+> - Set the **Milestone** using the **Milestone** button below.
+> - Replace `<Description>` in the **title field** at the top.
+> - Add **Labels** using the **Label** button below, e.g., `alpha`, `beta`, `release-candidate`, `graphics`, `audio`, `scripting`.
+> - Adjust the milestone prefix in the title to `[M00]`, `[M01]`, etc.
+> - Assign an owner using the **Assignee** button below (optional).
