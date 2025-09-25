@@ -35,6 +35,8 @@ Originally initiated and developed by AGS community contributors, including memb
 This continuation is an independent effort by **BYTE RANGER Software** and is not affiliated with Screen 7, Lucasfilm, or Disney.  
 This repository hosts the active continuation: planning, source/assets, builds, and documentation.
 
+> **Name disclaimer:** This project is **not related to any film** or other media titled *Fountain of Youth* or similar.
+
 📖 For a detailed **project history** see the [Project Website → History](https://byte-ranger-software.github.io/indy-foy/#history).
 
 ## Status
@@ -53,7 +55,7 @@ Project website is published via **GitHub Pages**.
 - Original music & SFX
 - Chapters include **Bimini, Europe & Asia**
 - Over **150 hand-drawn backgrounds** in retro low-res look
-- Classic **“Atlantis”-style GUI** & mechanics
+- Classic **"Atlantis"-style GUI** & mechanics
 - Antiquities, sidekicks & leather jackets!
 
 > *Note:* The exact feature set depends on the current AGS implementation stage.
@@ -173,7 +175,7 @@ please open an Issue first and describe your proposal, uncoordinated PRs may be 
 ## Development Setup
 - **Engine/Framework:** **AGS (Adventure Game Studio)**
 - **Dependencies:** _TBA_  
-- **Build:** AGS Editor → “Build / Rebuild” or “Save compiled game”  
+- **Build:** AGS Editor → "Build / Rebuild" or "Save compiled game"  
 - **Run:** Execute the compiled game
 
 ### Rendering & Resolution
@@ -237,15 +239,18 @@ Full license text: https://creativecommons.org/licenses/by-sa/4.0/
 ## Legal Notice
 This is a **non-commercial fan project**.
 
-“Indiana Jones”™ and related properties are trademarks of **Lucasfilm Ltd.**  
+**Indiana Jones™** and related properties are trademarks of **Lucasfilm Ltd.**  
 This project is **not affiliated with or endorsed by Lucasfilm, Disney, or Screen 7**.  
 All other trademarks are the property of their respective owners.
 
-“Fountain of Youth” was previously coordinated by contributors associated with Screen 7 (1999–2021).  
-Current continuation is independent and unaffiliated.
-
 Unless otherwise noted, repository contents are provided under **CC BY‑SA 4.0**.
 If you are a rights holder and have concerns, please contact us: ByteRanger@gmx.de.
+
+### Name Disclaimer
+The use of the title **Fountain of Youth** refers to the mythical motif only, and this project is **not affiliated with, endorsed by, or connected to any film, TV production, book, or other work** titled *Fountain of Youth* or with a similar name.
+
+**Fountain of Youth** was previously coordinated by contributors associated with Screen 7 (1999–2021).  
+Current continuation is independent and unaffiliated.
 
 ## Attribution & Credits
 See **[ATTRIBUTION.md](ATTRIBUTION.md)** for sources, acknowledgments, and detailed credits.  
