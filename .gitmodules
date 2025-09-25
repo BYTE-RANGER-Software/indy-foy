@@ -1,3 +1,4 @@
 [submodule "originals"]
 	path = originals
 	url = https://github.com/BYTE-RANGER-Software/foy-originals.git
+	update = none
