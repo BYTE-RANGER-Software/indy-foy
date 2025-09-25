@@ -1,0 +1,55 @@
+name: Milestone Task
+description: Track a concrete task within a specific milestone
+title: "[M00][Task] <Description>"
+labels: []
+type: task
+assignees: []
+
+body:
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: Optional
+      options:
+        - P0, critical
+        - P1, high
+        - P2, medium
+        - P3, low
+    validations:
+      required: false
+
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: Explain the outcome we want to achieve, not the steps.
+      placeholder: "Player can enter the docks area and trigger ambient intro cutscene."
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: checklist
+    attributes:
+      label: Checklist
+      description: Break the task into actionable steps with checkboxes. Optional: Each step → one sub-task / sub-issue via “… → Convert to issue”.
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+        - [ ] ...
+      render: markdown
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        > **Notes for maintainers**
+        >
+        > - Set the **Milestone** using the **Milestone** button below.
+        > - Replace `<Description>` in the **title** at the top, keep the prefix `[M00]`, adjust to `[M01]`, `[M02]`, and so on.
+        > - Add relevant **Labels** below, for example `BG`, `Art`, `Vertical Slice`, `documentation`, `scripting`.
+        > - Optional: Convert checklist items to issues via **… → Convert to issue**, then select the fitting sub-task template.
+        > - Optional: If checklist items are sub-Tasks, ensure the new child issues link back to this task via **Linked issues**, relation **tracks** or **tracked by** as appropriate.
