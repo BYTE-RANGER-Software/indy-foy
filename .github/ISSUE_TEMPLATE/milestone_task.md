@@ -7,13 +7,16 @@ type: task
 assignees: []
 ---
 
+<!-- Template-Version: v0.2 -->
+
 **Priority:** _optional_
 
 ## Goal
 Explain the outcome we want to achieve, not the steps.
 
 ## Checklist
-Break the task into actionable steps with checkboxes.
+Break the task into actionable steps with checkboxes. 
+Each step → one sub-issue
 
 - [ ] ...
 - [ ] ...
@@ -24,7 +27,7 @@ Break the task into actionable steps with checkboxes.
 > **Notes for maintainers**
 >
 > - Set the **Milestone** using the **Milestone** button below.
-> - Replace `<Description>` in the **title field** at the top.
-> - Add **Labels** using the **Label** button below, e.g., `alpha`, `beta`, `release-candidate`, `graphics`, `audio`, `scripting`.
-> - Adjust the milestone prefix in the title to `[M00]`, `[M01]`, etc.
-> - Assign an owner using the **Assignee** button below (optional).
+> - Replace `<Description>` in the **title** at the top, keep the prefix `[M00]`, adjust to `[M01]`, `[M02]`, and so on.
+> - Add relevant **Labels** below, for example `BG`, `Art`, `Vertical Slice`, `documentation`, `scripting`.
+> - Convert checklist items to issues via **… → Convert to issue**, then select the fitting template.
+> - Ensure the new child issues link back to this task via **Linked issues**, relation **tracks** or **tracked by** as appropriate.
