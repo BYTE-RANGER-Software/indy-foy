@@ -20,6 +20,7 @@
 - [Contributing](#contributing)
 - [Development Setup](#development-setup)
 - [Repository Layout](#repository-layout)
+- [Cloning](#cloning)
 - [License](#license)
 - [Legal Notice](#legal-notice)
 - [Attribution & Credits](#attribution--credits)
@@ -69,7 +70,6 @@ Project website is published via **GitHub Pages**.
 </p>
 
 > Click to view full size.  
-> Files are mirrored on the website under `/indy-foy/assets/`.
 
 ## Releases & Nightly Builds
 Verified releases appear on the **GitHub Releases** page.
@@ -157,13 +157,18 @@ Verified releases appear on the **GitHub Releases** page.
 👉 See [Issues → Milestones](https://github.com/byte-ranger-software/indy-foy/milestones) for live progress tracking.
 
 ## Contributing
-Contributions are possible **after prior coordination**.  
-Please open an Issue first and describe your proposal. Uncoordinated PRs may be declined.
+Contributions are possible **after prior coordination**,  
+please open an Issue first and describe your proposal, uncoordinated PRs may be declined.
 
-1. Open an Issue (goal, scope, sample art/mocks if available)  
-2. After approval: branch `feature/<short-description>`  
-3. Open PR; link the Issue; attach screenshots/GIFs  
+1. Open an Issue, include goal, scope, sample art or mocks if available  
+2. After approval: create a branch `\<type\>/\<scope\>/\<short-description\>`  
+   - Allowed `<type>`: `feature`, `bugfix`, `hotfix`, `chore`, `docs`, `meta`  
+   - `<scope>` is optional, use kebab-case  
+3. Open a PR, link the Issue, attach screenshots or GIFs  
 4. Use **Git LFS** for large sources only
+
+👉 For details, see the full guide in [.github/CONTRIBUTING.md](.github/CONTRIBUTING.md).
+
 
 ## Development Setup
 - **Engine/Framework:** **AGS (Adventure Game Studio)**
@@ -172,12 +177,13 @@ Please open an Issue first and describe your proposal. Uncoordinated PRs may be 
 - **Run:** Execute the compiled game
 
 ### Rendering & Resolution
-- **Native:** 640×400 (16:10), crisp pixels, nearest-neighbour scaling  
+- **Native:** 320×200 (16:10), crisp pixels, nearest-neighbour scaling  
 - Aspect-preserving integer scaling for 1280×800 / 1920×1200  
 - Optional pipeline: draw masters at 1280×800 and downscale for current builds
 
 ## Repository Layout
 ```
+.github/                    # workflows, issue templates, etc. (not shipped)
 design/                     # design docs & mockups (not shipped)
 docs/                       # website for GitHub Pages (not shipped in game releases)
      index.html
@@ -197,9 +203,31 @@ src/                        # new game source code
 tools/                      # build/release scripts and developer utilities (not shipped)
       packaging/            # e.g., zip/installer scripts
       ci/                   # CI helpers used by GitHub Actions
-      dev/                  # local dev tools (linters, formatters, one-off scripts)
-.github/                    # workflows, issue templates, etc.                        
+      dev/                  # local dev tools (linters, formatters, one-off scripts)                      
 ```
+> **Note on `originals/`:**  
+> This folder is a **Git submodule**, archival/reference only, excluded from builds and releases.  
+> It is currently **private**. After all licenses and copyrights are clarified, it will be set to **public**.
+
+## Cloning
+
+Most users do **not** need the `originals/` submodule to build or run the game.
+
+- **Regular clone, no submodules**
+  
+  ```bash
+  git clone https://github.com/byte-ranger-software/indy-foy.git
+  ```
+
+- **Developers who need access to archived resources in `originals/`**
+  
+  ```bash
+  # Requires read access to the private submodule
+  git clone --recurse-submodules https://github.com/byte-ranger-software/indy-foy.git
+  # or, if already cloned
+  git submodule update --init originals
+  ```
+---
 
 ## License
 Unless otherwise noted, all contents are licensed under  
