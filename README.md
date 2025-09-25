@@ -197,6 +197,7 @@ docs/                       # website for GitHub Pages (not shipped in game rele
             downloads/
 originals/                  # archival/reference only (not shipped)
 dist/                       # release packages (ZIPs/installers) for new game releases
+template/                   # AGS Template for FoY (not shipped, separate repo)
 src/                        # new game source code
     assets/                 # game assets (sources for AGS)
     AudioCache/             # Cache for imported audio files, for secure project reference
@@ -210,6 +211,10 @@ tools/                      # build/release scripts and developer utilities (not
 > **Note on `originals/`:**  
 > This folder is a **Git submodule**, archival/reference only, excluded from builds and releases.  
 > It is currently **private**. After all licenses and copyrights are clarified, it will be set to **public**.
+
+> **Note on `template/`:**  
+> This folder is a **Git submodule** and serves as a template for AGS for the actual game. 
+> It is currently **private**. Once it is finished and ready to use, it will be set to **public**.
 
 ## Cloning
 
