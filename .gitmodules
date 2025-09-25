@@ -2,3 +2,7 @@
 	path = originals
 	url = https://github.com/BYTE-RANGER-Software/foy-originals.git
 	update = none
+[submodule "template"]
+	path = template
+	url = https://github.com/BYTE-RANGER-Software/ags_FoY.git
+	update = none
