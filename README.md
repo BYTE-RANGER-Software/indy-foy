@@ -195,6 +195,7 @@ docs/                       # website for GitHub Pages (not shipped in game rele
             main.png
             ...
             downloads/
+    workflows/              # Workflow descriptions and notes
 originals/                  # archival/reference only (not shipped)
 dist/                       # release packages (ZIPs/installers) for new game releases
 template/                   # AGS Template for FoY (not shipped, separate repo)
