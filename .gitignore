@@ -7,6 +7,7 @@ Thumbs.db
 *.tmp
 
 # Build-Outputs & temporäre Dateien
+_Debug/
 Compiled/
 Build/
 bin/
@@ -16,3 +17,27 @@ bin/
 notes and drafts/
 src/tests/
 CHECKSUMS.txt
+
+# AGS specific
+# AudioCache can be rebuilt from sources
+src/AudioCache/
+
+# Lockfile
+_OpenInEditor.lock
+
+# User settings
+Game.agf.user
+*.crm.user
+
+# Backups
+Game.agf.bak
+backup_acsprset.spr
+
+# Memory dumps
+*.dmp
+
+# temporary, main game data, before getting packed into exe
+game28.dta
+
+# temporary build of the game before being moved to Compiled/ folder
+src/*.exe
