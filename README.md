@@ -185,9 +185,9 @@ please open an Issue first and describe your proposal, uncoordinated PRs may be 
 
 ## Repository Layout
 ```
-.github/                    # workflows, issue templates, etc. (not shipped)
-design/                     # design docs & mockups (not shipped)
-docs/                       # website for GitHub Pages (not shipped in game releases)
+.github/                       # workflows, issue templates, etc. (not shipped)
+design/                        # design docs & mockups (not shipped)
+docs/                          # website for GitHub Pages (not shipped in game releases)
      index.html
      main.js
      assets/
@@ -195,19 +195,21 @@ docs/                       # website for GitHub Pages (not shipped in game rele
             main.png
             ...
             downloads/
-    workflows/              # Workflow descriptions and notes
-originals/                  # archival/reference only (not shipped)
-dist/                       # release packages (ZIPs/installers) for new game releases
-template/                   # AGS Template for FoY (not shipped, separate repo)
-src/                        # new game source code
-    assets/                 # game assets (sources for AGS)
-    AudioCache/             # Cache for imported audio files, for secure project reference
-    Compiled/               # compiled game output (packaged into ../dist)
-    Speech/                 # Voice files for .vox creation 
-tools/                      # build/release scripts and developer utilities (not shipped)
-      packaging/            # e.g., zip/installer scripts
-      ci/                   # CI helpers used by GitHub Actions
-      dev/                  # local dev tools (linters, formatters, one-off scripts)                      
+    workflows/                 # Workflow descriptions and notes
+originals/                     # archival/reference only (not shipped, separate repo)
+dist/                          # release packages (ZIPs/installers) for new game releases
+template/                      # AGS Template for FoY (not shipped, separate repo)
+src/                           # new game source code
+    assets/                    # game assets (sources for AGS)
+    AudioCache/                # Cache for imported audio files, for secure project reference
+    Compiled/                  # compiled game output (packaged into ../dist)
+    Speech/                    # Voice files for .vox creation 
+tools/                         # build/release scripts and developer utilities (not shipped)
+      packaging/               # e.g., zip/installer scripts
+      ci/                      # CI helpers used by GitHub Actions
+      dev/                     # local dev tools (linters, formatters, one-off scripts)
+          vscode-ags-extension # AGS Script extension for VS Code (separate repo)
+
 ```
 > **Note on `originals/`:**  
 > This folder is a **Git submodule**, archival/reference only, excluded from builds and releases.  
