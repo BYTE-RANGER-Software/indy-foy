@@ -7,3 +7,6 @@
 	path = template
 	url = https://github.com/BYTE-RANGER-Software/ags_FoY.git
 	update = none
+[submodule "tools/dev/vscode-ags-extension"]
+	path = tools/dev/vscode-ags-extension
+	url = https://github.com/BYTE-RANGER-Software/vscode-ags-extension.git
