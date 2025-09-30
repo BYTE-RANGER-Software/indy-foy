@@ -14,7 +14,7 @@ bin/
 *.exe~
 *.bak
 **/not public
-notes and drafts/
+_internal/
 src/tests/
 CHECKSUMS.txt
 
