@@ -13,10 +13,12 @@ Build/
 bin/
 *.exe~
 *.bak
-**/not public
-_internal/
 src/tests/
 CHECKSUMS.txt
+
+# internal use
+not public/
+_internal/
 
 # AGS specific
 # AudioCache can be rebuilt from sources
@@ -41,3 +43,6 @@ game28.dta
 
 # temporary build of the game before being moved to Compiled/ folder
 src/*.exe
+
+# Release bundles are managed via GitHub Releases.
+/dist/
