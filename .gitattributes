@@ -4,3 +4,14 @@ docs/assets/** -filter -diff -merge -text
 # --- LFS nur für große Dateien außerhalb der Website
 src/**       filter=lfs diff=lfs merge=lfs -text
 design/**    filter=lfs diff=lfs merge=lfs -text
+
+# --- Exclude folders from automatically generated source ZIP files
+/.github            export-ignore
+/design             export-ignore
+/docs               export-ignore
+/originals          export-ignore
+/template           export-ignore
+/tools              export-ignore
+/src/AudioCache     export-ignore
+/src/Compiled       export-ignore
+
