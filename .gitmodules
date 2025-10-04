@@ -1,12 +1,12 @@
 [submodule "originals"]
 	path = originals
 	url = https://github.com/BYTE-RANGER-Software/foy-originals.git
-	update = none
-	
-[submodule "template"]
-	path = template
+	update = none	
+[submodule "framework"]
+	path = framework
 	url = https://github.com/BYTE-RANGER-Software/ags_FoY.git
 	update = none
 [submodule "tools/dev/vscode-ags-extension"]
 	path = tools/dev/vscode-ags-extension
 	url = https://github.com/BYTE-RANGER-Software/vscode-ags-extension.git
+
