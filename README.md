@@ -187,41 +187,40 @@ please open an Issue first and describe your proposal, uncoordinated PRs may be 
 ```
 .github/                       # workflows, issue templates, etc. (not shipped)
 design/                        # design docs & mockups (not shipped)
-docs/                          # website for GitHub Pages (not shipped in game releases)
-     index.html
-     main.js
-     assets/
-            logo.png
-            main.png
-            ...
-            downloads/
-    workflows/                 # Workflow descriptions and notes
-originals/                     # archival/reference only (not shipped, separate repo)
-dist/                          # release packages (ZIPs/installers) for new game releases
-template/                      # AGS Template for FoY (not shipped, separate repo)
+docs/                          # website for GitHub Pages (not shipped)
+    index.html
+    main.js
+    assets/
+        logo.png
+        main.png
+        ...
+        downloads/
+    workflows/                 # workflow descriptions and notes
+originals/                     # Git submodule, archival/reference only (not shipped)
+dist/                          # release packages (ZIPs/installers) for new game releases (not shipped)
+framework/                     # Git submodule, AGS framework for FoY (not shipped)
 src/                           # new game source code
     assets/                    # game assets (sources for AGS)
-    AudioCache/                # Cache for imported audio files, for secure project reference
+    AudioCache/                # cache for imported audio files, safe to ignore
     Compiled/                  # compiled game output (packaged into ../dist)
-    Speech/                    # Voice files for .vox creation 
+    Speech/                    # voice files for .vox creation 
 tools/                         # build/release scripts and developer utilities (not shipped)
-      packaging/               # e.g., zip/installer scripts
-      ci/                      # CI helpers used by GitHub Actions
-      dev/                     # local dev tools (linters, formatters, one-off scripts)
-          vscode-ags-extension # AGS Script extension for VS Code (separate repo)
+    packaging/                 # zip/installer scripts
+    ci/                        # CI helpers used by GitHub Actions
+    dev/                       # local dev tools (linters, formatters, one-off scripts)
+        vscode-ags-extension   # Git submodule, AGS Script extension for VS Code
 
 ```
-> **Note on `originals/`:**  
-> This folder is a **Git submodule**, archival/reference only, excluded from builds and releases.  
-> It is currently **private**. After all licenses and copyrights are clarified, it will be set to **public**.
+> **Note on** `originals/`, Git submodule, archival/reference only, excluded from builds and releases,  
+> currently private, becomes public after license clearance.
 
-> **Note on `template/`:**  
-> This folder is a **Git submodule** and serves as a template for AGS for the actual game. 
-> It is currently **private**. Once it is finished and ready to use, it will be set to **public**.
+> **Note on** `framework/`, Git submodule for the AGS framework,  
+> currently private, becomes public when finished.
 
 ## Cloning
 
-Most users do **not** need the `originals/` submodule to build or run the game.
+Most users do **not** need the `originals/` and `framework/` submodule to build or run the game.
+
 
 - **Regular clone, no submodules**
   
