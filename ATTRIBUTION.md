@@ -9,7 +9,7 @@ Unless otherwise noted, contents are provided under the
 
 **License:** https://creativecommons.org/licenses/by-sa/4.0/
 
-> **Trademarks:** “Indiana Jones” and related properties are trademarks of Lucasfilm Ltd.  
+> **Trademarks:** Certain names, titles, or properties referenced in this project may be trademarks of their respective owners. All trademarks are acknowledged and remain the property of their holders.    
 > This is a non-commercial fan project not affiliated with or endorsed by Lucasfilm, Disney, or Screen 7.  
 > Trademarks and logos are **not** licensed under CC BY-SA.
 
@@ -31,7 +31,7 @@ Unless otherwise noted, contents are provided under the
 
 When using or remixing content from this repository, please attribute like this:
 
-> “*Indiana Jones and the Fountain of Youth (BYTE RANGER Software)*” — CC BY-SA 4.0.  
+> “*Fountain of Youth (BYTE RANGER Software)*” — CC BY-SA 4.0.  
 > Source: https://github.com/CalDymos/indy-foy (commit `<hash>`).  
 > Changes made: `<short description>`.
 

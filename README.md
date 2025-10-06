@@ -4,7 +4,7 @@
 
 # Fountain of Youth (FoY)
 
-> **Non-profit fan point-and-click adventure inspired by *Indiana Jones* — continued by BYTE RANGER Software.**
+> **Non-profit fan-made point-and-click adventure in the spirit of early 1990s cinematic puzzle games — continued by BYTE RANGER Software.**
 
 ---
 
@@ -246,7 +246,7 @@ Full license text: https://creativecommons.org/licenses/by-sa/4.0/
 ## Legal Notice
 This is a **non-commercial fan project**.
 
-**Indiana Jones™** and related properties are trademarks of **Lucasfilm Ltd.**  
+Certain names and properties referenced in this repository may be trademarks of their respective owners (e.g., Lucasfilm Ltd.).  
 This project is **not affiliated with or endorsed by Lucasfilm, Disney, or Screen 7**.  
 All other trademarks are the property of their respective owners.
 

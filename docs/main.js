@@ -1,11 +1,11 @@
   /*
-  Project: Indiana Jones and the Fountain of Youth (indy-foy)
+  Project: Fountain of Youth (indy-foy)
   File: main.js
-  Version: 0.1.1
+  Version: 0.1.2
   Description: Handles accordion panels, lightbox viewer, and roadmap progress calculation.
   
   Author: Erek Starwind (BYTE RANGER Software)
-  Edited: 2025-08-27
+  Edited: 2025-10-06
 */
 const panels = Array.from(document.querySelectorAll('.panel'));
 function activateById(id){ panels.forEach(p=>p.classList.toggle('active', '#'+p.id===id)); if(history&&history.replaceState) history.replaceState(null,'',id); }
