@@ -1,0 +1,45 @@
+name: "Doc Sub-Task"
+description: "Documentation task for GDD / RDD / TDD"
+title: "[DOC] <Doc section>"
+labels: ["documentation"]
+assignees: []
+
+body:
+  - type: input
+    id: parent_deliverable
+    attributes:
+      label: "Parent Deliverable"
+      placeholder: "#<deliverable-issue>"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: doc_type
+    attributes:
+      label: "Document"
+      options:
+        - GDD
+        - RDD
+        - TDD
+    validations:
+      required: true
+
+  - type: input
+    id: section
+    attributes:
+      label: "Section"
+      placeholder: "Mechanics, Rooms R-200–R-220, Interaction API"
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: "Acceptance criteria"
+      placeholder: |
+        - section complete, consistent with current build,
+        - cross-referenced where needed,
+        - committed alongside example assets/scripts if applicable.
+      render: markdown
+    validations:
+      required: true

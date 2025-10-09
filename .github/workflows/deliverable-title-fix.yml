@@ -1,0 +1,34 @@
+name: "Deliverable, enforce title prefix"
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  issues: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            if (!issue) return;
+
+            // Nur auf Deliverables wirken, erkennbar am Label oder am vorgesehenen Muster
+            const hasDeliverableLabel = (issue.labels || []).some(l => (typeof l === "string" ? l : l.name) === "Deliverable");
+            const startsWithDel = (issue.title || "").toUpperCase().startsWith("[DEL]");
+            if (startsWithDel) return;
+
+            // Formwerte aus dem Body lesen, GitHub rendert die Felder als H2/H3 Abschnitte
+            const body = issue.body || "";
+            const kindMatch = body.match(/### Kind\s+([\s\S]*?)\n###/i) || body.match(/### Kind\s+([\s\S]*)$/i);
+            const kindLine = kindMatch ? kindMatch[1].split('\n')[0].trim() : "";
+            // Erwartet z. B. "VS, Vertical Slice", wir nehmen den linken Teil vor dem Komma
+            const kind = (kindLine.split(",")[0] || "").trim().toUpperCase() || "GEN";
+
+            if (!hasDeliverableLabel && kind === "GEN") return; // kein sicheres Signal
+
+            const newTitle = `[DEL][${kind}] ${issue.title}`;
+            await github.rest.issues.update({ ...context.repo, issue_number: issue.number, title: newTitle });

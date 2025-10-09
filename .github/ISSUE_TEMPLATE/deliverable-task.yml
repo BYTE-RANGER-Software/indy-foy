@@ -1,0 +1,96 @@
+name: "Deliverable Task"
+description: "Umbrella task that groups sub-tasks under a milestone, for example Create Vertical Slice"
+title: "[DEL][<KIND>] <Deliverable Title>"
+labels: ["Deliverable"]
+type: task
+assignees: []
+
+body:
+  - type: input
+    id: milestone
+    attributes:
+      label: "Milestone"
+      description: "Target milestone, for example M01"
+      placeholder: "M01"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: "Kind"
+      description: "Deliverable kind, will be used in the title as <KIND>"
+      options:
+        - "VS, Vertical Slice"
+        - "REL, Release"
+        - "DOC, Documentation Package"
+        - "SYS, System or Feature"
+        - "OPS, Publishing or Website"
+    validations:
+      required: true
+
+  - type: input
+    id: parent_mtask
+    attributes:
+      label: "Parent Milestone Task"
+      description: "Issue number of the Milestone Task, for example #1234"
+      placeholder: "#<milestone-task-issue>"
+    validations:
+      required: true
+
+  - type: textarea
+    id: outcome
+    attributes:
+      label: "Outcome"
+      description: "What exists when this deliverable is done"
+      placeholder: "Playable docks scene end to end, release ZIP attached, README link updated"
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: checklist
+    attributes:
+      label: "Checklist, convert each line to a Sub-Task"
+      description: "One line per sub task, then use … → Convert to issue, choose Sub-Task, or a specialized form like Code Sub-Task, Art Sub-Task, Doc Sub-Task"
+      placeholder: |
+        - [ ] [CODE] Interaction system, verbcoin prototype
+        - [ ] [BG][R-101] Docks, night, lore pass
+        - [ ] [ART][R-214] Backdrop docks night, final
+        - [ ] [AUD] Ambient loop for docks
+        - [ ] [NAR] Dialogue, dock worker, first pass
+        - [ ] [LD][R-214] Room setup, walkable and walk behind
+        - [ ] [DOC] Update TDD section, Interaction system
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: "Dependencies and Risks"
+      placeholder: "Upstream tasks, tools, external assets"
+      render: markdown
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: "Acceptance criteria"
+      placeholder: |
+        - demoable end to end,
+        - blocking bugs resolved,
+        - release ZIP uploaded, links updated,
+        - docs updated, GDD or RDD or TDD as applicable
+      render: markdown
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        > **Notes**
+        >
+        > - After creating this Deliverable, convert its checklist items to issues, pick **Sub-Task** or a specialized sub form,
+        > - Link this Deliverable to its Milestone Task via **Linked issues**, relation **tracked by**,
+        > - Labels and title prefixes can be auto enforced by workflows if enabled.

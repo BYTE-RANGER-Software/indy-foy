@@ -1,0 +1,47 @@
+name: "Deliverable, set milestone and label"
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  set:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const issue = context.payload.issue;
+            if (!issue) return;
+
+            // Nur Deliverables behandeln, per Titelpräfix oder Label
+            const isDel = issue.title.toUpperCase().startsWith("[DEL]") ||
+                          (issue.labels || []).some(l => (typeof l === "string" ? l : l.name) === "Deliverable");
+            if (!isDel) return;
+
+            // Label sicherstellen
+            const labels = new Set((issue.labels || []).map(l => typeof l === "string" ? l : l.name));
+            labels.add("Deliverable");
+            await github.rest.issues.setLabels({ owner, repo, issue_number: issue.number, labels: Array.from(labels) });
+
+            // Milestone aus Body extrahieren
+            const body = issue.body || "";
+            const m = body.match(/### Milestone\s+([\s\S]*?)\n###/i) || body.match(/### Milestone\s+([\s\S]*)$/i);
+            const wanted = m ? m[1].split('\n')[0].trim() : "";
+            if (!wanted) return;
+
+            // offenen Milestone mit passendem Titel finden
+            const milestones = await github.paginate(github.rest.issues.listMilestones, { owner, repo, state: "open", per_page: 100 });
+            const ms = milestones.find(x => x.title === wanted);
+            if (!ms) {
+              await github.rest.issues.createComment({
+                owner, repo, issue_number: issue.number,
+                body: `Milestone '${wanted}' not found, please create it or correct the field`
+              });
+              return;
+            }
+            await github.rest.issues.update({ owner, repo, issue_number: issue.number, milestone: ms.number });

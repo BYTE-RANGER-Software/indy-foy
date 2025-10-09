@@ -1,0 +1,80 @@
+name: "Code Sub-Task"
+description: "Programming & scripting task (AGS modules, engine glue, gameplay scripts)"
+title: "[CODE] <Module or feature>"
+labels: ["Code"]
+assignees: []
+
+body:
+  - type: input
+    id: parent_deliverable
+    attributes:
+      label: "Parent Deliverable"
+      placeholder: "#<deliverable-issue>"
+    validations:
+      required: true
+
+  - type: input
+    id: module
+    attributes:
+      label: "Module / Script area"
+      placeholder: "interaction_system / inventory / pathfinding / dialog glue"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: impact
+    attributes:
+      label: "Impacts"
+      options:
+        - label: "Rooms (list in notes)"
+        - label: "GUIs / HUD"
+        - label: "Characters / Views"
+        - label: "Save/Load format"
+        - label: "Build / tooling"
+    validations:
+      required: false
+
+  - type: textarea
+    id: interfaces
+    attributes:
+      label: "API / Interfaces"
+      description: "Public functions, events, expected inputs/outputs"
+      placeholder: |
+        Function: Interact(targetId, verb)
+        Returns: bool handled
+        Emits: OnInteractionComplete(targetId)
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: testplan
+    attributes:
+      label: "Test plan"
+      description: "How to verify? steps, rooms, expected results"
+      placeholder: |
+        - Open R-214 docks, click barrel with 'Look',
+        - Expect description, no pathing glitch,
+        - Interact triggers OnInteractionComplete.
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: "Acceptance criteria"
+      placeholder: |
+        - API documented in TDD,
+        - integrated in scene R-214,
+        - no console warnings, no regressions in existing rooms.
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: "Notes / deps / links"
+      placeholder: "Related issues, branches, docs, assets"
+      render: markdown

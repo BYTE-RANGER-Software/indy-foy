@@ -1,0 +1,57 @@
+name: "Art Sub-Task"
+description: "Art assets for rooms, characters, GUIs, inventory"
+title: "[ART][R-###] <Asset>"
+labels: ["Art"]
+assignees: []
+
+body:
+  - type: input
+    id: parent_deliverable
+    attributes:
+      label: "Parent Deliverable"
+      placeholder: "#<deliverable-issue>"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: asset_type
+    attributes:
+      label: "Asset type"
+      options:
+        - Backdrop
+        - Walkable/Walk-behind masks
+        - Character sprites / Views
+        - Inventory icon
+        - GUI elements
+        - Animation
+    validations:
+      required: true
+
+  - type: input
+    id: room
+    attributes:
+      label: "Room or target"
+      placeholder: "R-214 docks, Inventory, DialogGUI"
+    validations:
+      required: true
+
+  - type: textarea
+    id: specs
+    attributes:
+      label: "Specs"
+      placeholder: "Resolution, frames, palette, export format"
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: "Acceptance criteria"
+      placeholder: |
+        - imported in AGS, correct scaling,
+        - walkable/walk-behind tested,
+        - naming matches conventions.
+      render: markdown
+    validations:
+      required: true

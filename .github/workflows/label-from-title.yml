@@ -1,0 +1,48 @@
+name: "Label from title"
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  issues: write
+
+jobs:
+  apply-labels:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Map labels by title prefix
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            if (!issue || !issue.title) return;
+            const title = issue.title.trim();
+            const upper = title.toUpperCase();
+
+            const map = {
+              "[BG]":  ["BG","Lore"],
+              "[ART]": ["Art"],
+              "[LD]":  ["Level Design"],
+              "[NAR]": ["Narrative"],
+              "[AUD]": ["Audio"],
+              "[CODE]":["Code"],
+              "[DOC]": ["documentation"],
+              "[TD]":  ["Tech Debt"],
+              "[DEL]": ["Deliverable"]
+            };
+
+            const labels = new Set((issue.labels || []).map(l => typeof l === "string" ? l : l.name));
+
+            // Milestone Task Kennung
+            if (/^\[M\d+\]\[TASK\]/i.test(upper)) labels.add("Task");
+
+            const key = Object.keys(map).find(k => upper.startsWith(k));
+            if (key) for (const l of map[key]) labels.add(l);
+
+            if (labels.size === 0) return;
+
+            await github.rest.issues.setLabels({
+              ...context.repo,
+              issue_number: issue.number,
+              labels: Array.from(labels)
+            });

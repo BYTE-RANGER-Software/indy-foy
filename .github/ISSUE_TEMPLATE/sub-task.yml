@@ -1,0 +1,69 @@
+name: "Sub-Task"
+description: "Work item created from a deliverable checklist"
+title: "[<TYPE>][R-###] <Short title>"
+labels: []
+assignees: []
+
+body:
+  - type: dropdown
+    id: type
+    attributes:
+      label: "Type"
+      description: "Pick the sub-task kind"
+      options:
+        - BG
+        - ART
+        - LD
+        - NAR
+        - AUD
+        - CODE
+        - DOC
+        - TD
+    validations:
+      required: true
+
+  - type: input
+    id: reference
+    attributes:
+      label: "Reference"
+      description: "Room or module id, e.g., R-214 or interaction_system"
+      placeholder: "R-214"
+    validations:
+      required: true
+
+  - type: input
+    id: parent_deliverable
+    attributes:
+      label: "Parent Deliverable"
+      description: "Issue number of the Deliverable Task"
+      placeholder: "#<deliverable-issue>"
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: "Scope"
+      placeholder: "What exactly will be produced or changed?"
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: "Acceptance criteria"
+      placeholder: |
+        - integrated and tested in-engine,
+        - consistent naming and paths,
+        - no regressions in affected rooms or GUIs.
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: "Notes / links / risks"
+      placeholder: "Refs to rooms, assets, docs, branches"
+      render: markdown
