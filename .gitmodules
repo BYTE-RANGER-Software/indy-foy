@@ -12,5 +12,4 @@
 
 [submodule "tools/dev/rdd-excel-addin"]
 	path = tools/dev/rdd-excel-addin
-	url = https://github.com/BYTE-RANGER-Software/rdd-excel-addin
-	branch = main
+	url = https://github.com/BYTE-RANGER-Software/rdd-excel-addin.git
