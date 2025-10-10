@@ -10,3 +10,7 @@
 	path = tools/dev/vscode-ags-extension
 	url = https://github.com/BYTE-RANGER-Software/vscode-ags-extension.git
 
+[submodule "tools/dev/rdd-excel-addin"]
+	path = tools/dev/rdd-excel-addin
+	url = https://github.com/BYTE-RANGER-Software/rdd-excel-addin
+	branch = main
