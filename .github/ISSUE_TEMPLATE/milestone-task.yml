@@ -1,6 +1,6 @@
 name: Milestone Task
 description: "Umbrella task for a milestone; list deliverables here and convert each line into a Deliverable Task issue."
-title: "[M00][Task] <Description>"
+title: "[M00][Task][<No>] <Description>"
 labels: []
 type: task
 assignees: []
