@@ -85,63 +85,65 @@ Verified releases appear on the **GitHub Releases** page.
 ## Roadmap
 
 - **M00 — Pre-Pre-Production / Discovery & Preservation**  
-  Collect prior materials into `originals/` (with SHA-256 + source).  
-  Draft initial `ATTRIBUTION.md` document.  
-  
-- **M01 — Pre-Production / Vertical Slice Tech** 
-  Create or complete `GDD.docx` (Game Design Document – includes game concept, storyline, mechanics, art & sound, UI, technical aspects, project details) and `RDD.xlsx` (Room Design Document).  
-  Create `TDD.docx` (Technical Design Document based on GDD/RDD)  
-  Create Vertical Slice  
-  Publish Vertical Slice build (ZIP + website link)  
+  Collect and preserve prior materials in `originals/` (with SHA-256 + source).  
+  Draft initial `ATTRIBUTION.md` (archival baseline).  
+  Create **conceptual draft versions** of:
+  - `GDD.docx` (Game Design Document)
+  - `RDD.xlsx` (Room Design Document)
+  - `TDD.docx` (Technical Design Document)  
+
+- **M01 — Pre-Production / Tooling & Vertical Slice Tech**  
+  Promote GDD, RDD, and TDD from drafts to **binding production documents**.  
+  Create the initial **AGS framework** based on the production TDD.  
+  Develop a **production-ready RDD Excel Add-In** (validation, dependency graph, exports).  
+  Create a **playable technical vertical slice** (1 room, core interaction stubs).  
+  Update `ATTRIBUTION.md` based on assets actually used.  
+  Publish vertical slice build (ZIP + website link).
 
 - **M02 — Core Gameplay Systems**  
-  Implement room transitions & pathfinding.  
-  Hotspots, objects & inventory flow.  
-  Basic dialog system.  
-  Save/load system.  
-  Blocking volumes & options menu.  
+  Implement core gameplay systems on top of the established framework:
+  room transitions & pathfinding, hotspots & objects, inventory flow,
+  dialog system, save/load, blocking volumes, options menu.
 
-- **M03 — Content Production I: (Public Demo)**  
-  3–6 rooms, 5–8 puzzles.  
-  One mini-cutscene.  
-  First audio pass (music & SFX).  
-  QA & packaging for public demo release.  
+- **M03 — Content Production I: Public Demo**  
+  Produce the first playable content slice:
+  3–6 rooms, 5–8 puzzles, one mini-cutscene,
+  first audio pass (music & SFX), QA & demo packaging.
 
 - **M04 — Content Production II: Main Chapters**  
-  Expand rooms, puzzles & story progression.  
-  Implement additional characters & animations.  
-  Intermediate builds for internal testing.  
+  Expand rooms, puzzles, and story progression.
+  Implement additional characters and animations.
+  Intermediate internal builds.
 
 - **M05 — Alpha (Feature Complete)**  
-  All core mechanics & chapters implemented.  
-  Placeholder graphics/audio replaced by finals.  
-  Full playthrough possible (bugs expected).  
+  All core mechanics and chapters implemented.
+  Placeholder assets replaced by final versions.
+  Full playthrough possible (bugs expected).
 
 - **M06 — Beta (Closed Testing)**  
-  Bugfixing, balancing of puzzles & difficulty.  
-  Performance optimization.  
-  External testers (closed group) with feedback loop.  
+  Bug fixing and puzzle balancing.
+  Performance optimization.
+  Closed external testing with feedback loop.
 
 - **M07 — Release Candidate (RC)**  
-  All assets, features, and texts finalized.  
-  Translations/localization where applicable.  
-  Packaging & installer.  
-  Marketing material (trailer, screenshots).  
+  Feature-complete and content-locked build.
+  Final texts, localization (if applicable),
+  packaging and marketing material.
 
 - **M08 — Release 1.0**  
-  Public launch of the full game.  
-  Distribution via GitHub, itch.io, etc.  
-  Announcements & community posts.  
+  Public release of the full game.
+  Distribution via GitHub, itch.io, etc.
+  Announcements and community outreach.
 
 - **M09 — Post-Release Support**  
-  Patches & hotfixes.  
-  Possible bonus content.  
-  Documentation & optional open-source release.  
+  Patches and hotfixes.
+  Optional bonus content.
+  Documentation maintenance and potential open-source release.
 
 ## Roadmap Progress
 
 - 🚧[M00 — Pre-Pre-Production / Discovery & Preservation](https://github.com/byte-ranger-software/indy-foy/milestone/1)  
-- ☐ [M01 — Pre-Production / GDD, RDD, TDD & Vertical Slice Tech](https://github.com/byte-ranger-software/indy-foy/milestone/2)  
+- ☐ [M01 — Pre-Production / Tooling & Vertical Slice Tech](https://github.com/byte-ranger-software/indy-foy/milestone/2)  
 - ☐ [M02 — Core Gameplay Systems](https://github.com/byte-ranger-software/indy-foy/milestone/3)  
 - ☐ [M03 — Content Production I: Public Demo](https://github.com/byte-ranger-software/indy-foy/milestone/4)  
 - ☐ [M04 — Content Production II: Main Chapters](https://github.com/byte-ranger-software/indy-foy/milestone/5)  
