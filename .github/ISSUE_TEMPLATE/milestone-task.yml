@@ -50,7 +50,7 @@ body:
         > **Notes for maintainers**
         >
         > - Set the **Milestone** in the sidebar for this Milestone Task.
-        > - Keep the title prefix `[M00][Task][<No>]`, bump the number per milestone `[M01]`, `[M02]`, and so on. Bump the <No> per Task `[01]`, `[02]`, and so on.
+        > - Keep the title prefix `[M00][Task][<No>]`, bump the number per milestone `[M01]`, `[M02]`, and so on. Bump the '<No>' per Task `[01]`, `[02]`, and so on.
         > - In the **Checklist**, write only high-level deliverables. Do **not** list fine-grained sub-tasks here.
         > - For each checklist item use **… → Convert to issue** and choose the **Deliverable Task** form. The deliverable will then host its own checklist of **Sub-Tasks**.
         > - In each Deliverable Task, create Sub-Tasks via **… → Convert to issue** and choose the **Sub-Task** (or a specialized) form.
