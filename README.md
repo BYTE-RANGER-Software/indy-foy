@@ -142,8 +142,8 @@ Verified releases appear on the **GitHub Releases** page.
 
 ## Roadmap Progress
 
-- 🚧[M00 — Pre-Pre-Production / Discovery & Preservation](https://github.com/byte-ranger-software/indy-foy/milestone/1)  
-- ☐ [M01 — Pre-Production / Tooling & Vertical Slice Tech](https://github.com/byte-ranger-software/indy-foy/milestone/2)  
+- ✅[M00 — Pre-Pre-Production / Discovery & Preservation](https://github.com/byte-ranger-software/indy-foy/milestone/1)  
+- 🚧[M01 — Pre-Production / Tooling & Vertical Slice Tech](https://github.com/byte-ranger-software/indy-foy/milestone/2)  
 - ☐ [M02 — Core Gameplay Systems](https://github.com/byte-ranger-software/indy-foy/milestone/3)  
 - ☐ [M03 — Content Production I: Public Demo](https://github.com/byte-ranger-software/indy-foy/milestone/4)  
 - ☐ [M04 — Content Production II: Main Chapters](https://github.com/byte-ranger-software/indy-foy/milestone/5)  
