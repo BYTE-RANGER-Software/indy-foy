@@ -40,9 +40,8 @@ This repository hosts the active continuation: planning, source/assets, builds, 
 📖 For a detailed **project history** see the [Project Website → History](https://byte-ranger-software.github.io/indy-foy/#history).
 
 ## Status
-🚧 Early pre-pre-production.  
-We are currently focusing on collecting and archiving original materials related to FoY.  
-Next step: Creation and completion of the GDD (Game Design Document).
+🚧 Early pre-production.  
+We are currently focusing on creating and finalizing the GDD (Game Design Document) and the TDD (Technical Design Document). At the same time, we are developing the framework for AGS (Adventure Game Studio) and an RDD (Room Design Document) add-in for Excel to plan the rooms. The RDD will be the "single source of truth" and provide the data for AGS.
 
 ## Website
 Project website is published via **GitHub Pages**.
@@ -88,9 +87,9 @@ Verified releases appear on the **GitHub Releases** page.
   Collect and preserve prior materials in `originals/` (with SHA-256 + source).  
   Draft initial `ATTRIBUTION.md` (archival baseline).  
   Create **conceptual draft versions** of:
-  - `GDD.docx` (Game Design Document)
-  - `RDD.xlsx` (Room Design Document)
-  - `TDD.docx` (Technical Design Document)  
+  - `GDD - Draft.docx` (Game Design Document)
+  - `RDD - Draft.xlsx` (Room Design Document)
+  - `TDD - Draft.docx` (Technical Design Document)  
 
 - **M01 — Pre-Production / Tooling & Vertical Slice Tech**  
   Promote GDD, RDD, and TDD from drafts to **binding production documents**.  
@@ -211,12 +210,17 @@ tools/                         # build/release scripts and developer utilities (
     ci/                        # CI helpers used by GitHub Actions
     dev/                       # local dev tools (linters, formatters, one-off scripts)
         vscode-ags-extension   # Git submodule, AGS Script extension for VS Code
+        rdd-excel-addin        # Git submodule, RDD Add-In
 
 ```
+
 > **Note on** `originals/`, Git submodule, archival/reference only, excluded from builds and releases,  
 > currently private, becomes public after license clearance.
 
 > **Note on** `framework/`, Git submodule for the AGS framework,  
+> currently private, becomes public when finished.
+
+> **Note on** `tools/dev/vscode-ags-extension`, Git submodule for RDD Add-In,  
 > currently private, becomes public when finished.
 
 ## Cloning
