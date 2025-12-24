@@ -41,7 +41,7 @@ This repository hosts the active continuation: planning, source/assets, builds, 
 
 ## Status
 🚧 Early pre-production.  
-We are currently focusing on creating and finalizing the GDD (Game Design Document) and the TDD (Technical Design Document). At the same time, we are developing the framework for AGS (Adventure Game Studio) and an RDD (Room Design Document) add-in for Excel to plan the rooms. The RDD will be the "single source of truth" and provide the data for AGS.
+We are currently focusing on creating and finalizing the GDD (Game Design Document) and the TDD (Technical Design Document). At the same time, we are developing the framework for AGS (Adventure Game Studio) and an RDD (Room Design Document) add-in for Excel to plan the rooms and puzzles. The RDD will be the "single source of truth" and provide the data for AGS.
 
 ## Website
 Project website is published via **GitHub Pages**.
