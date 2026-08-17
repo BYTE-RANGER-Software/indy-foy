@@ -1,4 +1,4 @@
-![Status](https://img.shields.io/badge/status-Pre--Pre--Production-yellow)
+![Status](https://img.shields.io/badge/status-Pre--Production-yellow)
 ![License](https://img.shields.io/badge/license-CC%20BY--SA%204.0-blue)
 [![Project Maintenance](https://img.shields.io/maintenance/yes/2025.svg)](https://github.com/byte-ranger-software/indy-foy 'GitHub Repository')
 
@@ -41,7 +41,7 @@ This repository hosts the active continuation: planning, source/assets, builds, 
 
 ## Status
 🚧 Early pre-production.  
-We are currently focusing on creating and finalizing the GDD (Game Design Document) and the TDD (Technical Design Document). At the same time, we are developing the framework for AGS (Adventure Game Studio) and an RDD (Room Design Document) add-in for Excel to plan the rooms. The RDD will be the "single source of truth" and provide the data for AGS.
+We are currently focusing on creating and finalizing the GDD (Game Design Document) and the TDD (Technical Design Document). At the same time, we are developing the framework for AGS (Adventure Game Studio) and an RDD (Room Design Document) add-in for Excel to plan the rooms and puzzles. The RDD will be the "single source of truth" and provide the data for AGS.
 
 ## Website
 Project website is published via **GitHub Pages**.
