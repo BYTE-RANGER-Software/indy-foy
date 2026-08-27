@@ -1,6 +1,6 @@
 ![Status](https://img.shields.io/badge/status-Pre--Production-yellow)
 ![License](https://img.shields.io/badge/license-CC%20BY--SA%204.0-blue)
-[![Project Maintenance](https://img.shields.io/maintenance/yes/2025.svg)](https://github.com/byte-ranger-software/indy-foy 'GitHub Repository')
+[![Project Maintenance](https://img.shields.io/maintenance/yes/2026.svg)](https://github.com/byte-ranger-software/indy-foy 'GitHub Repository')
 
 # Fountain of Youth (FoY)
 
