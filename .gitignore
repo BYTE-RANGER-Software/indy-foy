@@ -16,7 +16,7 @@ bin/
 src/tests/
 CHECKSUMS.txt
 
-# internal use
+# internal use, separate private repository, never tracked here
 not public/
 _internal/
 

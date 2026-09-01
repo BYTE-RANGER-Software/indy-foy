@@ -1,6 +1,6 @@
 ![Status](https://img.shields.io/badge/status-Pre--Production-yellow)
 ![License](https://img.shields.io/badge/license-CC%20BY--SA%204.0-blue)
-[![Project Maintenance](https://img.shields.io/maintenance/yes/2025.svg)](https://github.com/byte-ranger-software/indy-foy 'GitHub Repository')
+[![Project Maintenance](https://img.shields.io/maintenance/yes/2026.svg)](https://github.com/byte-ranger-software/indy-foy 'GitHub Repository')
 
 # Fountain of Youth (FoY)
 
@@ -217,11 +217,13 @@ tools/                         # build/release scripts and developer utilities (
 > **Note on** `originals/`, Git submodule, archival/reference only, excluded from builds and releases,  
 > currently private, becomes public after license clearance.
 
-> **Note on** `framework/`, Git submodule for the AGS framework,  
+> **Note on** `framework/`, Git submodule, standalone AGS template for building games in the FoY style, not required to compile this game,  
 > currently private, becomes public when finished.
 
-> **Note on** `tools/dev/vscode-ags-extension`, Git submodule for RDD Add-In,  
+> **Note on** `tools/dev/rdd-excel-addin`, Git submodule for the RDD Add-In,  
 > currently private, becomes public when finished.
+
+> **Note on** `tools/dev/vscode-ags-extension`, Git submodule, AGS script support for VS Code, public.
 
 ## Cloning
 
@@ -238,9 +240,9 @@ Most users do **not** need the `originals/` and `framework/` submodule to build 
   
   ```bash
   # Requires read access to the private submodule
-  git clone --recurse-submodules https://github.com/byte-ranger-software/indy-foy.git
-  # or, if already cloned
-  git submodule update --init originals
+  git clone https://github.com/byte-ranger-software/indy-foy.git
+  cd indy-foy
+  git submodule update --init --checkout originals
   ```
 ---
 
