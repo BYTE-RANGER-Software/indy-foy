@@ -52,8 +52,8 @@ Project website is published via **GitHub Pages**.
 - Classic point-and-click mechanics (verb UI / inventory)
 - Story-driven puzzles, exploration, and action
 - Original music & SFX
-- Chapters include **Bimini, Europe & Asia**
-- Over **150 hand-drawn backgrounds** in retro low-res look
+- Eight chapters, from the South Pacific to New York, Mali, Bimini, London, Buenos Aires, the Antarctic and the ship that leaves it
+- Over **70 locations and scenes** in a hand-drawn retro low-res look
 - Classic **"Atlantis"-style GUI** & mechanics
 - Antiquities, sidekicks & leather jackets!
 
