@@ -15,3 +15,7 @@ design/**    filter=lfs diff=lfs merge=lfs -text
 /src/AudioCache     export-ignore
 /src/Compiled       export-ignore
 
+# Exportierte VBA-Module bytegenau speichern
+*.bas -text
+*.cls -text
+*.frm -text
